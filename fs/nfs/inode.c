@@ -50,6 +50,7 @@
 #include "pnfs.h"
 #include "nfs.h"
 #include "netns.h"
+#include "sysfs.h"
 
 #include "nfstrace.h"
 
@@ -2198,6 +2199,10 @@ static int __init init_nfs_fs(void)
 {
 	int err;
 
+	err = nfs_sysfs_init();
+	if (err < 0)
+		goto out10;
+
 	err = register_pernet_subsys(&nfs_net_ops);
 	if (err < 0)
 		goto out9;
@@ -2261,6 +2266,8 @@ out7:
 out8:
 	unregister_pernet_subsys(&nfs_net_ops);
 out9:
+	nfs_sysfs_exit();
+out10:
 	return err;
 }
 
@@ -2277,6 +2284,7 @@ static void __exit exit_nfs_fs(void)
 	unregister_nfs_fs();
 	nfs_fs_proc_exit();
 	nfsiod_stop();
+	nfs_sysfs_exit();
 }
 
 /* Not quite true; I just maintain it */
