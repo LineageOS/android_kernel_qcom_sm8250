@@ -238,6 +238,9 @@ struct nfs_server {
 	unsigned short		mountd_port;
 	unsigned short		mountd_protocol;
 	struct rpc_wait_queue	uoc_rpcwaitq;
+
+	/* User namespace info */
+	const struct cred	*cred;
 };
 
 /* Server capabilities */
