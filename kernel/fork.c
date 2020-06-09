@@ -96,7 +96,7 @@
 #include <linux/cpufreq_times.h>
 #include <linux/scs.h>
 
-#include <asm/pgtable.h>
+#include <linux/pgtable.h>
 #include <asm/pgalloc.h>
 #include <linux/uaccess.h>
 #include <asm/mmu_context.h>
