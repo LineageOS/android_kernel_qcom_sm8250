@@ -570,6 +570,7 @@ enum wlan_pmf_cap {
 	WLAN_PMF_REQUIRED,
 };
 
+#ifndef WLAN_SCAN_SECURITY_FILTER_V1
 /**
  * enum wlan_auth_type - Enumeration of the various Auth types
  * @WLAN_AUTH_TYPE_OPEN_SYSTEM: Open auth type
@@ -668,6 +669,7 @@ enum wlan_enc_type {
 	WLAN_ENCRYPT_TYPE_ANY,
 	WLAN_NUM_OF_ENCRYPT_TYPE = WLAN_ENCRYPT_TYPE_ANY,
 };
+#endif
 
 /**
  * struct wlan_ssid - SSID info

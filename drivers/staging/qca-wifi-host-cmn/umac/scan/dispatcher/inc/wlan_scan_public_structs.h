@@ -276,10 +276,29 @@ struct scan_cache_node {
 	struct scan_cache_entry *entry;
 };
 
+/**
+ * struct security_info - Scan cache security info
+ * @authmodeset: auth mode
+ * @key_mgmt: key management
+ * @ucastcipherset: unicast cipher set
+ * @mcastcipherset: multicast cipher set
+ * @mgmtcipherset: mgmt cipher set
+ * @uc_enc: unicast cipher
+ * @mc_enc: multicast cipher
+ * @auth_type: key management
+ */
 struct security_info {
+#ifdef WLAN_SCAN_SECURITY_FILTER_V1
+	uint32_t authmodeset;
+	uint32_t key_mgmt;
+	uint32_t ucastcipherset;
+	uint32_t mcastcipherset;
+	uint32_t mgmtcipherset;
+#else
 	enum wlan_enc_type uc_enc;
 	enum wlan_enc_type mc_enc;
 	enum wlan_auth_type auth_type;
+#endif
 };
 
 /**
@@ -606,6 +625,7 @@ struct scoring_config {
 #define CACHE_IDENTIFIER_LEN 2
 #define HESSID_LEN 6
 
+#ifdef WLAN_FEATURE_FILS_SK
 /**
  * struct fils_filter_info: FILS info present in scan filter
  * @realm_check: whether realm check is required
@@ -617,6 +637,7 @@ struct fils_filter_info {
 	uint8_t fils_realm[REAM_HASH_LEN];
 	uint8_t security_type;
 };
+#endif
 
 /**
  * @bss_scoring_required :- flag to bypass scoring filtered results
@@ -648,6 +669,11 @@ struct fils_filter_info {
  * @bssid_list: bssid list
  * @ssid_list: ssid list
  * @chan_freq_list: channel frequency list, frequency unit: MHz
+ * @authmodeset: auth mode
+ * @key_mgmt: key management
+ * @ucastcipherset: unicast cipher set
+ * @mcastcipherset: multicast cipher set
+ * @mgmtcipherset: mgmt cipher set
  * @auth_type: auth type list
  * @enc_type: unicast enc type list
  * @mc_enc_type: multicast cast enc type list
@@ -665,9 +691,11 @@ struct scan_filter {
 	uint32_t num_of_bssid;
 	uint32_t num_of_ssid;
 	uint32_t num_of_channels;
+#ifndef WLAN_SCAN_SECURITY_FILTER_V1
 	uint32_t num_of_auth;
 	uint32_t num_of_enc_type;
 	uint32_t num_of_mc_enc_type;
+#endif
 	enum wlan_pmf_cap pmf_cap;
 	bool ignore_pmf_cap;
 	uint32_t num_of_pcl_channels;
@@ -683,9 +711,17 @@ struct scan_filter {
 	struct qdf_mac_addr bssid_list[WLAN_SCAN_FILTER_NUM_BSSID];
 	struct wlan_ssid ssid_list[WLAN_SCAN_FILTER_NUM_SSID];
 	uint32_t chan_freq_list[NUM_CHANNELS];
+#ifdef WLAN_SCAN_SECURITY_FILTER_V1
+	uint32_t authmodeset;
+	uint32_t key_mgmt;
+	uint32_t ucastcipherset;
+	uint32_t mcastcipherset;
+	uint32_t mgmtcipherset;
+#else
 	enum wlan_auth_type auth_type[WLAN_NUM_OF_SUPPORT_AUTH_TYPE];
 	enum wlan_enc_type enc_type[WLAN_NUM_OF_ENCRYPT_TYPE];
 	enum wlan_enc_type mc_enc_type[WLAN_NUM_OF_ENCRYPT_TYPE];
+#endif
 	uint32_t pcl_freq_list[NUM_CHANNELS];
 	struct fils_filter_info fils_scan_filter;
 	uint8_t pcl_weight_list[NUM_CHANNELS];
