@@ -841,6 +841,8 @@ int read_platform_resources_from_drv_data(
 			"qcom,fw-vpp-cycles");
 	res->avsync_window_size = find_key_value(platform_data,
 			"qcom,avsync-window-size");
+	res->no_cvp = find_key_value(platform_data,
+			"qcom,no-cvp");
 
 	res->csc_coeff_data = &platform_data->csc_data;
 

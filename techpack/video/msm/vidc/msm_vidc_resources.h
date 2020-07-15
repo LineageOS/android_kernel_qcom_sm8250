@@ -206,6 +206,7 @@ struct msm_vidc_platform_resources {
 	struct msm_vidc_ubwc_config_data *ubwc_config;
 	uint32_t clk_freq_threshold;
 	struct cx_ipeak_client *cx_ipeak_context;
+	bool no_cvp;
 };
 
 static inline bool is_iommu_present(struct msm_vidc_platform_resources *res)
