@@ -1863,6 +1863,10 @@ static struct msm_vidc_common_data sdm845_common_data[] = {
 		.key = "qcom,fw-vpp-cycles",
 		.value = 225975,
 	},
+	{
+		.key = "qcom,no-cvp",
+		.value = 1,
+	},
 };
 
 static struct msm_vidc_common_data sdm670_common_data_v0[] = {
