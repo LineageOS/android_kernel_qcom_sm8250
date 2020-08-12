@@ -463,7 +463,7 @@ struct page *cma_alloc(struct cma *cma, size_t count, unsigned int align,
 	int max_retries = 20;
 	int available_regions = 0;
 
-	if (!cma || !cma->count)
+	if (!cma || !cma->count || !cma->bitmap)
 		return NULL;
 
 	pr_debug("%s(cma %p, count %zu, align %d)\n", __func__, (void *)cma,
