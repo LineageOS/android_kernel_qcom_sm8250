@@ -464,13 +464,13 @@ struct page *cma_alloc(struct cma *cma, size_t count, unsigned int align,
 	int available_regions = 0;
 
 	if (!cma || !cma->count || !cma->bitmap)
-		return NULL;
+		goto out;
 
 	pr_debug("%s(cma %p, count %zu, align %d)\n", __func__, (void *)cma,
 		 count, align);
 
 	if (!count)
-		return NULL;
+		goto out;
 
 	trace_cma_alloc_start(count, align);
 
@@ -480,7 +480,7 @@ struct page *cma_alloc(struct cma *cma, size_t count, unsigned int align,
 	bitmap_count = cma_bitmap_pages_to_bits(cma, count);
 
 	if (bitmap_count > bitmap_maxno)
-		return NULL;
+		goto out;
 
 	for (;;) {
 		mutex_lock(&cma->lock);
@@ -566,6 +566,12 @@ struct page *cma_alloc(struct cma *cma, size_t count, unsigned int align,
 	}
 
 	pr_debug("%s(): returned %p\n", __func__, page);
+out:
+	if (page)
+		count_vm_event(CMA_ALLOC_SUCCESS);
+	else
+		count_vm_event(CMA_ALLOC_FAIL);
+
 	return page;
 }
 EXPORT_SYMBOL_GPL(cma_alloc);
