@@ -168,6 +168,9 @@ QDF_STATUS wma_update_channel_list(WMA_HANDLE handle,
 			chan_p->dfs_set = 1;
 		}
 
+		if (chan_list->chanParam[i].nan_disabled)
+			chan_p->nan_disabled = 1;
+
 		if (chan_p->mhz < WMA_2_4_GHZ_MAX_FREQ) {
 			chan_p->phy_mode = MODE_11G;
 			if (chan_list->vht_en && chan_list->vht_24_en)
@@ -3783,7 +3786,7 @@ int wma_roam_stats_event_handler(WMA_HANDLE handle, uint8_t *event,
 		num_tlv = MAX_ROAM_SCAN_STATS_TLV;
 	}
 
-	rem_len = WMI_SVC_MSG_MAX_SIZE - sizeof(*fixed_param);
+	rem_len = len - sizeof(*fixed_param);
 	if (rem_len < num_tlv * sizeof(wmi_roam_trigger_reason)) {
 		wma_err_rl("Invalid roam trigger data");
 		goto err;
