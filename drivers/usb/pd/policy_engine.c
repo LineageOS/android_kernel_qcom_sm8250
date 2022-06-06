@@ -771,6 +771,8 @@ static int pd_send_msg(struct usbpd *pd, u8 msg_type, const u32 *data,
 	}
 	spin_unlock_irqrestore(&pd->rx_lock, flags);
 
+	usbpd_dbg(&pd->dev, "send msg %s\n",
+			msg_to_string(msg_type, num_data, false));
 	ret = pd_phy_write(hdr, (u8 *)data, num_data * sizeof(u32), sop);
 	if (ret) {
 		if (pd->pd_connected)
@@ -959,6 +961,7 @@ static void kick_sm(struct usbpd *pd, int ms)
 		usbpd_dbg(&pd->dev, "delay %d ms", ms);
 		hrtimer_start(&pd->timer, ms_to_ktime(ms), HRTIMER_MODE_REL);
 	} else {
+		usbpd_dbg(&pd->dev, "queue state work\n");
 		queue_work(pd->wq, &pd->sm_work);
 	}
 }
@@ -1721,8 +1724,12 @@ static void handle_vdm_tx(struct usbpd *pd, enum pd_sop_type sop_type)
 
 		mutex_unlock(&pd->svid_handler_lock);
 		/* retry when hitting PE_SRC/SNK_Ready again */
-		if (ret != -EBUSY && sop_type == SOP_MSG)
+		if (ret != -EBUSY && sop_type == SOP_MSG) {
 			usbpd_set_state(pd, PE_SEND_SOFT_RESET);
+		} else if (sop_type != SOP_MSG) {
+			kfree(pd->vdm_tx);
+			pd->vdm_tx = NULL;
+		}
 
 		return;
 	}
@@ -3679,8 +3686,10 @@ sm_done:
 	spin_unlock_irqrestore(&pd->rx_lock, flags);
 
 	/* requeue if there are any new/pending RX messages */
-	if (!ret && !pd->sm_queued)
+	if (!ret) {
+		usbpd_dbg(&pd->dev, "Requeuing new/pending RX messages\n");
 		kick_sm(pd, 0);
+	}
 
 	if (!pd->sm_queued)
 		pm_relax(&pd->dev);
