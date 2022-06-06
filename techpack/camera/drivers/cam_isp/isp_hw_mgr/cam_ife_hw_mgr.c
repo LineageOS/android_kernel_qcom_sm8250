@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: GPL-2.0-only
 /*
  * Copyright (c) 2017-2021, The Linux Foundation. All rights reserved.
+ * Copyright (c) 2022 Qualcomm Innovation Center, Inc. All rights reserved.
  */
 
 #include <linux/slab.h>
@@ -669,6 +670,8 @@ static void cam_ife_hw_mgr_print_acquire_info(
 	struct cam_ife_hw_mgr_res    *hw_mgr_res = NULL;
 	struct cam_ife_hw_mgr_res    *hw_mgr_res_temp = NULL;
 	struct cam_isp_resource_node *hw_res = NULL;
+	struct cam_hw_intf           *hw_intf = NULL;
+	struct cam_vfe_num_of_acquired_resources num_rsrc;
 	int hw_idx[CAM_ISP_HW_SPLIT_MAX] = {-1, -1};
 	int i = 0;
 
@@ -687,6 +690,27 @@ static void cam_ife_hw_mgr_print_acquire_info(
 
 	if (acquire_failed)
 		goto fail;
+
+	hw_mgr_res = list_first_entry(&hw_mgr_ctx->res_list_ife_src,
+		struct cam_ife_hw_mgr_res, list);
+	for (i = 0; i < CAM_ISP_HW_SPLIT_MAX; i++) {
+		if (!hw_mgr_res->hw_res[i])
+			continue;
+
+		hw_intf = hw_mgr_res->hw_res[i]->hw_intf;
+
+		if (hw_intf->hw_ops.process_cmd) {
+			num_rsrc.num_pix_rsrc = num_pix_port;
+			num_rsrc.num_pd_rsrc = num_pd_port;
+			num_rsrc.num_rdi_rsrc = num_rdi_port;
+
+			hw_intf->hw_ops.process_cmd(hw_intf->hw_priv,
+				CAM_ISP_HW_CMD_SET_NUM_OF_ACQUIRED_RESOURCE,
+				&num_rsrc,
+				sizeof(
+				struct cam_vfe_num_of_acquired_resources));
+		}
+	}
 
 	CAM_INFO(CAM_ISP,
 		"Successfully acquire %s IFE[%d %d] with [%u pix] [%u pd] [%u rdi] ports for ctx:%u",
@@ -3086,6 +3110,9 @@ static int cam_ife_mgr_acquire_hw(void *hw_mgr_priv, void *acquire_hw_args)
 		CAM_ERR(CAM_ISP, "Process base info failed");
 		goto free_res;
 	}
+
+	acquire_args->support_consumed_addr =
+		g_ife_hw_mgr.support_consumed_addr;
 
 	acquire_args->ctxt_to_hw_map = ife_ctx;
 	acquire_args->custom_enabled = ife_ctx->custom_enabled;
@@ -6486,6 +6513,10 @@ static int cam_ife_mgr_cmd(void *hw_mgr_priv, void *cmd_args)
 				isp_hw_cmd_args->u.packet_op_code =
 				CAM_ISP_PACKET_UPDATE_DEV;
 			break;
+		case CAM_ISP_HW_MGR_GET_LAST_CDM_DONE:
+			isp_hw_cmd_args->u.last_cdm_done =
+				ctx->last_cdm_done_req;
+			break;
 		default:
 			CAM_ERR(CAM_ISP, "Invalid HW mgr command:0x%x",
 				hw_cmd_args->cmd_type);
@@ -6552,10 +6583,6 @@ static int cam_ife_mgr_cmd(void *hw_mgr_priv, void *cmd_args)
 		break;
 	case CAM_HW_MGR_CMD_DUMP_ACQ_INFO:
 		cam_ife_hw_mgr_dump_acq_data(ctx);
-		break;
-	case CAM_ISP_HW_MGR_GET_LAST_CDM_DONE:
-		isp_hw_cmd_args->u.last_cdm_done =
-			ctx->last_cdm_done_req;
 		break;
 	default:
 		CAM_ERR(CAM_ISP, "Invalid cmd");
@@ -7424,7 +7451,7 @@ static int cam_ife_hw_mgr_handle_hw_epoch(
 			CAM_ISP_HW_EVENT_EPOCH);
 		if (!rc) {
 			epoch_done_event_data.frame_id_meta =
-				event_info->th_reg_val;
+				event_info->reg_val;
 			ife_hw_irq_epoch_cb(ife_hw_mgr_ctx->common.cb_priv,
 				CAM_ISP_HW_EVENT_EPOCH, &epoch_done_event_data);
 		}
@@ -7599,6 +7626,8 @@ static int cam_ife_hw_mgr_handle_hw_buf_done(
 
 	buf_done_event_data.num_handles = 1;
 	buf_done_event_data.resource_handle[0] = event_info->res_id;
+	buf_done_event_data.last_consumed_addr[0] =
+		event_info->reg_val;
 
 	if (atomic_read(&ife_hw_mgr_ctx->overflow_pending))
 		return 0;
@@ -7609,8 +7638,9 @@ static int cam_ife_hw_mgr_handle_hw_buf_done(
 			CAM_ISP_HW_EVENT_DONE, &buf_done_event_data);
 	}
 
-	CAM_DBG(CAM_ISP, "Buf done for VFE:%d out_res->res_id: 0x%x",
-		event_info->hw_idx, event_info->res_id);
+	CAM_DBG(CAM_ISP,
+		"Buf done for VFE:%d res_id: 0x%x last consumed addr: 0x%x",
+		event_info->hw_idx, event_info->res_id, event_info->reg_val);
 
 	return 0;
 }
@@ -7822,6 +7852,7 @@ int cam_ife_hw_mgr_init(struct cam_hw_mgr_intf *hw_mgr_intf, int *iommu_hdl)
 {
 	int rc = -EFAULT;
 	int i, j;
+	bool support_consumed_addr = false;
 	struct cam_iommu_handle cdm_handles;
 	struct cam_ife_hw_mgr_ctx *ctx_pool;
 	struct cam_ife_hw_mgr_res *res_list_ife_out;
@@ -7842,11 +7873,19 @@ int cam_ife_hw_mgr_init(struct cam_hw_mgr_intf *hw_mgr_intf, int *iommu_hdl)
 	for (i = 0, j = 0; i < CAM_IFE_HW_NUM_MAX; i++) {
 		rc = cam_vfe_hw_init(&g_ife_hw_mgr.ife_devices[i], i);
 		if (!rc) {
+			struct cam_hw_intf *ife_device =
+				g_ife_hw_mgr.ife_devices[i];
 			struct cam_hw_info *vfe_hw =
 				(struct cam_hw_info *)
-				g_ife_hw_mgr.ife_devices[i]->hw_priv;
+				ife_device->hw_priv;
 			struct cam_hw_soc_info *soc_info = &vfe_hw->soc_info;
 
+			if (j == 0)
+				ife_device->hw_ops.process_cmd(
+					vfe_hw,
+					CAM_ISP_HW_CMD_IS_CONSUMED_ADDR_SUPPORT,
+					&support_consumed_addr,
+					sizeof(support_consumed_addr));
 			j++;
 
 			g_ife_hw_mgr.cdm_reg_map[i] = &soc_info->reg_map[0];
@@ -7862,6 +7901,8 @@ int cam_ife_hw_mgr_init(struct cam_hw_mgr_intf *hw_mgr_intf, int *iommu_hdl)
 		CAM_ERR(CAM_ISP, "no valid IFE HW");
 		return -EINVAL;
 	}
+
+	g_ife_hw_mgr.support_consumed_addr = support_consumed_addr;
 
 	/* fill csid hw intf information */
 	for (i = 0, j = 0; i < CAM_IFE_CSID_HW_NUM_MAX; i++) {

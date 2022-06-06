@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: GPL-2.0-only
 /*
  * Copyright (c) 2019-2021, The Linux Foundation. All rights reserved.
+ * Copyright (c) 2022 Qualcomm Innovation Center, Inc. All rights reserved.
  */
 
 
@@ -86,6 +87,7 @@ struct cam_vfe_bus_ver3_common_data {
 	bool                                        is_lite;
 	bool                                        hw_init;
 	bool                                        disable_ubwc_comp;
+	bool                                        support_consumed_addr;
 	cam_hw_mgr_event_cb_func                    event_cb;
 	int                        rup_irq_handle[CAM_VFE_BUS_VER3_SRC_GRP_MAX];
 };
@@ -153,6 +155,7 @@ struct cam_vfe_bus_ver3_vfe_out_data {
 	uint32_t                              out_type;
 	uint32_t                              source_group;
 	struct cam_vfe_bus_ver3_common_data  *common_data;
+	struct cam_vfe_bus_ver3_priv         *bus_priv;
 
 	uint32_t                         num_wm;
 	struct cam_isp_resource_node    *wm_res[PLANE_MAX];
@@ -1948,6 +1951,7 @@ static int cam_vfe_bus_ver3_acquire_vfe_out(void *bus_priv, void *acquire_args,
 	rsrc_data->common_data->disable_ubwc_comp =
 		out_acquire_args->disable_ubwc_comp;
 	rsrc_data->priv = acq_args->priv;
+	rsrc_data->bus_priv = ver3_bus_priv;
 
 	secure_caps = cam_vfe_bus_ver3_can_be_secure(
 		rsrc_data->out_type);
@@ -2314,6 +2318,34 @@ static int cam_vfe_bus_ver3_handle_vfe_out_done_top_half(uint32_t evt_id,
 	return rc;
 }
 
+static uint32_t cam_vfe_bus_ver3_get_last_consumed_addr(
+	struct cam_vfe_bus_ver3_priv *bus_priv,
+	uint32_t res_type)
+{
+	uint32_t                                  val = 0;
+	struct cam_isp_resource_node             *rsrc_node = NULL;
+	struct cam_vfe_bus_ver3_vfe_out_data     *rsrc_data = NULL;
+	struct cam_vfe_bus_ver3_wm_resource_data *wm_rsrc_data = NULL;
+	enum cam_vfe_bus_ver3_vfe_out_type        res_id;
+
+	res_id = cam_vfe_bus_ver3_get_out_res_id(res_type);
+
+	if (res_id >= CAM_VFE_BUS_VER3_VFE_OUT_MAX) {
+		CAM_ERR(CAM_ISP, "invalid res id:%u", res_id);
+		return 0;
+	}
+
+	rsrc_node = &bus_priv->vfe_out[res_id];
+	rsrc_data = rsrc_node->res_priv;
+	wm_rsrc_data = rsrc_data->wm_res[PLANE_Y]->res_priv;
+
+	val = cam_io_r_mb(
+		wm_rsrc_data->common_data->mem_base +
+		wm_rsrc_data->hw_regs->addr_status_0);
+
+	return val;
+}
+
 static int cam_vfe_bus_ver3_handle_vfe_out_done_bottom_half(
 	void                *handler_priv,
 	void                *evt_payload_priv)
@@ -2348,6 +2380,10 @@ static int cam_vfe_bus_ver3_handle_vfe_out_done_bottom_half(
 			rsrc_data->common_data->is_lite);
 		for (i = 0; i < num_out; i++) {
 			evt_info.res_id = out_list[i];
+			evt_info.reg_val =
+				cam_vfe_bus_ver3_get_last_consumed_addr(
+				rsrc_data->bus_priv,
+				evt_info.res_id);
 			if (rsrc_data->common_data->event_cb)
 				rsrc_data->common_data->event_cb(ctx, evt_id,
 					(void *)&evt_info);
@@ -3041,9 +3077,8 @@ static int cam_vfe_bus_ver3_update_wm(void *priv, void *cmd_args,
 	struct cam_vfe_bus_ver3_wm_resource_data *wm_data = NULL;
 	struct cam_vfe_bus_ver3_reg_offset_ubwc_client *ubwc_client = NULL;
 	uint32_t *reg_val_pair;
-	uint32_t  i, j, k, size = 0;
+	uint32_t  i, j, size = 0;
 	uint32_t  frame_inc = 0, val;
-	uint32_t loop_size = 0;
 	bool frame_header_enable = false;
 
 	bus_priv = (struct cam_vfe_bus_ver3_priv  *) priv;
@@ -3172,40 +3207,31 @@ static int cam_vfe_bus_ver3_update_wm(void *priv, void *cmd_args,
 				wm_data->index, reg_val_pair[j-1]);
 		}
 
-		if ((!bus_priv->common_data.is_lite && wm_data->index > 22) ||
-			bus_priv->common_data.is_lite)
-			loop_size = wm_data->irq_subsample_period + 1;
-		else
-			loop_size = 1;
-
 		/* WM Image address */
-		for (k = 0; k < loop_size; k++) {
-			if (wm_data->en_ubwc) {
-				CAM_VFE_ADD_REG_VAL_PAIR(reg_val_pair, j,
-					wm_data->hw_regs->image_addr,
-					update_buf->wm_update->image_buf[i] +
-					io_cfg->planes[i].meta_size +
-					k * frame_inc);
-				update_buf->wm_update->image_buf_offset[i] =
-					io_cfg->planes[i].meta_size;
-			} else if (wm_data->en_cfg & (0x3 << 16)) {
-				CAM_VFE_ADD_REG_VAL_PAIR(reg_val_pair, j,
-					wm_data->hw_regs->image_addr,
-					(update_buf->wm_update->image_buf[i] +
-					wm_data->offset + k * frame_inc));
-				update_buf->wm_update->image_buf_offset[i] =
-					wm_data->offset;
-			} else {
-				CAM_VFE_ADD_REG_VAL_PAIR(reg_val_pair, j,
-					wm_data->hw_regs->image_addr,
-					(update_buf->wm_update->image_buf[i] +
-					k * frame_inc));
-				update_buf->wm_update->image_buf_offset[i] = 0;
-			}
 
-			CAM_DBG(CAM_ISP, "WM:%d image address 0x%X",
-				wm_data->index, reg_val_pair[j-1]);
+		if (wm_data->en_ubwc) {
+			CAM_VFE_ADD_REG_VAL_PAIR(reg_val_pair, j,
+				wm_data->hw_regs->image_addr,
+				update_buf->wm_update->image_buf[i] +
+				io_cfg->planes[i].meta_size);
+			update_buf->wm_update->image_buf_offset[i] =
+				io_cfg->planes[i].meta_size;
+		} else if (wm_data->en_cfg & (0x3 << 16)) {
+			CAM_VFE_ADD_REG_VAL_PAIR(reg_val_pair, j,
+				wm_data->hw_regs->image_addr,
+				(update_buf->wm_update->image_buf[i] +
+				wm_data->offset));
+			update_buf->wm_update->image_buf_offset[i] =
+				wm_data->offset;
+		} else {
+			CAM_VFE_ADD_REG_VAL_PAIR(reg_val_pair, j,
+				wm_data->hw_regs->image_addr,
+				update_buf->wm_update->image_buf[i]);
+			update_buf->wm_update->image_buf_offset[i] = 0;
 		}
+
+		CAM_DBG(CAM_ISP, "WM:%d image address 0x%X",
+			wm_data->index, reg_val_pair[j-1]);
 
 		CAM_VFE_ADD_REG_VAL_PAIR(reg_val_pair, j,
 			wm_data->hw_regs->frame_incr, frame_inc);
@@ -3730,6 +3756,7 @@ static int cam_vfe_bus_ver3_process_cmd(
 {
 	int rc = -EINVAL;
 	struct cam_vfe_bus_ver3_priv		 *bus_priv;
+	bool *support_consumed_addr;
 
 	if (!priv || !cmd_args) {
 		CAM_ERR_RATE_LIMIT(CAM_ISP, "Invalid input arguments");
@@ -3778,6 +3805,12 @@ static int cam_vfe_bus_ver3_process_cmd(
 		break;
 	case CAM_ISP_HW_CMD_WM_CONFIG_UPDATE:
 		rc = cam_vfe_bus_ver3_update_wm_config(cmd_args);
+		break;
+	case CAM_ISP_HW_CMD_IS_CONSUMED_ADDR_SUPPORT:
+		bus_priv = (struct cam_vfe_bus_ver3_priv *) priv;
+		support_consumed_addr = (bool *)cmd_args;
+		*support_consumed_addr =
+			bus_priv->common_data.support_consumed_addr;
 		break;
 	default:
 		CAM_ERR_RATE_LIMIT(CAM_ISP, "Invalid camif process command:%d",
@@ -3851,6 +3884,8 @@ int cam_vfe_bus_ver3_init(
 	bus_priv->common_data.hw_init            = false;
 
 	bus_priv->common_data.is_lite = soc_private->is_ife_lite;
+	bus_priv->common_data.support_consumed_addr =
+		ver3_hw_info->support_consumed_addr;
 
 	for (i = 0; i < CAM_VFE_BUS_VER3_SRC_GRP_MAX; i++)
 		bus_priv->common_data.rup_irq_handle[i] = 0;
