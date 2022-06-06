@@ -3074,7 +3074,6 @@ static int msm_comm_init_core(struct msm_vidc_inst *inst)
 	core->state = VIDC_CORE_INIT;
 	core->smmu_fault_handled = false;
 	core->trigger_ssr = false;
-	core->resources.max_inst_count = MAX_SUPPORTED_INSTANCES;
 	core->resources.max_secure_inst_count =
 		core->resources.max_secure_inst_count ?
 		core->resources.max_secure_inst_count :
@@ -4827,6 +4826,7 @@ int msm_comm_qbufs_batch(struct msm_vidc_inst *inst,
 	int rc = 0;
 	struct msm_vidc_buffer *buf;
 	int do_bw_calc = 0;
+	int num_buffers_queued = 0;
 
 	do_bw_calc = mbuf ? mbuf->vvb.vb2_buf.type == INPUT_MPLANE : 0;
 	rc = msm_comm_scale_clocks_and_bus(inst, do_bw_calc);
@@ -4852,10 +4852,13 @@ int msm_comm_qbufs_batch(struct msm_vidc_inst *inst,
 				__func__, rc);
 			break;
 		}
+		num_buffers_queued++;
 loop_end:
-		/* Queue pending buffers till the current buffer only */
-		if (buf == mbuf)
+		/* Queue pending buffers till batch size */
+		if (num_buffers_queued == inst->batch.size) {
+			s_vpr_l(inst->sid, "Queue buffers till batch size\n");
 			break;
+		}
 	}
 	mutex_unlock(&inst->registeredbufs.lock);
 
