@@ -5053,6 +5053,7 @@ static int binder_ioctl_get_node_debug_info(struct binder_proc *proc,
 	return 0;
 }
 
+#if IS_ENABLED(CONFIG_ANDROID_BINDER_FREEZE)
 static int binder_ioctl_freeze(struct binder_freeze_info *info,
 			       struct binder_proc *target_proc)
 {
@@ -5095,6 +5096,7 @@ static int binder_ioctl_freeze(struct binder_freeze_info *info,
 
 	return ret;
 }
+#endif
 
 static int binder_ioctl_get_freezer_info(
 				struct binder_frozen_status_info *info)
@@ -5241,6 +5243,7 @@ static long binder_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
 		}
 		break;
 	}
+#if IS_ENABLED(CONFIG_ANDROID_BINDER_FREEZE)
 	case BINDER_FREEZE: {
 		struct binder_freeze_info info;
 		struct binder_proc **target_procs = NULL, *target_proc;
@@ -5301,6 +5304,7 @@ static long binder_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
 			goto err;
 		break;
 	}
+#endif
 	case BINDER_GET_FROZEN_INFO: {
 		struct binder_frozen_status_info info;
 
