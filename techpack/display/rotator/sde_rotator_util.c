@@ -21,7 +21,11 @@
 #include <linux/msm-bus.h>
 #include <linux/msm-bus-board.h>
 #include <linux/regulator/consumer.h>
+#if defined(CONFIG_MSM_VIDC_LEGACY_V4L2)
+#include <media/msm_media_info_legacy.h>
+#else
 #include <media/msm_media_info.h>
+#endif
 #include <linux/videodev2.h>
 #include <linux/ion.h>
 
