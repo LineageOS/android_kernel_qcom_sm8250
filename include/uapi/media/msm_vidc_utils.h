@@ -1,4 +1,7 @@
 /* SPDX-License-Identifier: GPL-2.0 WITH Linux-syscall-note */
+#if defined(CONFIG_MSM_VIDC_LEGACY_V4L2)
+#include <media/msm_vidc_utils_legacy.h>
+#else
 #ifndef __MSM_VIDC_UTILS_H__
 #define __MSM_VIDC_UTILS_H__
 
@@ -372,4 +375,5 @@ enum msm_vidc_cb_event_types {
 	MSM_VIDC_COLOR_SPACE,
 	MSM_VIDC_FW_MIN_COUNT,
 };
+#endif
 #endif
