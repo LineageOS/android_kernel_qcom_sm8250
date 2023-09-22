@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "83e604c3_e116f1cd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32245
+      },
+      "writtenOn": "2023-09-22T17:34:57Z",
+      "side": 1,
+      "message": "Log:\nhttps://pastebin.mozilla.org/FyzwoTzZ",
+      "revId": "3104e7bbe56b07629a69f3471a6d36e681321138",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
