@@ -16,6 +16,29 @@
       "message": "Log:\nhttps://pastebin.mozilla.org/FyzwoTzZ",
       "revId": "3104e7bbe56b07629a69f3471a6d36e681321138",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "436e96e8_7b48f17a",
+        "filename": "sound/core/jack.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 381,
+      "author": {
+        "id": 25732
+      },
+      "writtenOn": "2023-09-23T23:06:44Z",
+      "side": 1,
+      "message": "Looks like a mismerge:\n\n```\nidev \u003d input_get_device(jack-\u003einput_dev);\n\tif (!idev)\n\t\treturn;\n```\n\t\t\nThis should be there",
+      "range": {
+        "startLine": 380,
+        "startChar": 1,
+        "endLine": 381,
+        "endChar": 9
+      },
+      "revId": "3104e7bbe56b07629a69f3471a6d36e681321138",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
