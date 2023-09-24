@@ -39,6 +39,30 @@
       },
       "revId": "3104e7bbe56b07629a69f3471a6d36e681321138",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c4f4df6b_68681215",
+        "filename": "sound/core/jack.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 381,
+      "author": {
+        "id": 25732
+      },
+      "writtenOn": "2023-09-24T11:58:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "436e96e8_7b48f17a",
+      "range": {
+        "startLine": 380,
+        "startChar": 1,
+        "endLine": 381,
+        "endChar": 9
+      },
+      "revId": "3104e7bbe56b07629a69f3471a6d36e681321138",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
