@@ -16,6 +16,23 @@
       "message": "Thanks to hridaya for the improved commit message",
       "revId": "0c75d35226daf00fcaa1302b9e809ab9a9044772",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6492d1df_283610ff",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 16185
+      },
+      "writtenOn": "2023-09-25T16:56:59Z",
+      "side": 1,
+      "message": "as mike pointed out, this should go to AOSP as well? @0xCafeBABE can you do that?",
+      "revId": "0c75d35226daf00fcaa1302b9e809ab9a9044772",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
