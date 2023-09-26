@@ -69,6 +69,24 @@
       "parentUuid": "a4279362_0e64adb2",
       "revId": "0c75d35226daf00fcaa1302b9e809ab9a9044772",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "af461d33_cdba6778",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32245
+      },
+      "writtenOn": "2023-09-26T05:38:55Z",
+      "side": 1,
+      "message": "I\u0027ve also tried the following and they doesn\u0027t work either:\n1) escape the \" using \\\n2) change one \" pair to \u0027\n3) Remove one \"\" pair",
+      "parentUuid": "9e31147c_cc15860d",
+      "revId": "0c75d35226daf00fcaa1302b9e809ab9a9044772",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
