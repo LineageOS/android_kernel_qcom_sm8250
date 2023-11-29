@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba537d6c_4f7a29d7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4550
+      },
+      "writtenOn": "2023-11-29T14:14:05Z",
+      "side": 1,
+      "message": "Maybe use this instead? https://github.com/LineageOS/android_kernel_motorola_sm8250/commit/62cfdafaed815e5a10e9f82c9fe00736efb50479",
+      "revId": "ddb8edbb2cc11e156290d373e7774153bacbddc0",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
