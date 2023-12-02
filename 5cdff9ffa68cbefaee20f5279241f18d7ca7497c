@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f759798e_71808690",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 16779
+      },
+      "writtenOn": "2023-12-02T14:25:43Z",
+      "side": 1,
+      "message": "This gets rid of this error: `msm_vidc:   err : 00000001: ....d: Failed to create debugfs for msm_vidc`",
+      "revId": "5cdff9ffa68cbefaee20f5279241f18d7ca7497c",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
