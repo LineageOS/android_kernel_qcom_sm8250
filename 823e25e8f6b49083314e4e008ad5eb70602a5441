@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eedac23a_d32a1738",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 31334
+      },
+      "writtenOn": "2023-12-02T14:44:38Z",
+      "side": 1,
+      "message": "ufs_spin_lock_irqsave() and ufs_spin_unlock_irqrestore() are not common kernel\u0027s stuff, use spin_lock_irqsave() and spin_unlock_irqrestore() instead.",
+      "revId": "823e25e8f6b49083314e4e008ad5eb70602a5441",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
