@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5875de43_766d197b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3917
+      },
+      "writtenOn": "2023-12-13T19:33:24Z",
+      "side": 1,
+      "message": "I think there\u0027s merge problem in drivers/leds/leds-pwd.c:174 led_dat -\u003e led_data?",
+      "revId": "b86097d2fa993d0b368b2d3cb5a2f514ac6ab30c",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
