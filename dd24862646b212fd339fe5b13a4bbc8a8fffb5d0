@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "74b9123d_3de9e20f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3917
+      },
+      "writtenOn": "2023-12-31T10:20:16Z",
+      "side": 1,
+      "message": "Tested on bengal: equivalent change on gta4lwifi boots fine.",
+      "revId": "dd24862646b212fd339fe5b13a4bbc8a8fffb5d0",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
