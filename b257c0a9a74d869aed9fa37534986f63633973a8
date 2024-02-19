@@ -16,6 +16,23 @@
       "message": "https://github.com/SebaUbuntu/android_kernel_qcom_sm8250/commits/lineage-20/",
       "revId": "b257c0a9a74d869aed9fa37534986f63633973a8",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c01d7371_ff1cd6e7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4550
+      },
+      "writtenOn": "2024-02-19T23:52:18Z",
+      "side": 1,
+      "message": "That branch is almost 2 years old, if we merge it we should be looking for any followup commits that are in newer stable kernels",
+      "revId": "b257c0a9a74d869aed9fa37534986f63633973a8",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
