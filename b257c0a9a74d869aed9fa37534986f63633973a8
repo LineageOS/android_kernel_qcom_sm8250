@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4bfded02_7f9055c5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 25732
+      },
+      "writtenOn": "2024-02-19T19:16:07Z",
+      "side": 1,
+      "message": "https://github.com/SebaUbuntu/android_kernel_qcom_sm8250/commits/lineage-20/",
+      "revId": "b257c0a9a74d869aed9fa37534986f63633973a8",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
