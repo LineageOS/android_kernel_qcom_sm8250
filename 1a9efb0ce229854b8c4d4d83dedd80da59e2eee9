@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4eb8ebb9_3f78622c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3917
+      },
+      "writtenOn": "2024-03-20T07:16:37Z",
+      "side": 1,
+      "message": "Seems to work on alioth:\n\nlioth:/ # dmesg | grep -i erofs                                                                                                                                                                                                                                                                                                                                               \n[    2.349390] erofs: (device dm-14): mounted with opts: , root inode @ nid 49.\n[    2.349624] erofs: (device dm-11): mounted with opts: , root inode @ nid 38.\nalioth:/ # mount | grep -i erofs \n/dev/block/dm-14 on /vendor type erofs (ro,seclabel,relatime,user_xattr,acl,cache_strategy\u003dreadaround)\n/dev/block/dm-11 on /odm type erofs (ro,seclabel,relatime,user_xattr,acl,cache_strategy\u003dreadaround)",
+      "revId": "1a9efb0ce229854b8c4d4d83dedd80da59e2eee9",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
