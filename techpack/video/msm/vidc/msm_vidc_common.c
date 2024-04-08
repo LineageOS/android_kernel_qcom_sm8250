@@ -1858,7 +1858,12 @@ static void handle_event_change(enum hal_command_response cmd, void *data)
 		msm_dcvs_try_enable(inst);
 		extra_buff_count = msm_vidc_get_extra_buff_count(inst,
 				HAL_BUFFER_OUTPUT);
-		fmt->count_min = event_notify->fw_min_cnt;
+		if (inst->core->platform_data->vpu_ver == VPU_VERSION_AR50
+			&& codec == V4L2_PIX_FMT_MPEG2) {
+			fmt->count_min = event_notify->fw_min_cnt + 1;
+		} else {
+			fmt->count_min = event_notify->fw_min_cnt;
+		}
 		fmt->count_min_host = fmt->count_min + extra_buff_count;
 		s_vpr_h(inst->sid,
 			"seq: hal buffer[%d] count: min %d min_host %d\n",
