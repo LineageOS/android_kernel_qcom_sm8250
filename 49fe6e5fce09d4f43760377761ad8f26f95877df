@@ -18,6 +18,24 @@
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ae6f296_8bd8c438",
+        "filename": "drivers/platform/msm/usb_bam.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1159,
+      "author": {
+        "id": 32442
+      },
+      "writtenOn": "2024-07-24T16:12:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "417ba9b8_c4abcd37",
+      "revId": "49fe6e5fce09d4f43760377761ad8f26f95877df",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8211f739_5eec4cbe",
@@ -31,6 +49,24 @@
       "writtenOn": "2024-07-24T14:42:08Z",
       "side": 1,
       "message": "Same as above",
+      "revId": "49fe6e5fce09d4f43760377761ad8f26f95877df",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b5a1fa04_fff74103",
+        "filename": "drivers/platform/msm/usb_bam.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1281,
+      "author": {
+        "id": 32442
+      },
+      "writtenOn": "2024-07-24T16:12:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8211f739_5eec4cbe",
       "revId": "49fe6e5fce09d4f43760377761ad8f26f95877df",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
