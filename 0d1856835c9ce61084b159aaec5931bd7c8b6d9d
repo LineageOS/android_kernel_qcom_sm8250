@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b30c46f3_3a44d2da",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 11883
+      },
+      "writtenOn": "2024-12-19T20:05:22Z",
+      "side": 1,
+      "message": "Let Korg stable peeps know about the fuckup, 4.19 is dead so won\u0027t probably see any movement",
+      "revId": "0d1856835c9ce61084b159aaec5931bd7c8b6d9d",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
