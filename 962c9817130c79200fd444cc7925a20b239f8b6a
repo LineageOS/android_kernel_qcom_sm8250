@@ -16,6 +16,23 @@
       "message": "The following HALs in device manifest are not declared in FCM \u003c\u003d level 6: \n  android.hardware.biometrics.fingerprint.IFingerprint/default (@4)\n  android.hardware.bluetooth.audio.IBluetoothAudioProviderFactory/default (@4)\n  android.hardware.drm.IDrmFactory/clearkey (@1)\n  android.hardware.health.IHealth/default (@3)\n  android.hardware.ir.IConsumerIr/default (@1)\n  android.hardware.light.ILights/default (@2)\n  android.hardware.nfc.INfc/default (@1)\n  android.hardware.power.IPower/default (@5)\n  android.hardware.thermal.IThermal/default (@1)\n  android.hardware.usb.IUsb/default (@1)\n  android.hardware.usb.gadget.IUsbGadget/default (@1)\n  android.hardware.wifi.IWifi/default (@2)\n  android.hardware.wifi.hostapd.IHostapd/default (@2)\n  android.hardware.wifi.supplicant.ISupplicant/default (@3)\nERROR: files are incompatible: Runtime info and framework compatibility matrix are incompatible: No compatible kernel requiremen\nt found (kernel FCM version \u003d 6).\nFor kernel requirements at matrix level 6, Kernel config errors:\n    Missing config CONFIG_CRYPTO_CHACHA20POLY1305\n    Missing config CONFIG_TRACE_GPU_MEM\n    Missing config CONFIG_XFRM_MIGRATE\n\nandroid.hardware.radio@1.5::IRadio/slot1 is deprecated; requires at least 1.6\n    because it matches android.hardware.radio@1.4::IRadio/slot1 from /system/etc/vintf/compatibility_matrix.5.xml\nandroid.hardware.radio@1.5::IRadio/slot2 is deprecated; requires at least 1.6\n    because it matches android.hardware.radio@1.4::IRadio/slot2 from /system/etc/vintf/compatibility_matrix.5.xml\nandroid.hardware.radio@1.5::IRadio/slot1 is deprecated; requires at least 1.6\n    because it matches android.hardware.radio@1.5::IRadio/slot1 from /system/etc/vintf/compatibility_matrix.5.xml\nandroid.hardware.radio@1.5::IRadio/slot2 is deprecated; requires at least 1.6\n    because it matches android.hardware.radio@1.5::IRadio/slot2 from /system/etc/vintf/compatibility_matrix.5.xml: Success\nINCOMPATIBLE",
       "revId": "962c9817130c79200fd444cc7925a20b239f8b6a",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "91a85f20_5666e598",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 22176
+      },
+      "writtenOn": "2025-02-17T22:02:08Z",
+      "side": 1,
+      "message": "have you tested without 418963",
+      "revId": "962c9817130c79200fd444cc7925a20b239f8b6a",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
