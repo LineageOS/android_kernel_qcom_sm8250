@@ -68,6 +68,24 @@
       "message": "Can you apply these directly to kona and lito defconfigs?",
       "revId": "962c9817130c79200fd444cc7925a20b239f8b6a",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e59ccaba_669453c2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32245
+      },
+      "writtenOn": "2025-02-18T00:31:57Z",
+      "side": 1,
+      "message": "yeah it\u0027s doable, but I preferred this because it\u0027ll affect devices that still uses target-level 5, and maybe some devices uses their own defconfig instead. How do you think?",
+      "parentUuid": "f16e2a67_1d39aa34",
+      "revId": "962c9817130c79200fd444cc7925a20b239f8b6a",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
