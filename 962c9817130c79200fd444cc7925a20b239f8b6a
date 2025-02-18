@@ -121,6 +121,24 @@
       "parentUuid": "c48f05ba_e36f9948",
       "revId": "962c9817130c79200fd444cc7925a20b239f8b6a",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed20132b_615cb41a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32245
+      },
+      "writtenOn": "2025-02-18T06:56:59Z",
+      "side": 1,
+      "message": "this config is based on comparison result of `android-base-conditional.xml` in between `r/android-4.19` and `s/android-4.19`. so, it\u0027s reliable when applying to different defconfigs.\n\nalso, `CONFIG_GKI_HIDDEN_GPU_CONFIGS` is dependency of `CONFIG_TRACE_GPU_MEM`",
+      "parentUuid": "11dadbbe_baa2d5ca",
+      "revId": "962c9817130c79200fd444cc7925a20b239f8b6a",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
