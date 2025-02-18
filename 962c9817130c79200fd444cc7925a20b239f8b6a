@@ -103,6 +103,24 @@
       "message": "it\u0027s fine now",
       "revId": "962c9817130c79200fd444cc7925a20b239f8b6a",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "11dadbbe_baa2d5ca",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 22176
+      },
+      "writtenOn": "2025-02-18T06:44:41Z",
+      "side": 1,
+      "message": "it seems that we only need 3 config of it?\n\nCONFIG_CRYPTO_CHACHA20POLY1305\u003dy\nCONFIG_TRACE_GPU_MEM\u003dy\nCONFIG_XFRM_MIGRATE\u003dy",
+      "parentUuid": "c48f05ba_e36f9948",
+      "revId": "962c9817130c79200fd444cc7925a20b239f8b6a",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
