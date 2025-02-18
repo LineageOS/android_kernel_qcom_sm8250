@@ -193,6 +193,24 @@
       "parentUuid": "afc2042c_90736951",
       "revId": "962c9817130c79200fd444cc7925a20b239f8b6a",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7e5d9262_e785106d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 25732
+      },
+      "writtenOn": "2025-02-18T16:56:46Z",
+      "side": 1,
+      "message": "Point still stands, it\u0027s way better to just apply it directly to original defconfigs, all devices could benefit from this",
+      "parentUuid": "6632623f_e3608cf9",
+      "revId": "962c9817130c79200fd444cc7925a20b239f8b6a",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
