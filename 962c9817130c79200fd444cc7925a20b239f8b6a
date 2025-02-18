@@ -33,6 +33,24 @@
       "message": "have you tested without 418963",
       "revId": "962c9817130c79200fd444cc7925a20b239f8b6a",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c48f05ba_e36f9948",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32245
+      },
+      "writtenOn": "2025-02-18T00:21:20Z",
+      "side": 1,
+      "message": "sure I did.\n\n1. you have to either include the kernel config fragment or pick the one I uploaded to xiaomi_sm8250 repo instead\n2. for radio, did you pick 395938",
+      "parentUuid": "91a85f20_5666e598",
+      "revId": "962c9817130c79200fd444cc7925a20b239f8b6a",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
