@@ -16,6 +16,24 @@
       "message": "This isn\u0027t enough, but I can figure out what else is using trace_printk().",
       "revId": "327fcc87ed7eb90387deb3e0817fece30a9a6744",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dae75a4f_a7559ea4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2025-03-30T22:36:18Z",
+      "side": 1,
+      "message": "Alright, this should be all. The rest of the trace_printk usages I was seeing were due to Samsung.",
+      "parentUuid": "c5bfe4eb_d5589036",
+      "revId": "327fcc87ed7eb90387deb3e0817fece30a9a6744",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
