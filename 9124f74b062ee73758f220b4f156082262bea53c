@@ -16,6 +16,23 @@
       "message": "Tested on samsung sm8250.",
       "revId": "9124f74b062ee73758f220b4f156082262bea53c",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "214344f4_5bce1f56",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 16185
+      },
+      "writtenOn": "2025-04-01T16:46:08Z",
+      "side": 1,
+      "message": "same on pro1x",
+      "revId": "9124f74b062ee73758f220b4f156082262bea53c",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
