@@ -1272,15 +1272,15 @@ static int ext4_write_begin(struct file *file, struct address_space *mapping,
 		return -EIO;
 
 	if (trace_android_fs_datawrite_start_enabled()) {
-		char *path, pathbuf[MAX_TRACE_PATHBUF_LEN];
-
-		path = android_fstrace_get_pathname(pathbuf,
-						    MAX_TRACE_PATHBUF_LEN,
-						    inode);
-		trace_android_fs_datawrite_start(inode, pos, len,
-						 current->pid, path,
-						 current->comm);
-	}
+ 		char *path, pathbuf[MAX_TRACE_PATHBUF_LEN];
+ 
+ 		path = android_fstrace_get_pathname(pathbuf,
+ 						    MAX_TRACE_PATHBUF_LEN,
+ 						    inode);
+ 		trace_android_fs_datawrite_start(inode, pos, len,
+ 						 current->pid, path,
+ 						 current->comm);
+ 	}
 	trace_ext4_write_begin(inode, pos, len, flags);
 	/*
 	 * Reserve one block more for addition to orphan list in case
