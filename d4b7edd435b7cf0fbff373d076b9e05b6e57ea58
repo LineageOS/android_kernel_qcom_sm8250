@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a08ea54f_3667173b",
+        "filename": "fs/crypto/hooks.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2025-04-14T00:31:44Z",
+      "side": 0,
+      "message": "Shouldn\u0027t it be resolved to this?",
+      "revId": "d4b7edd435b7cf0fbff373d076b9e05b6e57ea58",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5dc4f2ff_a664993d",
+        "filename": "fs/crypto/hooks.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2025-04-14T00:31:44Z",
+      "side": 0,
+      "message": "Same here.",
+      "range": {
+        "startLine": 96,
+        "startChar": 1,
+        "endLine": 96,
+        "endChar": 69
+      },
+      "revId": "d4b7edd435b7cf0fbff373d076b9e05b6e57ea58",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
