@@ -36,6 +36,24 @@
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e0382aff_aa7704ed",
+        "filename": "fs/crypto/hooks.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2025-04-19T10:18:38Z",
+      "side": 0,
+      "message": "Acknowledged",
+      "parentUuid": "a4c2cc2a_fbb9cccf",
+      "revId": "d4b7edd435b7cf0fbff373d076b9e05b6e57ea58",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5dc4f2ff_a664993d",
@@ -49,6 +67,30 @@
       "writtenOn": "2025-04-14T00:31:44Z",
       "side": 0,
       "message": "Same here.",
+      "range": {
+        "startLine": 96,
+        "startChar": 1,
+        "endLine": 96,
+        "endChar": 69
+      },
+      "revId": "d4b7edd435b7cf0fbff373d076b9e05b6e57ea58",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7ec12c98_8bbf4f9e",
+        "filename": "fs/crypto/hooks.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2025-04-19T10:18:38Z",
+      "side": 0,
+      "message": "Acknowledged",
+      "parentUuid": "5dc4f2ff_a664993d",
       "range": {
         "startLine": 96,
         "startChar": 1,
