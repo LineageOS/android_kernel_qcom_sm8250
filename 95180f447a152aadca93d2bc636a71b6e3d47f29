@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4add9dfb_bcc0dc0c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32442
+      },
+      "writtenOn": "2025-04-28T05:23:45Z",
+      "side": 1,
+      "message": "https://review.lineageos.org/c/LineageOS/android_kernel_motorola_sm7250/+/413020/comments/0be0d670_2f467147",
+      "revId": "95180f447a152aadca93d2bc636a71b6e3d47f29",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
