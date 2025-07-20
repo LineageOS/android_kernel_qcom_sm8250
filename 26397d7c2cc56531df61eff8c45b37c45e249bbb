@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "64bd46db_9f96a964",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 35659
+      },
+      "writtenOn": "2025-07-20T21:03:59Z",
+      "side": 1,
+      "message": "HAVE_JUMP_LABEL doesn’t exist in 4.19",
+      "revId": "26397d7c2cc56531df61eff8c45b37c45e249bbb",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51ebaac9_14d4c17f",
+        "filename": "include/linux/module.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 449,
+      "author": {
+        "id": 35659
+      },
+      "writtenOn": "2025-07-20T21:03:59Z",
+      "side": 1,
+      "message": "```suggestion\n#ifdef CONFIG_JUMP_LABEL\n```",
+      "revId": "26397d7c2cc56531df61eff8c45b37c45e249bbb",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "25ff60f6_6c7dc031",
+        "filename": "kernel/module.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3192,
+      "author": {
+        "id": 35659
+      },
+      "writtenOn": "2025-07-20T21:03:59Z",
+      "side": 1,
+      "message": "```suggestion\n#ifdef CONFIG_JUMP_LABEL\n```",
+      "revId": "26397d7c2cc56531df61eff8c45b37c45e249bbb",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
