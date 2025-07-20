@@ -18,6 +18,23 @@
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7bdd78ce_ecee6238",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 34512
+      },
+      "writtenOn": "2025-07-20T21:12:43Z",
+      "side": 1,
+      "message": "pretty sure it doesnt get defined in kernel on 5.x anyway:\n\nthis is 5.4:\n\nrg \"HAVE_JUMP_LABEL\"\nnet/bridge/br_input.c\n216:#ifdef HAVE_JUMP_LABEL\n\nkernel/jump_label.c\n419:#ifndef HAVE_JUMP_LABEL_BATCH\n\ninclude/linux/dynamic_debug.h\n108:#else /* !HAVE_JUMP_LABEL */\n\narch/x86/include/asm/jump_label.h\n5:#define HAVE_JUMP_LABEL_BATCH",
+      "revId": "26397d7c2cc56531df61eff8c45b37c45e249bbb",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "51ebaac9_14d4c17f",
