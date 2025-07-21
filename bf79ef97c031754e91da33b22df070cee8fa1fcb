@@ -16,6 +16,23 @@
       "message": "mind rebasing this one to the beginning?\n\nWe can merge this now.",
       "revId": "bf79ef97c031754e91da33b22df070cee8fa1fcb",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d49efb85_6f2a1a7c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4550
+      },
+      "writtenOn": "2025-07-21T09:06:54Z",
+      "side": 1,
+      "message": "No, this shouldn\u0027t be merged now as it\u0027s incomplete and also edits unused defconfigs. A separate chain will be done for multiple defconfig updates, you can use this just for testing for now.",
+      "revId": "bf79ef97c031754e91da33b22df070cee8fa1fcb",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
