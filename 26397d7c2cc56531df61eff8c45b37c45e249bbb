@@ -88,6 +88,24 @@
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "33c9e972_364d9d74",
+        "filename": "include/linux/module.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 449,
+      "author": {
+        "id": 34512
+      },
+      "writtenOn": "2025-07-21T12:29:17Z",
+      "side": 1,
+      "message": "Fix applied.",
+      "parentUuid": "51ebaac9_14d4c17f",
+      "revId": "26397d7c2cc56531df61eff8c45b37c45e249bbb",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "25ff60f6_6c7dc031",
@@ -101,6 +119,24 @@
       "writtenOn": "2025-07-20T21:03:59Z",
       "side": 1,
       "message": "```suggestion\n#ifdef CONFIG_JUMP_LABEL\n```",
+      "revId": "26397d7c2cc56531df61eff8c45b37c45e249bbb",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a3699e9_a84fd417",
+        "filename": "kernel/module.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3192,
+      "author": {
+        "id": 34512
+      },
+      "writtenOn": "2025-07-21T12:29:17Z",
+      "side": 1,
+      "message": "Fix applied.",
+      "parentUuid": "25ff60f6_6c7dc031",
       "revId": "26397d7c2cc56531df61eff8c45b37c45e249bbb",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
