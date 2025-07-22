@@ -51,6 +51,24 @@
       "parentUuid": "d49efb85_6f2a1a7c",
       "revId": "bf79ef97c031754e91da33b22df070cee8fa1fcb",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1c94ef24_ccb7bf92",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 34512
+      },
+      "writtenOn": "2025-07-22T09:40:15Z",
+      "side": 1,
+      "message": "err occurs on non perf as well, but I think u meaning that we only ever need to build perf",
+      "parentUuid": "8c92f7c1_16f97811",
+      "revId": "bf79ef97c031754e91da33b22df070cee8fa1fcb",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
