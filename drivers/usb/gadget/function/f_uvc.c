@@ -44,7 +44,7 @@ MODULE_PARM_DESC(trace, "Trace level bitmask");
 #define UVC_STRING_STREAMING_IDX		1
 
 static struct usb_string uvc_en_us_strings[] = {
-	[UVC_STRING_CONTROL_IDX].s = "UVC Camera",
+	[UVC_STRING_CONTROL_IDX].s = "Moto Webcam",
 	[UVC_STRING_STREAMING_IDX].s = "Video Streaming",
 	{  }
 };
@@ -403,11 +403,10 @@ uvc_function_connect(struct uvc_device *uvc)
 void
 uvc_function_disconnect(struct uvc_device *uvc)
 {
-	struct usb_composite_dev *cdev = uvc->func.config->cdev;
 	int ret;
 
 	if ((ret = usb_function_deactivate(&uvc->func)) < 0)
-		INFO(cdev, "UVC disconnect failed with %d\n", ret);
+		pr_err("UVC disconnect failed with %d\n", ret);
 }
 
 /* --------------------------------------------------------------------------
@@ -623,6 +622,7 @@ uvc_function_bind(struct usb_configuration *c, struct usb_function *f)
 	opts->streaming_interval = clamp(opts->streaming_interval, 1U, 16U);
 	opts->streaming_maxpacket = clamp(opts->streaming_maxpacket, 1U, 3072U);
 	opts->streaming_maxburst = min(opts->streaming_maxburst, 15U);
+	opts->streaming_txfifo_hint = min(opts->streaming_txfifo_hint, 14U);
 
 	/* For SS, wMaxPacketSize has to be 1024 if bMaxBurst is not 0 */
 	if (opts->streaming_maxburst &&
@@ -691,6 +691,9 @@ uvc_function_bind(struct usb_configuration *c, struct usb_function *f)
 		goto error;
 	}
 	uvc->video.ep = ep;
+
+	if (gadget_is_superspeed(c->cdev->gadget))
+		uvc->video.ep->txfifo_hint = opts->streaming_txfifo_hint;
 
 	uvc_fs_streaming_ep.bEndpointAddress = uvc->video.ep->address;
 	uvc_hs_streaming_ep.bEndpointAddress = uvc->video.ep->address;
@@ -895,9 +898,21 @@ static struct usb_function_instance *uvc_alloc_inst(void)
 
 	opts->streaming_interval = 1;
 	opts->streaming_maxpacket = 1024;
+	opts->streaming_txfifo_hint = 0;
 
 	uvcg_attach_configfs(opts);
 	return &opts->func_inst;
+}
+
+static void usb_uvc_free_work_func(struct work_struct *w)
+{
+	struct uvc_device *uvc =
+		container_of(w, struct uvc_device, free_work.work);
+
+	if (!uvc->open_count)
+		kfree(uvc);
+	else
+		schedule_delayed_work(&uvc->free_work, msecs_to_jiffies(2000));
 }
 
 static void uvc_free(struct usb_function *f)
@@ -906,7 +921,8 @@ static void uvc_free(struct usb_function *f)
 	struct f_uvc_opts *opts = container_of(f->fi, struct f_uvc_opts,
 					       func_inst);
 	--opts->refcnt;
-	kfree(uvc);
+
+	schedule_delayed_work(&uvc->free_work, msecs_to_jiffies(500));
 }
 
 static void uvc_unbind(struct usb_configuration *c, struct usb_function *f)
@@ -946,6 +962,7 @@ static struct usb_function *uvc_alloc(struct usb_function_instance *fi)
 
 	init_completion(&uvc->unbind_ok);
 	mutex_init(&uvc->video.mutex);
+	INIT_DELAYED_WORK(&uvc->free_work, usb_uvc_free_work_func);
 	uvc->state = UVC_STATE_DISCONNECTED;
 	opts = fi_to_f_uvc_opts(fi);
 

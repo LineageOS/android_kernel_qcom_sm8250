@@ -35,6 +35,8 @@
 #include <linux/kallsyms.h>
 #include <linux/math64.h>
 #endif
+#include <linux/console.h>
+#include <linux/kmsg_dump.h>
 
 #define MODULE_NAME "msm_watchdog"
 #define WDT0_ACCSCSSNBARK_INT 0
@@ -67,6 +69,8 @@ static char *init_log_buf;
 static unsigned int *log_buf_size;
 static dma_addr_t log_buf_paddr;
 #endif
+
+ATOMIC_NOTIFIER_HEAD(wdt_notifier_list);
 
 static struct msm_watchdog_data *wdog_data;
 
@@ -245,6 +249,8 @@ static void wdog_disable(struct msm_watchdog_data *wdog_dd)
 	/*Ensure all cpus see update to enable*/
 	smp_mb();
 	atomic_notifier_chain_unregister(&panic_notifier_list,
+						&wdog_dd->panic_blk);
+	atomic_notifier_chain_unregister(&wdt_notifier_list,
 						&wdog_dd->panic_blk);
 	del_timer_sync(&wdog_dd->pet_timer);
 	/* may be suspended after the first write above */
@@ -715,10 +721,46 @@ static int msm_watchdog_remove(struct platform_device *pdev)
 	return 0;
 }
 
+inline void kmsg_dump_wdog_bite(void)
+{
+	static char buf[1024];
+	/*
+	 * Disable local interrupts. This will prevent panic_smp_self_stop
+	 * from deadlocking the first cpu that invokes the panic, since
+	 * there is nothing to prevent an interrupt handler (that runs
+	 * after setting panic_cpu) from invoking panic() again.
+	 */
+	local_irq_disable();
+	preempt_disable_notrace();
+
+	console_verbose();
+	bust_spinlocks(1);
+	dump_stack_minidump(0);
+	/* Dump stack for call trace on wdt */
+	dump_stack();
+	/*
+	* Run any wdt panic handler, including those that might need to
+	* add information to the kmsg dump output.
+	*/
+	atomic_notifier_call_chain(&wdt_notifier_list, 0, buf);
+	/* Call flush even twice. It tries harder with a single online CPU */
+	printk_safe_flush_on_panic();
+	kmsg_dump(KMSG_DUMP_PANIC);
+	console_unblank();
+	debug_locks_off();
+	console_flush_on_panic();
+	pr_emerg("---[ end Watch dog bit - not syncing: %s ]---\n", buf);
+	local_irq_enable();
+}
+
 void msm_trigger_wdog_bite(void)
 {
 	if (!wdog_data)
 		return;
+
+	/* Dump kmsg buffer to pstore before watchdog bite */
+	/* helps to dump data to dontpanic logs */
+	kmsg_dump_wdog_bite();
 
 	compute_irq_stat(&wdog_data->irq_counts_work);
 	pr_info("Causing a watchdog bite!");
@@ -735,6 +777,7 @@ void msm_trigger_wdog_bite(void)
 		__raw_readl(wdog_data->base + WDT0_EN),
 		__raw_readl(wdog_data->base + WDT0_BARK_TIME),
 		__raw_readl(wdog_data->base + WDT0_BITE_TIME));
+
 	/*
 	 * This function induces the non-secure bite and control
 	 * should not return to the calling function. Non-secure
@@ -901,6 +944,8 @@ static void init_watchdog_data(struct msm_watchdog_data *wdog_dd)
 
 	wdog_dd->panic_blk.notifier_call = panic_wdog_handler;
 	atomic_notifier_chain_register(&panic_notifier_list,
+				       &wdog_dd->panic_blk);
+	atomic_notifier_chain_register(&wdt_notifier_list,
 				       &wdog_dd->panic_blk);
 	mutex_init(&wdog_dd->disable_lock);
 	init_waitqueue_head(&wdog_dd->pet_complete);

@@ -464,6 +464,21 @@ static void halt_spmi_pmic_arbiter(void)
 	}
 }
 
+#define DEBUG_SYS_RESETART_WARM 1
+#define DEBUG_SYS_RESETART_PANIC 2
+static int debug_sys_restart_mode;
+static int __init set_sys_restart_mode(char *str)
+{
+	if (!strcmp(str, "warm"))
+		debug_sys_restart_mode = DEBUG_SYS_RESETART_WARM;
+	else if (!strcmp(str, "panic"))
+		debug_sys_restart_mode = DEBUG_SYS_RESETART_PANIC;
+	pr_info("sys_restart_mode is set to %d\n", debug_sys_restart_mode);
+	return 1;
+}
+
+__setup("sys_restart_mode=", set_sys_restart_mode);
+
 static void msm_restart_prepare(const char *cmd)
 {
 	bool need_warm_reset = false;
@@ -471,6 +486,11 @@ static void msm_restart_prepare(const char *cmd)
 	 * Write download mode flags if restart_mode says so
 	 * Kill download mode if master-kill switch is set
 	 */
+
+	if (debug_sys_restart_mode == DEBUG_SYS_RESETART_PANIC) {
+		in_panic = 1;
+		pr_info("force system enter into ramdump for debug\n");
+	}
 
 	set_dload_mode(download_mode &&
 			(in_panic || restart_mode == RESTART_DLOAD));
@@ -490,7 +510,7 @@ static void msm_restart_prepare(const char *cmd)
 		pr_info("Forcing a warm reset of the system\n");
 
 	/* Hard reset the PMIC unless memory contents must be maintained. */
-	if (force_warm_reboot || need_warm_reset)
+	if (force_warm_reboot || need_warm_reset || in_panic)
 		qpnp_pon_system_pwr_off(PON_POWER_OFF_WARM_RESET);
 	else
 		qpnp_pon_system_pwr_off(PON_POWER_OFF_HARD_RESET);
@@ -500,6 +520,14 @@ static void msm_restart_prepare(const char *cmd)
 			qpnp_pon_set_restart_reason(
 				PON_RESTART_REASON_BOOTLOADER);
 			__raw_writel(0x77665500, restart_reason);
+			/* set reboot_bl flag in PMIC for cold reset */
+			qpnp_pon_store_extra_reset_info(RESET_EXTRA_REBOOT_BL_REASON,
+				RESET_EXTRA_REBOOT_BL_REASON);
+			/*
+			 * force cold reboot here to avoid unexpected
+			 * warm boot from bootloader.
+			 */
+			qpnp_pon_system_pwr_off(PON_POWER_OFF_HARD_RESET);
 		} else if (!strncmp(cmd, "recovery", 8)) {
 			qpnp_pon_set_restart_reason(
 				PON_RESTART_REASON_RECOVERY);
@@ -530,9 +558,49 @@ static void msm_restart_prepare(const char *cmd)
 					     restart_reason);
 		} else if (!strncmp(cmd, "edl", 3)) {
 			enable_emergency_dload_mode();
+		} else if (!strncmp(cmd, "post-wdt", 8)) {
+			/* set  flag in PMIC to nofity BL post watchdog reboot */
+			qpnp_pon_store_extra_reset_info(RESET_EXTRA_POST_REBOOT_MASK,
+				RESET_EXTRA_POST_WDT_REASON);
+			 /* force cold reboot */
+			qpnp_pon_system_pwr_off(PON_POWER_OFF_HARD_RESET);
+		} else if (!strncmp(cmd, "post-pmicwdt", 12)) {
+			/* set  flag in PMIC to nofity BL post pmic watchdog reboot */
+			qpnp_pon_store_extra_reset_info(RESET_EXTRA_POST_REBOOT_MASK,
+				RESET_EXTRA_POST_PMICWDT_REASON);
+			 /* force cold reboot */
+			qpnp_pon_system_pwr_off(PON_POWER_OFF_HARD_RESET);
+		} else if (!strncmp(cmd, "post-panic", 10)) {
+			/* set  flag in PMIC to nofity BL post panic reboot */
+			qpnp_pon_store_extra_reset_info(RESET_EXTRA_POST_REBOOT_MASK,
+				RESET_EXTRA_POST_PANIC_REASON);
+			 /* force cold reboot */
+			qpnp_pon_system_pwr_off(PON_POWER_OFF_HARD_RESET);
+		} else if (!strncmp(cmd, "hw_warmreset", 13)) {
+			qpnp_pon_set_restart_reason(
+				PON_RESTART_REASON_HW_WARMRESET);
+			qpnp_pon_system_pwr_off(PON_POWER_OFF_WARM_RESET);
+			pr_info("set system hw warmreset mode\n");
+		} else if (!strncmp(cmd, "post-hw_warmreset", 17)) {
+			/* set  flag in PMIC to nofity BL post hw_warmreset reboot */
+			qpnp_pon_store_extra_reset_info(RESET_EXTRA_POST_REBOOT_MASK,
+				RESET_EXTRA_POST_HWWARM_RESET_REASON);
+			 /* force cold reboot */
+			qpnp_pon_system_pwr_off(PON_POWER_OFF_HARD_RESET);
 		} else {
 			__raw_writel(0x77665501, restart_reason);
 		}
+	} else if (in_panic == 1) {
+		__raw_writel(0x77665505, restart_reason);
+		qpnp_pon_store_extra_reset_info(RESET_EXTRA_PANIC_REASON,
+			RESET_EXTRA_PANIC_REASON);
+	} else {
+		__raw_writel(0x77665501, restart_reason);
+	}
+
+	if (debug_sys_restart_mode == DEBUG_SYS_RESETART_WARM) {
+		qpnp_pon_system_pwr_off(PON_POWER_OFF_WARM_RESET);
+		pr_info("set system warmreset mode for debug\n");
 	}
 
 	flush_cache_all();

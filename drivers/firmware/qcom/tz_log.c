@@ -18,10 +18,19 @@
 #include <linux/of.h>
 #include <linux/dma-buf.h>
 #include <linux/ion_kernel.h>
-
+#ifdef CONFIG_MSM_TZ_QSEE_LOG
+#include <linux/vmalloc.h>
+#endif
 #include <soc/qcom/scm.h>
 #include <soc/qcom/qseecomi.h>
 #include <soc/qcom/qtee_shmbridge.h>
+
+
+#ifndef CONFIG_DEBUG_FS
+#include <linux/proc_fs.h>
+static struct proc_dir_entry *tzdbg_root;
+#define TZDBG_ROOT_DIR "tzdbg"
+#endif
 
 /* QSEE_LOG_BUF_SIZE = 32K */
 #define QSEE_LOG_BUF_SIZE 0x8000
@@ -401,7 +410,16 @@ struct tzdbg_stat {
 	char *name;
 	char *data;
 };
-
+//print qsee log to kernel log
+#ifdef CONFIG_MSM_TZ_QSEE_LOG
+#ifdef CONFIG_DEBUG_FS
+static bool enable_printk_qseelog = false;
+#else
+static bool enable_printk_qseelog = false;
+#endif
+#define PRINTK_LIMIT 1024
+static char     *b_str = NULL;
+#endif
 struct tzdbg {
 	void __iomem *virt_iobase;
 	void __iomem *hyp_virt_iobase;
@@ -415,6 +433,10 @@ struct tzdbg {
 	uint32_t tz_version;
 	bool is_encrypted_log_enabled;
 	bool is_enlarged_buf;
+#ifdef CONFIG_MSM_TZ_QSEE_LOG
+	struct workqueue_struct		*heartbeat_work_q;
+	struct work_struct		heartbeat_work;
+#endif
 };
 
 struct tzbsp_encr_log_t {
@@ -1131,7 +1153,11 @@ static ssize_t tzdbgfs_read_unencrypted(struct file *file, char __user *buf,
 	size_t count, loff_t *offp)
 {
 	int len = 0;
+#ifdef CONFIG_DEBUG_FS
 	int tz_id = *(int *)(file->private_data);
+#else
+    int tz_id = *(int *)((struct seq_file *)file->private_data)->private;
+#endif
 
 	if (tz_id == TZDBG_BOOT || tz_id == TZDBG_RESET ||
 		tz_id == TZDBG_INTERRUPT || tz_id == TZDBG_GENERAL ||
@@ -1253,10 +1279,22 @@ static ssize_t tzdbgfs_read(struct file *file, char __user *buf,
 		return tzdbgfs_read_encrypted(file, buf, count, offp);
 }
 
+#ifndef CONFIG_DEBUG_FS
+
+static int tzdbg_proc_open(struct inode *inode, struct file *file)
+{
+    return single_open(file, NULL, PDE_DATA(inode));
+}
+#endif
+
 static const struct file_operations tzdbg_fops = {
 	.owner   = THIS_MODULE,
 	.read    = tzdbgfs_read,
+#ifdef CONFIG_DEBUG_FS
 	.open    = simple_open,
+#else
+    .open   = tzdbg_proc_open,
+#endif
 };
 
 
@@ -1412,6 +1450,7 @@ static void tzdbg_free_encrypted_log_buf(struct platform_device *pdev)
 
 static int  tzdbgfs_init(struct platform_device *pdev)
 {
+#ifdef CONFIG_DEBUG_FS
 	int rc = 0;
 	int i;
 	struct dentry           *dent_dir;
@@ -1441,13 +1480,57 @@ err:
 	debugfs_remove_recursive(dent_dir);
 
 	return rc;
+#else
+    int rc = 0;
+    int i;
+    struct proc_dir_entry *proc_d_entry = NULL;
+
+    tzdbg_root = proc_mkdir(TZDBG_ROOT_DIR, NULL);
+    if (NULL == tzdbg_root) {
+        dev_err(&pdev->dev, "Created dir /proc/%s error!\n", TZDBG_ROOT_DIR);
+        return -1;
+    }
+
+    dev_info(&pdev->dev, "Created dir /proc/%s \n", TZDBG_ROOT_DIR);
+
+    for (i = 0; i < TZDBG_STATS_MAX; i++) {
+        tzdbg.debug_tz[i] = i;
+        proc_d_entry = proc_create_data(tzdbg.stat[i].name, 0666, tzdbg_root, &tzdbg_fops, &tzdbg.debug_tz[i]);
+        if (proc_d_entry == NULL) {
+            dev_err(&pdev->dev, "TZ proc_create_data %s failed\n", tzdbg.stat[i].name);
+            rc = -ENOMEM;
+            goto err;
+        }
+    }
+
+	tzdbg.disp_buf = kzalloc(max(debug_rw_buf_size,
+			tzdbg.hyp_debug_rw_buf_size), GFP_KERNEL);
+	if (tzdbg.disp_buf == NULL)
+		goto err;
+
+    platform_set_drvdata(pdev, tzdbg_root);
+
+    return 0;
+err:
+    remove_proc_subtree(TZDBG_ROOT_DIR, NULL);
+    return -1;
+
+#endif
 }
 
 static void tzdbgfs_exit(struct platform_device *pdev)
 {
+#ifdef CONFIG_DEBUG_FS
 	struct dentry *dent_dir;
 	dent_dir = platform_get_drvdata(pdev);
 	debugfs_remove_recursive(dent_dir);
+#else
+    kzfree(tzdbg.disp_buf);
+    remove_proc_subtree(TZDBG_ROOT_DIR, NULL);
+    if (g_qsee_log)
+        dma_free_coherent(&pdev->dev, QSEE_LOG_BUF_SIZE,
+            (void *)g_qsee_log, coh_pmem);
+#endif
 }
 
 static int __update_hypdbg_base(struct platform_device *pdev,
@@ -1554,7 +1637,120 @@ static void tzdbg_encrypted_log_init(void)
 		tzdbg.is_encrypted_log_enabled = desc.ret[0];
 	}
 }
+#ifdef CONFIG_MSM_TZ_QSEE_LOG
+static int splitline_printk(const char *str, int len)
+{
+	int cnt = 0;
+	char *s = "\n";
+	char *b_str_tmp = NULL;
+	char *buf = NULL;
 
+	if (b_str == NULL && debug_rw_buf_size >0 ) {
+		b_str = (char *)vmalloc(debug_rw_buf_size +1);
+	}
+	if(len> debug_rw_buf_size) {
+		pr_err("[TEE-AP]:log is more than max len. trancate  \n");
+		len = debug_rw_buf_size;
+	}
+	b_str_tmp = b_str;
+	memcpy(b_str_tmp, str, len);
+	b_str_tmp[len] = 0;
+
+
+	buf = strstr(b_str_tmp, s);
+
+	while (buf != NULL) {
+		cnt++;
+		buf[0] = '\0';
+		pr_err("[TEE]: %s \n",b_str_tmp);
+		b_str_tmp = buf + strlen(s);
+		buf = strstr(b_str_tmp, s);
+	}
+
+	return 0;
+}
+
+static int _print_qsee_log_stats(struct tzdbg_log_t *log,
+						   struct tzdbg_log_pos_t *log_start, uint32_t log_len
+			)
+{
+	uint32_t wrap_start;
+	uint32_t wrap_end;
+	uint32_t wrap_cnt;
+	int max_len;
+	int len = 0;
+	int i = 0;
+
+	wrap_start = log_start->wrap;
+	wrap_end = log->log_pos.wrap;
+
+	/* Calculate difference in # of buffer wrap-arounds */
+	if (wrap_end >= wrap_start) {
+		wrap_cnt = wrap_end - wrap_start;
+	} else {
+		/* wrap counter has wrapped around, invalidate start position */
+		wrap_cnt = 2;
+	}
+
+	if (wrap_cnt > 1) {
+		/* end position has wrapped around more than once, */
+		/* current start no longer valid                   */
+		log_start->wrap = log->log_pos.wrap - 1;
+		log_start->offset = (log->log_pos.offset + 1) % log_len;
+	} else if ((wrap_cnt == 1) &&
+			   (log->log_pos.offset > log_start->offset)) {
+		/* end position has overwritten start */
+		log_start->offset = (log->log_pos.offset + 1) % log_len;
+	}
+
+	while (log_start->offset == log->log_pos.offset) {
+		/*
+		 * No data in ring buffer,
+		 * so we'll hang around until something happens
+		 */
+		unsigned long t = msleep_interruptible(50);
+
+		if (t != 0) {
+			/* Some event woke us up, so let's quit */
+			return 0;
+		}
+	}
+
+	max_len = debug_rw_buf_size;
+
+	/*
+	 *  Read from ring buff while there is data and space in return buff
+	 */
+	while ((log_start->offset != log->log_pos.offset) && (len < max_len)) {
+		tzdbg.disp_buf[i++] = log->log_buf[log_start->offset];
+		log_start->offset = (log_start->offset + 1) % log_len;
+		if (log_start->offset == 0)
+			++log_start->wrap;
+		++len;
+	}
+	tzdbg.stat[TZDBG_QSEE_LOG].data= tzdbg.disp_buf;
+	/*
+	 * print the display buffer
+	 */
+	splitline_printk(tzdbg.stat[TZDBG_QSEE_LOG].data,len);
+	return len;
+}
+
+
+static void tzdbg_heartbeat_work(struct work_struct *work)
+{
+	static struct tzdbg_log_pos_t log_start = {0};
+
+	pr_debug("[TEE] qsee log -------------begin---\n");
+	_print_qsee_log_stats(g_qsee_log, &log_start,
+						 QSEE_LOG_BUF_SIZE - sizeof(struct tzdbg_log_pos_t)
+						 );
+	pr_debug("[TEE] qsee log -------------end---\n");
+	queue_work(tzdbg.heartbeat_work_q ,
+			&tzdbg.heartbeat_work
+			);
+}
+#endif
 /*
  * Driver functions
  */
@@ -1673,6 +1869,16 @@ static int tz_log_probe(struct platform_device *pdev)
 
 	if (tzdbgfs_init(pdev))
 		goto exit_free_disp_buf;
+
+#ifdef CONFIG_MSM_TZ_QSEE_LOG
+	if(enable_printk_qseelog) {
+		tzdbg.heartbeat_work_q = create_singlethread_workqueue("tz_heartbeat");
+		INIT_WORK(&tzdbg.heartbeat_work,
+						tzdbg_heartbeat_work);
+		queue_work(tzdbg.heartbeat_work_q, &tzdbg.heartbeat_work);
+		dev_err(&pdev->dev, "%s: enable_printk_qseelog is set\n", __func__);
+	}
+#endif
 	return 0;
 
 exit_free_disp_buf:
@@ -1724,7 +1930,14 @@ static void __exit tz_log_exit(void)
 {
 	platform_driver_unregister(&tz_log_driver);
 }
-
+#ifdef CONFIG_MSM_TZ_QSEE_LOG
+static int __init setup_enable_printk_qseelog(char *buf)
+{
+	enable_printk_qseelog = true;
+	return 0;
+}
+early_param("printk_qseelog", setup_enable_printk_qseelog);
+#endif
 module_init(tz_log_init);
 module_exit(tz_log_exit);
 

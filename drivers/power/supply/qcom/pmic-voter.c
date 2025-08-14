@@ -327,6 +327,7 @@ int get_effective_result_locked(struct votable *votable)
 
 	return votable->effective_result;
 }
+EXPORT_SYMBOL(get_effective_result);
 
 int get_effective_result(struct votable *votable)
 {
@@ -498,6 +499,7 @@ out:
 	unlock_votable(votable);
 	return rc;
 }
+EXPORT_SYMBOL(vote);
 
 /**
  * vote_override() -
@@ -563,7 +565,11 @@ int rerun_election(struct votable *votable)
 
 	lock_votable(votable);
 	effective_result = get_effective_result_locked(votable);
-	if (votable->callback)
+
+	pr_debug("%s: effective vote is %d ensure set\n",
+		 votable->name, effective_result);
+
+	if (votable->callback && !votable->force_active)
 		rc = votable->callback(votable,
 			votable->data,
 			effective_result,
@@ -571,6 +577,7 @@ int rerun_election(struct votable *votable)
 	unlock_votable(votable);
 	return rc;
 }
+EXPORT_SYMBOL(rerun_election);
 
 struct votable *find_votable(const char *name)
 {
@@ -599,6 +606,7 @@ out:
 	else
 		return NULL;
 }
+EXPORT_SYMBOL(find_votable);
 
 static int force_active_get(void *data, u64 *val)
 {
@@ -644,6 +652,32 @@ out:
 }
 DEFINE_DEBUGFS_ATTRIBUTE(votable_force_ops, force_active_get, force_active_set,
 		"%lld\n");
+
+int pmic_vote_force_val_set(struct votable *votable, u32 val) {
+	if(votable) {
+		votable->force_val = val;
+		return 0;
+	}
+
+	return -EINVAL;
+}
+EXPORT_SYMBOL(pmic_vote_force_val_set);
+
+int pmic_vote_force_active_get(struct votable *votable, u64 *val) {
+	if(votable)
+		return force_active_get(votable, val);
+
+	return -EINVAL;
+}
+EXPORT_SYMBOL(pmic_vote_force_active_get);
+
+int pmic_vote_force_active_set(struct votable *votable, u64 val) {
+	if(votable)
+		return force_active_set(votable, val);
+
+	return -EINVAL;
+}
+EXPORT_SYMBOL(pmic_vote_force_active_set);
 
 static int show_votable_clients(struct seq_file *m, void *data)
 {

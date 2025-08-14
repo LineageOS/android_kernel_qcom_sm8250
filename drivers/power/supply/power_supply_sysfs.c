@@ -98,6 +98,10 @@ static const char * const power_supply_typec_src_rp_text[] = {
 	"Rp-Default", "Rp-1.5A", "Rp-3A"
 };
 
+static char *charge_rate[] = {
+	"None", "Normal", "Weak", "Turbo", "Turbo_30W", "Hyper"
+};
+
 static ssize_t power_supply_show_usb_type(struct device *dev,
 					  enum power_supply_usb_type *usb_types,
 					  ssize_t num_usb_types,
@@ -218,6 +222,10 @@ static ssize_t power_supply_show_property(struct device *dev,
 	case POWER_SUPPLY_PROP_MODEL_NAME ... POWER_SUPPLY_PROP_SERIAL_NUMBER:
 		ret = sprintf(buf, "%s\n", value.strval);
 		break;
+	case POWER_SUPPLY_PROP_CHARGE_RATE:
+		snprintf(buf, strlen(charge_rate[value.intval]) + 2,
+			"%s\n", charge_rate[value.intval]);
+		break;
 	default:
 		ret = sprintf(buf, "%d\n", value.intval);
 	}
@@ -310,6 +318,7 @@ static struct device_attribute power_supply_attrs[] = {
 	POWER_SUPPLY_ATTR(charge_empty),
 	POWER_SUPPLY_ATTR(charge_now),
 	POWER_SUPPLY_ATTR(charge_avg),
+	POWER_SUPPLY_ATTR(charge_rate),
 	POWER_SUPPLY_ATTR(charge_counter),
 	POWER_SUPPLY_ATTR(constant_charge_current),
 	POWER_SUPPLY_ATTR(constant_charge_current_max),
@@ -375,6 +384,7 @@ static struct device_attribute power_supply_attrs[] = {
 	POWER_SUPPLY_ATTR(temp_cold),
 	POWER_SUPPLY_ATTR(temp_hot),
 	POWER_SUPPLY_ATTR(system_temp_level),
+	POWER_SUPPLY_ATTR(num_system_temp_levels),
 	POWER_SUPPLY_ATTR(resistance),
 	POWER_SUPPLY_ATTR(resistance_capacitive),
 	POWER_SUPPLY_ATTR(resistance_id),
@@ -485,6 +495,13 @@ static struct device_attribute power_supply_attrs[] = {
 	POWER_SUPPLY_ATTR(cc_toggle_enable),
 	POWER_SUPPLY_ATTR(fg_type),
 	POWER_SUPPLY_ATTR(charger_status),
+	POWER_SUPPLY_ATTR(moisture_detection_enabled),
+	POWER_SUPPLY_ATTR(age),
+#ifdef CONFIG_QC3P_PUMP_SUPPORT
+	POWER_SUPPLY_ATTR(hvdcp_power),
+	POWER_SUPPLY_ATTR(qc3p_current_max),
+	POWER_SUPPLY_ATTR(qc3p_aicl_threshold),
+#endif
 	/* Local extensions of type int64_t */
 	POWER_SUPPLY_ATTR(charge_counter_ext),
 	/* Properties of type `const char *' */

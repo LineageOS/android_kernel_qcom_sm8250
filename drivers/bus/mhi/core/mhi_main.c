@@ -461,6 +461,9 @@ int mhi_queue_skb(struct mhi_device *mhi_dev,
 	/* toggle wake to exit out of M2 */
 	mhi_cntrl->wake_toggle(mhi_cntrl);
 
+	if(mhi_cntrl->pm_state != MHI_PM_M0)
+		mhi_trigger_resume(mhi_cntrl);
+
 	/* generate the tre */
 	buf_info = buf_ring->wp;
 	buf_info->v_addr = skb->data;
@@ -1617,6 +1620,17 @@ void mhi_ctrl_ev_task(unsigned long data)
 	}
 }
 
+#ifdef CONFIG_MHI_DEBUG
+extern int resume_mhi_log_print;
+static inline void turn_on_mhi_debug_log(struct mhi_controller *mhi_cntrl, int enable)
+{
+	if (enable)
+		mhi_cntrl->klog_lvl = MHI_MSG_LVL_VERBOSE;
+	else
+		mhi_cntrl->klog_lvl = MHI_MSG_LVL_ERROR;
+}
+#endif
+
 irqreturn_t mhi_msi_handlr(int irq_number, void *dev)
 {
 	struct mhi_event *mhi_event = dev;
@@ -1625,6 +1639,10 @@ irqreturn_t mhi_msi_handlr(int irq_number, void *dev)
 		&mhi_cntrl->mhi_ctxt->er_ctxt[mhi_event->er_index];
 	struct mhi_ring *ev_ring = &mhi_event->ring;
 	void *dev_rp = mhi_to_virtual(ev_ring, er_ctxt->rp);
+
+#ifdef CONFIG_MHI_DEBUG
+	turn_on_mhi_debug_log(mhi_cntrl, resume_mhi_log_print);
+#endif
 
 	/* confirm ER has pending events to process before scheduling work */
 	if (ev_ring->rp == dev_rp)
@@ -1656,6 +1674,10 @@ irqreturn_t mhi_intvec_threaded_handlr(int irq_number, void *dev)
 	enum mhi_dev_state state = MHI_STATE_MAX;
 	enum MHI_PM_STATE pm_state = 0;
 	enum mhi_ee ee = 0;
+
+#ifdef CONFIG_MHI_DEBUG
+	turn_on_mhi_debug_log(mhi_cntrl, resume_mhi_log_print);
+#endif
 
 	MHI_VERB("Enter\n");
 
@@ -1730,6 +1752,10 @@ irqreturn_t mhi_intvec_handlr(int irq_number, void *dev)
 
 	struct mhi_controller *mhi_cntrl = dev;
 	u32 in_reset = -1;
+
+#ifdef CONFIG_MHI_DEBUG
+	turn_on_mhi_debug_log(mhi_cntrl, resume_mhi_log_print);
+#endif
 
 	/* wake up any events waiting for state change */
 	MHI_VERB("Enter\n");

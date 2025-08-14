@@ -304,7 +304,6 @@ static void ssusb_redriver_gen_dev_set(
 	dev_dbg(redriver->dev,
 		"successfully (%s) the redriver chip, reg 0x00 = 0x%x\n",
 		on ? "ENABLE":"DISABLE", val);
-
 	redriver->gen_dev_val = val;
 
 	if (redriver->is_set_aux) {
@@ -320,7 +319,18 @@ static void ssusb_redriver_gen_dev_set(
 		"successfully (%s) set AUX, aux_val = 0x%x\n",
 		on ? "ENABLE":"DISABLE", aux_val);
 	}
+	else
+	{
+		//set aux value back to default when just using usb c config
+		aux_val = 0x11;
+		ret = redriver_i2c_reg_set(redriver, AUX_SET_REG, aux_val);
+		if (ret < 0)
+			goto err_exit;
+	}
 
+	dev_dbg(redriver->dev,
+		"successfully set the aux reg on the redriver chip, reg 0x09 = 0x%x\n",
+		aux_val);
 	return;
 
 err_exit:

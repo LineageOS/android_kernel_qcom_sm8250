@@ -2439,7 +2439,7 @@ int cnss_wlan_register_driver(struct cnss_wlan_driver *driver_ops)
 		cnss_pr_err("Timeout (%ums) waiting for calibration to complete\n",
 			    timeout);
 		if (!test_bit(CNSS_IN_REBOOT, &plat_priv->driver_state)) {
-			CNSS_ASSERT(0);
+			WARN_ON(1);
 		}
 
 		cal_info = kzalloc(sizeof(*cal_info), GFP_KERNEL);

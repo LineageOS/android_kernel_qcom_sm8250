@@ -934,6 +934,12 @@ static int spi_geni_prepare_transfer_hardware(struct spi_master *spi)
 			"%s: Error %d pinctrl_select_state\n", __func__, ret);
 	}
 
+	if (mas->dev->power.disable_depth > 0) {
+		dev_err(mas->dev, "%s:disable_depth not zero %d\n",
+					__func__, mas->dev->power.disable_depth);
+		pm_runtime_enable(mas->dev);
+	}
+
 	if (!mas->setup || !mas->shared_ee) {
 		ret = pm_runtime_get_sync(mas->dev);
 		if (ret < 0) {
@@ -1492,7 +1498,7 @@ static void geni_spi_handle_rx(struct spi_geni_master *mas)
 	int rx_wc = 0;
 	u8 *rx_buf = NULL;
 
-	if (!mas->cur_xfer)
+	if ((!mas->cur_xfer) || !(mas->cur_xfer->rx_buf))
 		return;
 
 	rx_buf = mas->cur_xfer->rx_buf;
@@ -1898,6 +1904,7 @@ static int spi_geni_resume(struct device *dev)
 static int spi_geni_suspend(struct device *dev)
 {
 	int ret = 0;
+#if 0
 	struct spi_master *spi = get_spi_master(dev);
 	struct spi_geni_master *geni_mas = spi_master_get_devdata(spi);
 
@@ -1909,6 +1916,10 @@ static int spi_geni_suspend(struct device *dev)
 	}
 
 	GENI_SE_ERR(geni_mas->ipc, true, dev, ":%s: End\n", __func__);
+#else
+	if (!pm_runtime_status_suspended(dev))
+		ret = -EBUSY;
+#endif
 	return ret;
 }
 #else

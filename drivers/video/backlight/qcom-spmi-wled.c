@@ -25,12 +25,17 @@
 #include <linux/leds-qpnp-flash.h>
 #include "../../leds/leds.h"
 
+#define WLED5_CTRL_PBUS_WRITE_SYNC_CTL	0xef
+
 /* General definitions */
 #define WLED_DEFAULT_BRIGHTNESS		2048
 #define  WLED_MAX_BRIGHTNESS_12B	4095
 #define  WLED_MAX_BRIGHTNESS_15B	32767
 
 #define WLED_SOFT_START_DLY_US		10000
+
+#define  WLED_PFM_ISSUE_LOW_THRESHOLD	255
+#define  WLED_PFM_ISSUE_HIGH_THRESHOLD	2047
 
 /* WLED control registers */
 #define WLED_CTRL_FAULT_STATUS		0x08
@@ -216,6 +221,22 @@ struct wled_flash_config {
 	int safety_timer;
 };
 
+struct low_bl_config {
+	int low_bl_threshold;
+	int low_bl_remap_percent;
+	int low_bl_delay_ms;
+};
+
+struct bl_step_seq {
+	u32 level;
+	u32 sleep_ms;
+};
+
+struct bl_step_config {
+	struct bl_step_seq *sequence;
+	u32 count;
+};
+
 struct wled {
 	const char *name;
 	struct platform_device *pdev;
@@ -253,6 +274,17 @@ struct wled {
 	enum wled_flash_mode flash_mode;
 	u8 num_strings;
 	u32 leds_per_string;
+	bool low_bl_force_cabc_disable;
+	struct low_bl_config low_bl_cfg;
+
+	u32 pfm_issue_low_threshold;
+	u32 pfm_issue_high_threshold;
+	bool pfm_issue_workaround_enable;
+
+	bool bl_step_up_enable;
+	struct bl_step_config bl_step_cfg;
+
+	bool sleep_cabc_disable;
 };
 
 enum wled5_mod_sel {
@@ -276,7 +308,14 @@ static const u8 wled5_brt_wid_sel_reg[MOD_MAX] = {
 	[MOD_B] = WLED5_SINK_MOD_B_BR_WID_SEL_REG,
 };
 
+static int pfm_issue_delay = 5;
+module_param_named(
+	delay, pfm_issue_delay, int, 0600
+);
+
 static int wled_flash_setup(struct wled *wled);
+
+static int wled_set_brightness_step(struct wled *wled, u16 brightness);
 
 static inline bool is_wled4(struct wled *wled)
 {
@@ -503,7 +542,78 @@ static int wled_update_status(struct backlight_device *bl)
 
 	mutex_lock(&wled->lock);
 	if (brightness) {
+		if (wled->low_bl_force_cabc_disable && wled->brightness) {
+			if (brightness <= wled->low_bl_cfg.low_bl_threshold) {
+				brightness = brightness * wled->low_bl_cfg.low_bl_remap_percent/100;
+				if (!wled->cabc_disabled) {
+					wled->cabc_config(wled, false);
+					wled->cabc_disabled = true;
+					pr_info("under low brightness(%d), will disable cabc\n", brightness);
+				}
+
+			}
+			else if ((wled->brightness < wled->low_bl_cfg.low_bl_threshold) && (wled->cabc_disabled)) {
+				wled->cabc_disabled = false;
+				wled->cabc_config(wled, true);
+				pr_info("exit low brightness(%d), will enable cabc\n", brightness);
+			}
+		}
+
+		/* This is workaround for pmic 6150/7150 wled boost current issue, QC HW team confirm that
+		   PMIC WLED low brightness(<255) is pfm mode, high brightness(>255) is pwm mode, when
+		   brightness from pfm mode to pwm mode transfer fastly, this mode switch will caused
+		   a higher boost current, in Liberty, it may reach 1.7A, this is a risk for hardware,
+		   even pmic damage*/
+		if(wled->pfm_issue_workaround_enable) {
+			if(wled->brightness < wled->pfm_issue_low_threshold &&
+				brightness > wled->pfm_issue_high_threshold) {
+				pr_info("wled pfm_issue_workaround, first step brighness %d, delay %d\n",
+						wled->pfm_issue_low_threshold, pfm_issue_delay);
+				rc = wled_set_brightness(wled, wled->pfm_issue_low_threshold);
+				if (rc < 0) {
+					pr_err("wled failed to set brightness low_threshold rc:%d\n", rc);
+					goto unlock_mutex;
+				}
+
+				if (!!brightness != wled->prev_state) {
+					rc = wled_module_enable(wled, !!brightness);
+					if (rc < 0) {
+						pr_err("wled enable failed rc:%d\n", rc);
+						goto unlock_mutex;
+					}
+					wled->prev_state = !!brightness;
+				}
+
+				mdelay(pfm_issue_delay);
+				pr_info("wled pfm_issue_workaround, second step brighness %d, delay %d\n",
+						wled->pfm_issue_high_threshold, pfm_issue_delay);
+				rc = wled_set_brightness(wled, wled->pfm_issue_high_threshold);
+				if (rc < 0) {
+					pr_err("wled failed to set brightness high_threshold:%d\n", rc);
+					goto unlock_mutex;
+				}
+				mdelay(pfm_issue_delay);
+				pr_info("wled pfm_issue_workaround, set brighness %d\n", brightness);
+			}
+		} else if (wled->bl_step_up_enable) {
+			rc = wled_set_brightness_step(wled, brightness);
+			if (rc < 0) {
+				pr_err("wled failed to set brightness step rc:%d\n", rc);
+				goto unlock_mutex;
+			}
+		}
+
 		rc = wled_set_brightness(wled, brightness);
+		if (wled->cabc_disabled && wled->low_bl_force_cabc_disable && !wled->brightness) {
+			if (brightness <= wled->low_bl_cfg.low_bl_threshold)
+				pr_info("keep cabc disabled\n");
+			else {
+				msleep(wled->low_bl_cfg.low_bl_delay_ms);
+				wled->cabc_disabled = false;
+				wled->cabc_config(wled, true);
+				pr_info("enable wled cabc\n");
+			}
+		}
 		if (rc < 0) {
 			pr_err("wled failed to set brightness rc:%d\n", rc);
 			goto unlock_mutex;
@@ -535,6 +645,11 @@ static int wled_update_status(struct backlight_device *bl)
 			}
 		}
 	} else {
+		if (!wled->cabc_disabled && wled->low_bl_force_cabc_disable) {
+			wled->cabc_config(wled, false);
+			wled->cabc_disabled = true;
+			pr_info("disable wled cabc\n");
+		}
 		rc = wled_module_enable(wled, brightness);
 		if (rc < 0) {
 			pr_err("wled disable failed rc:%d\n", rc);
@@ -1082,6 +1197,33 @@ static inline u8 get_wled_safety_time(int time_ms)
 	return 0;
 }
 
+static int parse_low_bl_config(struct wled *wled)
+{
+	struct device *dev = &wled->pdev->dev;
+	u32 val = 0;
+
+	if (of_property_read_bool(dev->of_node, "mmi,low-bl-force-cabc-disable"))
+			wled->low_bl_force_cabc_disable = true;
+
+	if (wled->low_bl_force_cabc_disable) {
+		of_property_read_u32(dev->of_node, "mmi,low-bl-threshold", &val);
+		wled->low_bl_cfg.low_bl_threshold = val;
+
+		of_property_read_u32(dev->of_node, "mmi,low-bl-remap-percent", &val);
+		wled->low_bl_cfg.low_bl_remap_percent = val;
+
+		val = 0;
+		of_property_read_u32(dev->of_node, "mmi,low-bl-delay-ms", &val);
+		wled->low_bl_cfg.low_bl_delay_ms = val;
+
+		pr_info(" low-bl-force-cabc-disbale enabled, low-bl-threshold %d low-bl-remap_percent %d low_bl_delay_ms %d\n",
+				wled->low_bl_cfg.low_bl_threshold, wled->low_bl_cfg.low_bl_remap_percent, wled->low_bl_cfg.low_bl_delay_ms);
+
+		wled->cabc_disabled = false;
+	}
+	return  0;
+}
+
 static int wled5_setup(struct wled *wled)
 {
 	int rc, temp, i;
@@ -1143,6 +1285,9 @@ static int wled5_setup(struct wled *wled)
 	rc = wled5_cabc_config(wled, wled->cfg.cabc_sel ? true : false);
 	if (rc < 0)
 		return rc;
+
+	wled->low_bl_force_cabc_disable = false;
+	if (wled->cfg.cabc_sel) parse_low_bl_config(wled);
 
 	/* Enable one of the modulators A or B based on mod_sel */
 	addr = wled->sink_addr + WLED5_SINK_MOD_A_EN_REG;
@@ -2306,6 +2451,152 @@ static int wled_configure(struct wled *wled, struct device *dev)
 	return 0;
 }
 
+static int wled_parse_bl_step_sequence(struct wled *wled)
+{
+	int rc = 0;
+	int i;
+	u32 length = 0;
+	u32 count = 0;
+	u32 size = 0;
+	u32 *arr_32 = NULL;
+	const u32 *arr;
+	struct bl_step_seq *seq;
+	struct device *dev = &wled->pdev->dev;
+
+	wled->bl_step_up_enable = false;
+	wled->bl_step_up_enable = of_property_read_bool(dev->of_node,
+					 "qcom,wled-bl-step-up");
+
+	if (!wled->bl_step_up_enable) goto error;
+
+	arr = of_get_property(dev->of_node,
+			"qcom,wled-bl-step-sequence", &length);
+
+	if (!arr) {
+		pr_err(" wled-bl-step-sequence not found\n");
+		rc = -EINVAL;
+		goto error;
+	}
+	if (length & 0x1) {
+		pr_err("syntax error for wled-bl-step-sequence\n");
+		rc = -EINVAL;
+		goto error;
+	}
+
+	pr_debug("BL STEP SEQ LENGTH = %d\n", length);
+	length = length / sizeof(u32);
+
+	size = length * sizeof(u32);
+
+	arr_32 = kzalloc(size, GFP_KERNEL);
+	if (!arr_32) {
+		rc = -ENOMEM;
+		goto error;
+	}
+
+	rc = of_property_read_u32_array(dev->of_node, "qcom,wled-bl-step-sequence",
+					arr_32, length);
+	if (rc) {
+		pr_err("cannot read wled-bl-step-sequence\n");
+		goto error_free_arr_32;
+	}
+
+	count = length / 2;
+	size = count * sizeof(*seq);
+	seq = kzalloc(size, GFP_KERNEL);
+	if (!seq) {
+		rc = -ENOMEM;
+		goto error_free_arr_32;
+	}
+
+	wled->bl_step_cfg.sequence = seq;
+	wled->bl_step_cfg.count = count;
+
+	for (i = 0; i < length; i += 2) {
+		seq->level = arr_32[i];
+		seq->sleep_ms = arr_32[i + 1];
+		pr_debug(" %d: level %d sleep_ms %d\n", i, seq->level, seq->sleep_ms);
+		seq++;
+	}
+
+
+error_free_arr_32:
+	kfree(arr_32);
+
+error:
+	return rc;
+}
+
+
+/*
+* This is workaround for pmic 6150/7150 wled boost current issue, QC HW team confirm that
+* PMIC WLED low brightness(<255) is pfm mode, high brightness(>255) is pwm mode, when
+* brightness from pfm mode to pwm mode transfer fastly, this mode switch will caused
+* a higher boost current, in Liberty, it may reach 1.7A, this is a risk for hardware,
+* even pmic damage
+*/
+
+static int wled_set_brightness_step(struct wled *wled, u16 brightness)
+{
+	int rc = 0;
+	int i, start_index, end_index;
+	struct bl_step_seq *seq = wled->bl_step_cfg.sequence;
+	u32 count = wled->bl_step_cfg.count;
+
+	if (!seq || !count) {
+		rc = -EINVAL;
+		goto exit;
+	}
+
+	if ((wled->brightness >= seq[count-1].level) ||
+		(brightness <= seq[0].level) || (wled->brightness >= brightness))
+		goto exit;
+
+	start_index = 0;
+	end_index = 0;
+	for (i = 0; i < count; i++) {
+		if ( wled->brightness < seq[i].level) {
+			start_index = i;
+			break;
+		}
+	}
+
+	for (i = count-1; i >= 0; i--) {
+		if ( brightness > seq[i].level) {
+			end_index = i;
+			break;
+		}
+	}
+
+	if ( end_index < start_index) goto exit;
+
+	pr_info(" set_brightness_step : %d -> [%d, %d]-> %d\n",
+		wled->brightness, seq[start_index].level, seq[end_index].level, brightness);
+
+	for (i = start_index; i <= end_index; i++)
+	{
+		rc = wled_set_brightness(wled, seq[i].level);
+		if (rc < 0) {
+			pr_err("wled failed to set brightness high_threshold:%d\n", rc);
+			goto exit;
+		}
+		mdelay(seq[i].sleep_ms);
+
+		pr_debug("set brightness %d, sleep %d ms\n", seq[i].level, seq[i].sleep_ms);
+
+		if (!!brightness != wled->prev_state) {
+			rc = wled_module_enable(wled, !!brightness);
+			if (rc < 0) {
+				pr_err("wled enable failed rc:%d\n", rc);
+				goto exit;
+			}
+			wled->prev_state = !!brightness;
+		}
+	}
+exit:
+	return rc;
+}
+
 static const struct backlight_ops wled_ops = {
 	.update_status = wled_update_status,
 	.get_brightness = wled_get_brightness,
@@ -2351,6 +2642,11 @@ static int wled_probe(struct platform_device *pdev)
 		return rc;
 	}
 
+	rc = wled_parse_bl_step_sequence(wled);
+	if (rc < 0) {
+		dev_err(&pdev->dev, "wled parse bl_step_sequence rc:%d\n", rc);
+	}
+
 	mutex_init(&wled->lock);
 
 	val = WLED_DEFAULT_BRIGHTNESS;
@@ -2360,6 +2656,26 @@ static int wled_probe(struct platform_device *pdev)
 	val = WLED_MAX_BRIGHTNESS_12B;
 	of_property_read_u32(pdev->dev.of_node, "max-brightness", &val);
 	wled->max_brightness = val;
+
+	val = WLED_PFM_ISSUE_LOW_THRESHOLD;
+	of_property_read_u32(pdev->dev.of_node, "qcom,wled-pfm-issue-low-threshold", &val);
+	wled->pfm_issue_low_threshold = val;
+
+	val = WLED_PFM_ISSUE_HIGH_THRESHOLD;
+	of_property_read_u32(pdev->dev.of_node, "qcom,wled-pfm-issue-high-threshold", &val);
+	wled->pfm_issue_high_threshold = val;
+
+	wled->pfm_issue_workaround_enable = of_property_read_bool(pdev->dev.of_node,
+					 "qcom,wled-pfm-issue-workaround-enable");
+	dev_info(&pdev->dev, "wled pfm_issue_workaround_enable %d, threshold[%d--%d]\n",
+				wled->pfm_issue_workaround_enable,
+				wled->pfm_issue_low_threshold,
+				wled->pfm_issue_high_threshold);
+
+	wled->sleep_cabc_disable= of_property_read_bool(pdev->dev.of_node,
+					 "qcom,wled-sleep-disable-cabc");
+	dev_info(&pdev->dev, "wled sleep-disable-cabc [%d]\n",
+				wled->sleep_cabc_disable);
 
 	/* For WLED5, when CABC is enabled, max brightness is 4095. */
 	if (is_wled5(wled) && wled->cfg.cabc_sel)

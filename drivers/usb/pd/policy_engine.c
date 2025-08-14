@@ -236,7 +236,8 @@ static void *usbpd_ipc_log;
 #define SINK_TX_TIME		16
 
 /* tPSHardReset + tSafe0V */
-#define SNK_HARD_RESET_VBUS_OFF_TIME	(35 + 650)
+/* Increase the tSfe0V up to 850 to handle some slow hdmi cable*/
+#define SNK_HARD_RESET_VBUS_OFF_TIME	(35 + 850)
 
 /* tSrcRecover + tSrcTurnOn */
 #define SNK_HARD_RESET_VBUS_ON_TIME	(1000 + 275)
@@ -887,6 +888,32 @@ static int pd_select_pdo(struct usbpd *pd, int pdo_pos, int uv, int ua)
 
 	pd->requested_current = curr;
 	pd->requested_pdo = pdo_pos;
+	usbpd_warn(&pd->dev, "select_pdo: PDO:%d, %d uV, %d uA\n",
+		   pdo_pos, uv, ua);
+
+	return 0;
+}
+
+static int pd_get_pdo(struct usbpd *pd, int pdo_pos, int *uv_max, int *uv_min, int *ua)
+{
+	u8 type;
+	u32 pdo = pd->received_pdos[pdo_pos - 1];
+
+	if (0 == pdo)
+		return -ENOTSUPP;
+
+	type = PD_SRC_PDO_TYPE(pdo);
+	if (type == PD_SRC_PDO_TYPE_FIXED) {
+		*ua = PD_SRC_PDO_FIXED_MAX_CURR(pdo) * 10;
+		*uv_max = *uv_min = PD_SRC_PDO_FIXED_VOLTAGE(pdo) * 50 * 1000;
+	} else if (type == PD_SRC_PDO_TYPE_AUGMENTED) {
+		*uv_max = PD_APDO_MAX_VOLT(pdo) * 100000;
+		*uv_min = PD_APDO_MIN_VOLT(pdo) *  100000;
+		*ua = PD_APDO_MAX_CURR(pdo) * 50000;
+	} else {
+		usbpd_err(&pd->dev, "Only Fixed or Programmable PDOs supported\n");
+		return -ENOTSUPP;
+	}
 
 	return 0;
 }
@@ -903,7 +930,9 @@ static int pd_eval_src_caps(struct usbpd *pd)
 		return -EINVAL;
 	}
 
+	usbpd_info(&pd->dev,"%s peer_usb_comm=%d\n", __func__, pd->peer_usb_comm);
 	pd->peer_usb_comm = PD_SRC_PDO_FIXED_USB_COMM(first_pdo);
+
 	pd->peer_pr_swap = PD_SRC_PDO_FIXED_PR_SWAP(first_pdo);
 	pd->peer_dr_swap = PD_SRC_PDO_FIXED_DR_SWAP(first_pdo);
 
@@ -2351,6 +2380,7 @@ static void enter_state_src_negotiate_capability(struct usbpd *pd)
 	int ret;
 
 	log_decoded_request(pd, pd->rdo);
+	usbpd_info(&pd->dev,"%s peer_usb_comm=%d\n", __func__, PD_RDO_USB_COMM(pd->rdo));
 	pd->peer_usb_comm = PD_RDO_USB_COMM(pd->rdo);
 
 	if (PD_RDO_OBJ_POS(pd->rdo) != 1 ||
@@ -2405,12 +2435,11 @@ static void enter_state_src_negotiate_capability(struct usbpd *pd)
 static void enter_state_src_ready(struct usbpd *pd)
 {
 	/*
-	 * USB Host stack was started at PE_SRC_STARTUP but if peer
-	 * doesn't support USB communication, we can turn it off
+	 * USB Host stack was started at PE_SRC_STARTUP. Ignore peer
+	 * device support of USB communication bit to enable some extended
+	 * displays and Hubs. Host will anyway enter low power
+	 * mode if no devices connected.
 	 */
-	if (pd->current_dr == DR_DFP && !pd->peer_usb_comm &&
-			!pd->in_explicit_contract)
-		stop_usb_host(pd);
 
 	pd->in_explicit_contract = true;
 
@@ -4269,9 +4298,245 @@ static ssize_t pdo_n_show(struct device *dev, struct device_attribute *attr,
 	return -EINVAL;
 }
 
+int usbpd_select_pdo_match(struct usbpd *pd)
+{
+	int uv_diff = 0, max_uv_diff = 0, pdo = 0;
+	int pdo_max_uv = 0, pdo_min_uv = 0, pdo_ua = 0;
+	int uv_in, i;
+	int pdo_pos;
+	u8 type = -1;
+	int ret;
+	union power_supply_propval val;
+
+	if (!pd)
+		return -EINVAL;
+
+	mutex_lock(&pd->swap_lock);
+
+	if (pd->current_pr == PR_SRC) {
+		usbpd_err(&pd->dev, "select_pdo: not support in source mode\n");
+		ret = -ENOTSUPP;
+		goto out;
+	}
+
+	/* Only allowed if we are already in explicit sink contract */
+	if (pd->current_state != PE_SNK_READY || !is_sink_tx_ok(pd)) {
+		usbpd_err(&pd->dev, "select_pdo: Cannot select new PDO yet\n");
+		ret = -EBUSY;
+		if((pd->current_state >= PE_SRC_DISABLED) &&
+		(pd->current_state <= PE_SRC_TRANSITION_TO_DEFAULT))
+		{
+			usbpd_err(&pd->dev, "select_pdo: we are sourcing power so return not supported\n");
+			ret = -ENOTSUPP;
+		}
+		goto out;
+	}
+
+	/* Check the Max Input Voltage from USBPSY */
+	power_supply_get_property(pd->usb_psy,
+				  POWER_SUPPLY_PROP_VOLTAGE_MAX, &val);
+	uv_in = val.intval;
+	/* start with 5 V */
+	max_uv_diff = 5000000;
+	for (i = 1; i < 8; i++) {
+		pdo_pos = pd->received_pdos[i - 1];
+		if (pdo_pos != 0)
+			type = PD_SRC_PDO_TYPE(pdo_pos);
+		if (type == PD_SRC_PDO_TYPE_FIXED &&
+			!pd_get_pdo(pd, i, &pdo_max_uv, &pdo_min_uv, &pdo_ua)) {
+			if (pdo_max_uv <= uv_in) {
+				//If there is a valid pdo we should default to choosing one
+				//even if it charges slower vs not setting a pdo
+				//and getting invalid pdo prints
+				if(pdo == 0)
+				{
+					pdo = i;
+				}
+				uv_diff = uv_in - pdo_max_uv;
+				if (uv_diff < max_uv_diff) {
+					max_uv_diff = uv_diff;
+					pdo = i;
+				}
+			}
+		}
+	}
+
+	if (pdo < 1 || pdo > 7) {
+		usbpd_err(&pd->dev, "select_pdo: invalid PDO:%d\n", pdo);
+		ret = pd->current_voltage;
+		goto out;
+	}
+
+	pd_get_pdo(pd, pdo, &pdo_max_uv, &pdo_min_uv, &pdo_ua);
+	ret = pd_select_pdo(pd, pdo, pdo_max_uv, pdo_ua);
+	if (ret)
+		goto out;
+	else
+		ret = pdo_max_uv;
+
+	reinit_completion(&pd->is_ready);
+	pd->send_request = true;
+	kick_sm(pd, 0);
+
+	/* wait for operation to complete */
+	if (!wait_for_completion_timeout(&pd->is_ready,
+			msecs_to_jiffies(1000))) {
+		usbpd_err(&pd->dev, "select_pdo: request timed out\n");
+		ret = -ETIMEDOUT;
+		goto out;
+	}
+
+	/* determine if request was accepted/rejected */
+	if (pd->selected_pdo != pd->requested_pdo ||
+			pd->current_voltage != pd->requested_voltage) {
+		usbpd_err(&pd->dev, "select_pdo: request rejected\n");
+		ret = -EINVAL;
+	}
+
+out:
+	pd->send_request = false;
+	mutex_unlock(&pd->swap_lock);
+	return ret;
+}
+EXPORT_SYMBOL(usbpd_select_pdo_match);
+
+int usbpd_get_pdo_info(struct usbpd *pd, struct usbpd_pdo_info *pdo_info, int length)
+{
+	int pdo = 0;
+	int i;
+	int ret = 0;
+
+	if (!pd || !pdo_info)
+		return -EINVAL;
+
+	if (length > PD_MAX_PDO_NUM) {
+		usbpd_err(&pd->dev,
+			"the members of the struct pd_info[] array must be less than %d, "
+			"err length %d\n", PD_MAX_PDO_NUM, length);
+		return -EINVAL;
+	}
+
+	mutex_lock(&pd->swap_lock);
+
+	if (pd->current_pr == PR_SRC) {
+		usbpd_err(&pd->dev, "select_pdo:not support in source mode\n");
+		ret = -ENOTSUPP;
+		goto out;
+	}
+	usbpd_err(&pd->dev, "select pdo info ,pd->current_state %d\n", pd->current_state);
+
+	if (!is_sink_tx_ok(pd))
+		usbpd_err(&pd->dev, "select pdo info , !is_sink_tx_ok\n");
+
+	/* Only allowed if we are already in explicit sink contract */
+	if (pd->current_state != PE_SNK_READY || !is_sink_tx_ok(pd)) {
+		usbpd_err(&pd->dev, "select_pdo_info: Cannot select new PDO yet\n");
+		ret = -EBUSY;
+		goto out;
+	}
+
+	for (i = 0; i < length; i++) {
+		pdo = pd->received_pdos[i];
+		if (pdo == 0)
+			break;
+
+		pdo_info[i].pdo_pos = i + 1;
+		pdo_info[i].type = PD_SRC_PDO_TYPE(pdo);
+		if (pdo_info[i].type == PD_SRC_PDO_TYPE_FIXED) {
+			pdo_info[i].ua = PD_SRC_PDO_FIXED_MAX_CURR(pdo) * 10*1000;
+			pdo_info[i].uv_max = PD_SRC_PDO_FIXED_VOLTAGE(pdo) * 50 * 1000;
+			pdo_info[i].uv_min = PD_SRC_PDO_FIXED_VOLTAGE(pdo) * 50 * 1000;
+
+			printk(KERN_INFO  "pdo %d, Fixed supply\n"
+					"Voltage:%d (uV)\n"
+					"Max Current:%d (uA)\n",
+					pdo_info[i].pdo_pos,
+					pdo_info[i].uv_max,
+					pdo_info[i].ua);
+
+		} else if (pdo_info[i].type == PD_SRC_PDO_TYPE_AUGMENTED) {
+			pdo_info[i].uv_max = PD_APDO_MAX_VOLT(pdo) * 100000;
+			pdo_info[i].uv_min = PD_APDO_MIN_VOLT(pdo) *  100000;
+			pdo_info[i].ua = PD_APDO_MAX_CURR(pdo) * 50000;
+
+			printk(KERN_INFO  "pdo %d, Programmable Power supply\n"
+					"Voltage:%d (uV)\n"
+					"Max Current:%d (uA)\n",
+					pdo_info[i].pdo_pos,
+					pdo_info[i].uv_max,
+					pdo_info[i].ua);
+
+		} else
+			usbpd_err(&pd->dev, "Only get Fixed or Programmable PDOs supported\n");
+	}
+out:
+	mutex_unlock(&pd->swap_lock);
+	return ret;
+}
+EXPORT_SYMBOL(usbpd_get_pdo_info);
+
+int usbpd_select_pdo(struct usbpd *pd, int pdo_pos, int uv, int ua)
+{
+	int ret;
+
+	if (!pd)
+		return -EINVAL;
+
+	mutex_lock(&pd->swap_lock);
+
+	if (pd->current_pr == PR_SRC) {
+		usbpd_err(&pd->dev, "select_pdo:not support in source mode\n");
+		ret = -ENOTSUPP;
+		goto out;
+	}
+
+	/* Only allowed if we are already in explicit sink contract */
+	if (pd->current_state != PE_SNK_READY || !is_sink_tx_ok(pd)) {
+		usbpd_err(&pd->dev, "select_pdo: Cannot select new PDO yet\n");
+		ret = -EBUSY;
+		goto out;
+	}
+
+	if (pdo_pos < 1 || pdo_pos > 7) {
+		usbpd_err(&pd->dev, "select_pdo: invalid PDO:%d\n", pdo_pos);
+		ret = -EINVAL;
+		goto out;
+	}
+
+	ret = pd_select_pdo(pd, pdo_pos, uv, ua);
+	if (ret)
+		goto out;
+
+	reinit_completion(&pd->is_ready);
+	pd->send_request = true;
+	kick_sm(pd, 0);
+
+	/* wait for operation to complete */
+	if (!wait_for_completion_timeout(&pd->is_ready,
+			msecs_to_jiffies(1000))) {
+		usbpd_err(&pd->dev, "select_pdo: request timed out\n");
+		ret = -ETIMEDOUT;
+		goto out;
+	}
+
+	/* determine if request was accepted/rejected */
+	if (pd->selected_pdo != pd->requested_pdo ||
+			pd->current_voltage != pd->requested_voltage) {
+		usbpd_err(&pd->dev, "select_pdo: request rejected\n");
+		ret = -EINVAL;
+	}
+
+out:
+	pd->send_request = false;
+	mutex_unlock(&pd->swap_lock);
+	return ret;
+}
+EXPORT_SYMBOL(usbpd_select_pdo);
+
 static ssize_t select_pdo_store(struct device *dev,
 		struct device_attribute *attr, const char *buf, size_t size)
 {
+#ifdef QCOM_BASE
 	struct usbpd *pd = dev_get_drvdata(dev);
 	int src_cap_id;
 	int pdo, uv = 0, ua = 0;
@@ -4333,6 +4598,9 @@ out:
 	pd->send_request = false;
 	mutex_unlock(&pd->swap_lock);
 	return ret ? ret : size;
+#else
+	return size;
+#endif
 }
 
 static ssize_t select_pdo_show(struct device *dev,

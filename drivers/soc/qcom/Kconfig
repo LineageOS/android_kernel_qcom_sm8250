@@ -3,6 +3,94 @@
 # QCOM Soc drivers
 #
 menu "Qualcomm SoC drivers"
+config MMI_DEVICE_DTBS
+	depends on ARCH_QCOM
+	default n
+	bool "Motorola Mobility Device DTBs"
+	help
+		Only include Motorola device specific DTBs to limit the number that
+		get built during kernel compilation.
+
+config SMITH_DTB
+	depends on ARCH_QCOM
+	default n
+	bool "SMITH DTBs"
+	help
+	Only include SMITH specific DTBs to limit the number that
+	get built during kernel compilation.
+
+config RACER_DTB
+	depends on ARCH_QCOM
+	default n
+	bool "RACER DTBs"
+	help
+	Only include RACER specific DTBs to limit the number that
+	get built during kernel compilation.
+
+config NAIRO_DTB
+	depends on ARCH_QCOM
+	default n
+	bool "NAIBO DTBs"
+	help
+	Only include NAIBO specific DTBs to limit the number that
+	get built during kernel compilation.
+
+config NIO_DTB
+    depends on ARCH_QCOM
+    default n
+    bool "NIO DTBs"
+    help
+    Only include NIO specific DTBs to limit the number that
+    get built during kernel compilation.
+
+config KIEV_DTB
+	depends on ARCH_QCOM
+	default n
+	bool "KIEV DTBs"
+	help
+	Only include KIEV specific DTBs to limit the number that
+	get built during kernel compilation.
+
+config PSTAR_DTB
+	depends on ARCH_QCOM
+	default n
+	bool "PSTAR DTBs"
+	help
+	Only include PSTAR specific DTBs to limit the number that
+	get built during kernel compilation.
+
+config BERLIN_DTB
+	depends on ARCH_QCOM
+	default n
+	bool "BERLIN DTBs"
+	help
+	Only include BERLIN specific DTBs to limit the number that
+	get built during kernel compilation.
+
+config BERLNA_DTB
+	depends on ARCH_QCOM
+	default n
+	bool "BERLNA DTBs"
+	help
+	Only include BERLNA specific DTBs to limit the number that
+	get built during kernel compilation.
+
+config KIEVV_DTB
+        depends on ARCH_QCOM
+        default n
+        bool "KIEVV DTBs"
+        help
+        Only include KIEVV specific DTBs to limit the number that
+        get built during kernel compilation
+
+config KYOTO_DTB
+	depends on ARCH_QCOM
+	default n
+	bool "KYOTO DTBs"
+	help
+	Only include KYOTO specific DTBs to limit the number that
+	get built during kernel compilation.
+
 config QCOM_COMMAND_DB
 	tristate "Qualcomm Command DB"
 	depends on ARCH_QCOM || COMPILE_TEST
@@ -598,6 +686,15 @@ config QCOM_FSA4480_I2C
 	  using I2C. This driver provides common support
 	  for accessing the device, switching between USB and Audio
 	  modes, changing orientation.
+
+config QCOM_FSA4480_LPD
+	bool "Fairchild FSA4480 chip with I2C LPD"
+	select REGMAP_I2C
+	depends on I2C
+	help
+	  Support for the Fairchild FSA4480 IC LPD detection function controlled
+	  using I2C. This driver provides common support of resistance detection
+	  for accessing the device
 
 config QCOM_WATCHDOG_V2
 	bool "QTI Watchdog Support"

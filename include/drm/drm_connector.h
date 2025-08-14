@@ -92,6 +92,8 @@ enum subpixel_order {
 
 };
 
+#define DRM_DISPLAY_NAME_LEN 128
+
 /**
  * struct drm_scrambling: sink's scrambling support.
  */
@@ -265,6 +267,14 @@ struct drm_display_info {
 	 * @height_mm: Physical height in mm.
 	 */
 	unsigned int height_mm;
+
+	u64 panel_id;
+	u64 panel_ver;
+	u32 panel_regDA;
+	u32 panel_regDB;
+	char panel_name[DRM_DISPLAY_NAME_LEN];
+	char panel_supplier[DRM_DISPLAY_NAME_LEN];
+
 
 	/**
 	 * @pixel_clock: Maximum pixel clock supported by the sink, in units of

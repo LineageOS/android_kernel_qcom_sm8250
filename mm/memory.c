@@ -1129,6 +1129,7 @@ static int copy_pte_range(struct mm_struct *dst_mm, struct mm_struct *src_mm,
 	spinlock_t *src_ptl, *dst_ptl;
 	int progress = 0;
 	int rss[NR_MM_COUNTERS];
+	unsigned long orig_addr = addr;
 	swp_entry_t entry = (swp_entry_t){0};
 
 again:
@@ -1167,6 +1168,15 @@ again:
 	} while (dst_pte++, src_pte++, addr += PAGE_SIZE, addr != end);
 
 	arch_leave_lazy_mmu_mode();
+
+	/*
+	 * Prevent the page fault handler to copy the page while stale tlb entry
+	 * are still not flushed.
+	 */
+	if (IS_ENABLED(CONFIG_SPECULATIVE_PAGE_FAULT) &&
+	    is_cow_mapping(vma->vm_flags))
+		flush_tlb_range(vma, orig_addr, end);
+
 	spin_unlock(src_ptl);
 	pte_unmap(orig_src_pte);
 	add_mm_rss_vec(dst_mm, rss);
@@ -3310,7 +3320,13 @@ vm_fault_t do_swap_page(struct vm_fault *vmf)
 	 * and can then take the readahead path instead of SWP_SYNCHRONOUS_IO.
 	 */
 	si = swp_swap_info(entry);
+	/* Moto huangzq2: check sync_io on each page if we enabled Zram wb.
+	 * Zram writeback will remove SWP_SYNCHRONOUS_IO flag as it has disk
+	 * IO operation on writeback page during swap in.
+	 */
 	if (si->flags & SWP_SYNCHRONOUS_IO && __swap_count(si, entry) == 1)
+		skip_swapcache = true;
+	else if (__swap_count(si, entry) == 1 && swap_slot_has_sync_io(entry))
 		skip_swapcache = true;
 
 	page = lookup_swap_cache(entry, vma, vmf->address);
@@ -3339,7 +3355,7 @@ vm_fault_t do_swap_page(struct vm_fault *vmf)
 			ret = VM_FAULT_RETRY;
 			goto out;
 		} else {
-			page = swapin_readahead(entry, GFP_HIGHUSER_MOVABLE,
+			page = swapin_readahead(entry, GFP_HIGHUSER_MOVABLE | __GFP_CMA,
 						vmf);
 			swapcache = page;
 		}

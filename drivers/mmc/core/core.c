@@ -3766,7 +3766,16 @@ static int mmc_pm_notify(struct notifier_block *notify_block,
 		spin_lock_irqsave(&host->lock, flags);
 		host->rescan_disable = 1;
 		spin_unlock_irqrestore(&host->lock, flags);
+
+		dev_warn(mmc_dev(host), "Prepare cancel detect work");
+		if(wq_has_sleeper(&host->wq)) {
+			wake_up(&host->wq);
+			dev_warn(mmc_dev(host), "There aren't unfinished tasks, abort suspend");
+			return NOTIFY_BAD;
+		}
+
 		cancel_delayed_work_sync(&host->detect);
+		dev_warn(mmc_dev(host), "Canceled detect work");
 
 		if (!host->bus_ops)
 			break;

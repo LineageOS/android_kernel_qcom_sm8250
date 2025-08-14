@@ -25,6 +25,7 @@
 #include <linux/regulator/driver.h>
 #include <linux/regulator/machine.h>
 #include <linux/regulator/of_regulator.h>
+#include <linux/time.h>
 
 #define PMIC_VER_8941				0x01
 #define PMIC_VERSION_REG			0x0105
@@ -86,6 +87,8 @@
 #define QPNP_PON_S3_DBC_CTL(pon)		((pon)->base + 0x75)
 #define QPNP_PON_SMPL_CTL(pon)			((pon)->base + 0x7F)
 #define QPNP_PON_TRIGGER_EN(pon)		((pon)->base + 0x80)
+#define QPNP_PON_PERPH_RB_SPARE(pon)		((pon)->base + 0x8C)
+#define QPNP_PON_DVDD_RB_SPARE(pon)		((pon)->base + 0x8D)
 #define QPNP_PON_XVDD_RB_SPARE(pon)		((pon)->base + 0x8E)
 #define QPNP_PON_SOFT_RB_SPARE(pon)		((pon)->base + 0x8F)
 #define QPNP_PON_SEC_ACCESS(pon)		((pon)->base + 0xD0)
@@ -180,6 +183,7 @@ struct qpnp_pon_config {
 	bool			old_state;
 	bool			use_bark;
 	bool			config_reset;
+	u32			swap_code;
 };
 
 struct pon_regulator {
@@ -350,6 +354,12 @@ static bool is_pon_gen2(struct qpnp_pon *pon)
 		pon->subtype == PON_GEN2_SECONDARY;
 }
 
+extern unsigned int key_swap_algo(unsigned int code);
+unsigned int __attribute__((weak)) key_swap_algo(unsigned int code)
+{
+	return code;
+}
+
 /**
  * qpnp_pon_set_restart_reason() - Store device restart reason in PMIC register
  *
@@ -382,6 +392,50 @@ int qpnp_pon_set_restart_reason(enum pon_restart_reason reason)
 	return rc;
 }
 EXPORT_SYMBOL(qpnp_pon_set_restart_reason);
+
+/**
+ * qpnp_pon_store_extra_reset_info - Store extra reset info in PMIC register.
+ *
+ * Returns = 0 if PMIC feature is not available or store restart reason
+ * successfully.
+ * Returns > 0 for errors
+ *
+ * This function is used to store extra reset info in PMIC spare register
+ * which can be preserved during reset.
+ */
+int qpnp_pon_store_extra_reset_info(u16 mask, u16 val)
+{
+	int rc = 0;
+	struct qpnp_pon *pon = sys_reset_dev;
+
+	if (!pon)
+		return 0;
+
+	if (mask & 0xFF) {
+		rc = qpnp_pon_masked_write(pon, QPNP_PON_DVDD_RB_SPARE(pon),
+					   (mask & 0xFF), (val & 0xFF));
+		if (rc) {
+			dev_err(pon->dev,
+				"Failed to store extra reset info to 0x%x\n",
+				QPNP_PON_DVDD_RB_SPARE(pon));
+			return rc;
+		}
+	}
+
+	if (mask & 0xFF00) {
+		rc = qpnp_pon_masked_write(pon, QPNP_PON_XVDD_RB_SPARE(pon),
+				((mask >> 8) & 0xFF), ((val >> 8) & 0xFF));
+		if (rc) {
+			dev_err(pon->dev,
+				"Failed to store extra reset info to 0x%x\n",
+				QPNP_PON_XVDD_RB_SPARE(pon));
+			return rc;
+		}
+	}
+
+	return rc;
+}
+EXPORT_SYMBOL(qpnp_pon_store_extra_reset_info);
 
 /*
  * qpnp_pon_check_hard_reset_stored() - Checks if the PMIC need to
@@ -917,6 +971,9 @@ static int qpnp_pon_input_dispatch(struct qpnp_pon *pon, u32 pon_type)
 	uint pon_rt_sts;
 	u64 elapsed_us;
 	int rc;
+	struct timeval timestamp;
+	struct tm tm;
+	char buff[255];
 
 	cfg = qpnp_get_cfg(pon, pon_type);
 	if (!cfg)
@@ -943,6 +1000,17 @@ static int qpnp_pon_input_dispatch(struct qpnp_pon *pon, u32 pon_type)
 	switch (cfg->pon_type) {
 	case PON_KPDPWR:
 		pon_rt_bit = QPNP_PON_KPDPWR_N_SET;
+
+		/* get the time stamp in readable format to print*/
+		do_gettimeofday(&timestamp);
+		time_to_tm((time_t)(timestamp.tv_sec), 0, &tm);
+		snprintf(buff, sizeof(buff),
+			"%u-%02d-%02d %02d:%02d:%02d UTC",
+			(int) tm.tm_year + 1900, tm.tm_mon + 1,
+			tm.tm_mday, tm.tm_hour, tm.tm_min, tm.tm_sec);
+
+		pr_warn("Report pwrkey %s event at: %s\n", pon_rt_bit &
+			pon_rt_sts ? "press" : "release", buff);
 		break;
 	case PON_RESIN:
 		pon_rt_bit = QPNP_PON_RESIN_N_SET;
@@ -957,7 +1025,7 @@ static int qpnp_pon_input_dispatch(struct qpnp_pon *pon, u32 pon_type)
 		return -EINVAL;
 	}
 
-	pr_debug("PMIC input: code=%d, status=0x%02X\n", cfg->key_code,
+	pr_info("PMIC input: code=%d, status=0x%02X\n", cfg->key_code,
 		pon_rt_sts);
 	key_status = pon_rt_sts & pon_rt_bit;
 
@@ -975,12 +1043,14 @@ static int qpnp_pon_input_dispatch(struct qpnp_pon *pon, u32 pon_type)
 			pon_rt_sts, (pon_rt_sts & QPNP_PON_KPDPWR_ON));
 
 	if (!cfg->old_state && !key_status) {
-		input_report_key(pon->pon_input, cfg->key_code, 1);
+		input_report_key(pon->pon_input, key_swap_algo(cfg->key_code), 1);
 		input_sync(pon->pon_input);
+		pr_debug("key_swap (%s): code=%d, state=1\n", __func__, cfg->key_code);
 	}
 
-	input_report_key(pon->pon_input, cfg->key_code, key_status);
+	input_report_key(pon->pon_input, key_swap_algo(cfg->key_code), key_status);
 	input_sync(pon->pon_input);
+	pr_debug("key_swap (%s): code=%d, state=%d\n", __func__, cfg->key_code, key_status);
 
 	cfg->old_state = !!key_status;
 
@@ -1352,6 +1422,8 @@ qpnp_pon_config_input(struct qpnp_pon *pon, struct qpnp_pon_config *cfg)
 	}
 
 	input_set_capability(pon->pon_input, EV_KEY, cfg->key_code);
+	if (cfg->swap_code)
+		input_set_capability(pon->pon_input, EV_KEY, cfg->swap_code);
 
 	return 0;
 }
@@ -1656,6 +1728,9 @@ static int qpnp_pon_config_init(struct qpnp_pon *pon,
 		 * specified if there is no key mapping on the reset line.
 		 */
 		of_property_read_u32(cfg_node, "linux,code", &cfg->key_code);
+		of_property_read_u32(cfg_node, "mmi,key-swap-code", &cfg->swap_code);
+		if (cfg->swap_code)
+			dev_info(pon->dev, "Added swap keycode %d\n",cfg->swap_code);
 
 		/* Register key configuration */
 		if (cfg->key_code) {
@@ -1995,6 +2070,8 @@ static int qpnp_pon_read_gen2_pon_off_reason(struct qpnp_pon *pon, u16 *reason,
 	rc = qpnp_pon_read(pon, QPNP_PON_OFF_REASON(pon), &reg);
 	if (rc)
 		return rc;
+	dev_info(pon->dev, "PON Register , addr=0x%04X, val=0x%x\n",
+			QPNP_PON_OFF_REASON(pon), (u8)reg);
 
 	if (reg & QPNP_GEN2_POFF_SEQ) {
 		rc = qpnp_pon_read(pon, QPNP_POFF_REASON1(pon), &reg1);
@@ -2002,6 +2079,8 @@ static int qpnp_pon_read_gen2_pon_off_reason(struct qpnp_pon *pon, u16 *reason,
 			return rc;
 		*reason = (u8)reg1;
 		*reason_index_offset = 0;
+		dev_info(pon->dev, "PON Register , addr=0x%04X, val=0x%x\n",
+				QPNP_POFF_REASON1(pon), (u8)buf[0]);
 	} else if (reg & QPNP_GEN2_FAULT_SEQ) {
 		rc = regmap_bulk_read(pon->regmap, QPNP_FAULT_REASON1(pon), buf,
 				      2);
@@ -2012,12 +2091,18 @@ static int qpnp_pon_read_gen2_pon_off_reason(struct qpnp_pon *pon, u16 *reason,
 		}
 		*reason = buf[0] | (u16)(buf[1] << 8);
 		*reason_index_offset = POFF_REASON_FAULT_OFFSET;
+		dev_info(pon->dev, "PON Register , addr=0x%04X, val=0x%x\n",
+				QPNP_FAULT_REASON1(pon), (u8)buf[0]);
+		dev_info(pon->dev, "PON Register , addr=0x%04X, val=0x%x\n",
+				QPNP_FAULT_REASON1(pon), (u8)buf[1]);
 	} else if (reg & QPNP_GEN2_S3_RESET_SEQ) {
 		rc = qpnp_pon_read(pon, QPNP_S3_RESET_REASON(pon), &reg1);
 		if (rc)
 			return rc;
 		*reason = (u8)reg1;
 		*reason_index_offset = POFF_REASON_S3_RESET_OFFSET;
+		dev_info(pon->dev, "PON Register , addr=0x%04X, val=0x%x\n",
+				QPNP_S3_RESET_REASON(pon), (u8)buf[0]);
 	}
 
 	return 0;

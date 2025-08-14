@@ -869,6 +869,7 @@ static void dwc3_set_incr_burst_type(struct dwc3 *dwc)
 	ret = device_property_read_u32_array(dev,
 			"snps,incr-burst-type-adjustment", vals, ntype);
 	if (ret) {
+		kfree(vals);
 		dev_err(dev, "Error to get property\n");
 		return;
 	}
@@ -1298,6 +1299,8 @@ static void dwc3_get_properties(struct dwc3 *dwc)
 
 	device_property_read_u32(dev, "snps,xhci-imod-value",
 			&dwc->xhci_imod_value);
+	dwc->xhci_hw_lpm_disable = device_property_read_bool(dev,
+				"xhci-hw-lpm-disable");
 
 	dwc->core_id = -1;
 	device_property_read_u32(dev, "usb-core-id", &dwc->core_id);

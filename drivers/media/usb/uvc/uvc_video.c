@@ -866,6 +866,17 @@ static void uvc_video_stats_decode(struct uvc_streaming *stream,
 		return;
 	}
 
+        /*  BEGIN IKSWR-85387  Lenovo liangsk2, 2021/05/21  If device is ThinkReality A3,
+         *  check for invalid headers.  if the data[0] is not equal to header_size, will
+         *  get the wrong pts.
+         */
+        if ((len < header_size || data[0] < header_size || data[0] != header_size) &&
+	    (stream->dev->quirks & UVC_QUIRK_OVERRIDE_TIMESTAMPS)) {
+                stream->stats.frame.nb_invalid++;
+                return;
+        }
+	//  END IKSWR-85387
+
 	/* Extract the timestamps. */
 	if (has_pts)
 		pts = get_unaligned_le32(&data[2]);
@@ -1133,6 +1144,16 @@ static int uvc_video_decode_start(struct uvc_streaming *stream,
 		buf->buf.field = V4L2_FIELD_NONE;
 		buf->buf.sequence = stream->sequence;
 		buf->buf.vb2_buf.timestamp = ktime_to_ns(uvc_video_get_time());
+		/*  BEGIN IKSWR-62149  Lenovo chengyk3, 2021/03/25 Match the frame
+		 *  timestamp and 6dof timestamp.If device if ThinkReality A3,overwirte
+		 *  the current time as the device-side pts
+		 */
+		if (stream->stats.frame.pts != 0 &&
+				(stream->dev->quirks & UVC_QUIRK_OVERRIDE_TIMESTAMPS)) {
+			buf->buf.vb2_buf.glass_timestamp =
+				stream->stats.frame.pts;
+		}
+		//  END IKSWR-62149
 
 		/* TODO: Handle PTS and SCR. */
 		buf->state = UVC_BUF_STATE_ACTIVE;
