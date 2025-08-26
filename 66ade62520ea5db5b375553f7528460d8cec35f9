@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2095a594_bb579d48",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3917
+      },
+      "writtenOn": "2025-08-26T21:21:24Z",
+      "side": 1,
+      "message": "seems to work on bengal sm6115 (gta4lwifi) - see https://gist.githubusercontent.com/chrmhoffmann/2cea33525adc59f33d47a1fb3b8ee136/raw/7c0db34d83348dbdd2cadba66c343d160478a115/gistfile1.txt",
+      "revId": "66ade62520ea5db5b375553f7528460d8cec35f9",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
