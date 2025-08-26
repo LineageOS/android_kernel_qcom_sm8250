@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "abd4b3eb_415d5bfc",
+        "filename": "drivers/net/ethernet/netronome/nfp/bpf/offload.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 628,
+      "author": {
+        "id": 28223
+      },
+      "writtenOn": "2025-08-26T22:23:52Z",
+      "side": 1,
+      "message": "?",
+      "revId": "8bec18c328e9506c131b283bf1f861bfe8d73e7b",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
