@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a7887fa6_5421b568",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4550
+      },
+      "writtenOn": "2025-08-28T20:17:13Z",
+      "side": 1,
+      "message": "Per git history, DM_CRYPT is used for adoptable storage and is still needed",
+      "revId": "7f7219c30bb16f90d459cf4c5ac95cf70a564a48",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
