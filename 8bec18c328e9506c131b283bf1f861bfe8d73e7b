@@ -16,6 +16,24 @@
       "message": "?",
       "revId": "8bec18c328e9506c131b283bf1f861bfe8d73e7b",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3bb31106_bd58b2a8",
+        "filename": "drivers/net/ethernet/netronome/nfp/bpf/offload.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 628,
+      "author": {
+        "id": 4550
+      },
+      "writtenOn": "2025-08-28T00:31:08Z",
+      "side": 1,
+      "message": "Fixed",
+      "parentUuid": "abd4b3eb_415d5bfc",
+      "revId": "8bec18c328e9506c131b283bf1f861bfe8d73e7b",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
