@@ -33,6 +33,24 @@
       "message": "Leaving this to mike, I\u0027m not caught up on the binder freeze situation.",
       "revId": "70ee2bd8bd5b39737d4c20e186f242db21ff5ef1",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec043df9_ced47362",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 34512
+      },
+      "writtenOn": "2025-09-01T08:21:02Z",
+      "side": 1,
+      "message": "care to elaborate.",
+      "parentUuid": "23f7bd66_cd3d153f",
+      "revId": "70ee2bd8bd5b39737d4c20e186f242db21ff5ef1",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
