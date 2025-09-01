@@ -51,6 +51,24 @@
       "parentUuid": "23f7bd66_cd3d153f",
       "revId": "70ee2bd8bd5b39737d4c20e186f242db21ff5ef1",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "311dec11_8f912a60",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4550
+      },
+      "writtenOn": "2025-09-01T08:53:58Z",
+      "side": 1,
+      "message": "I8fef53a3b957d529cd6ace75e648ce8a5847e046 is the fix for the freezer issue and no shipping devices on 22.2 are missing that commit",
+      "parentUuid": "ec043df9_ced47362",
+      "revId": "70ee2bd8bd5b39737d4c20e186f242db21ff5ef1",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
