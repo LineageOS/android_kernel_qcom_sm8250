@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "059923da_164e433c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 35551
+      },
+      "writtenOn": "2025-09-03T08:45:46Z",
+      "side": 1,
+      "message": "found , did not hidl.h include/linux/hid.h in this commit go back use old version?\n\nline 746\n\nit must be go back to before\nstruct hid_descriptor {\n\t__u8  bLength;\n\t__u8  bDescriptorType;\n\t__le16 bcdHID;\n\t__u8  bCountryCode;\n\t__u8  bNumDescriptors;\n\n\tstruct hid_class_descriptor desc[1];\n} __attribute__ ((packed));\n\nfor new merge\nstruct hid_class_descriptor rpt_desc;\nstruct hid_class_descriptor opt_descs[];\n\nbut found talk here it like newer approach\nhttps://groups.google.com/g/syzkaller-bugs/c/Af-YwwgteQk",
+      "revId": "9aff51ad3aefe1f2e6dc767d1b40772fbae84d28",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
