@@ -33,6 +33,24 @@
       "message": "it like me need adapt to all reference desc to rpt_desc",
       "revId": "9aff51ad3aefe1f2e6dc767d1b40772fbae84d28",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ceae6ca_e9d3f5fc",
+        "filename": "include/linux/hid.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 678,
+      "author": {
+        "id": 35551
+      },
+      "writtenOn": "2025-09-03T09:30:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3b6ed429_b4ed6726",
+      "revId": "9aff51ad3aefe1f2e6dc767d1b40772fbae84d28",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
