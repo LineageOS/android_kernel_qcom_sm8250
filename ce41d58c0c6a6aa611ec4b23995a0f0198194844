@@ -33,6 +33,24 @@
       "message": "\u003e This commit misses its subsequent fixes which are:\n\u003e \n\u003e mm/vmalloc: Fix calculation of direct map addr range\n\u003e mm/vmalloc: Avoid rare case of flushing TLB with weird arguments\n\nI accidentally marked my previous comment as resolved.",
       "revId": "ce41d58c0c6a6aa611ec4b23995a0f0198194844",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "adf00316_210c5d74",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 34512
+      },
+      "writtenOn": "2025-09-04T19:46:18Z",
+      "side": 1,
+      "message": "https://review.lineageos.org/c/LineageOS/android_kernel_qcom_sm8250/+/450036\n\nand the other commit is below that in relation chain",
+      "parentUuid": "9df8dbcf_7bacdf4e",
+      "revId": "ce41d58c0c6a6aa611ec4b23995a0f0198194844",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
