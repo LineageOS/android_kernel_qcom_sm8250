@@ -18,6 +18,24 @@
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc93792f_5f95b201",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 34512
+      },
+      "writtenOn": "2025-09-04T19:30:40Z",
+      "side": 1,
+      "message": "yap",
+      "parentUuid": "edb09a10_62760994",
+      "revId": "9320713f2093921466c32e1a8ba65a59d72e0bbf",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9f7ff008_e281cc63",
@@ -31,6 +49,24 @@
       "writtenOn": "2025-09-04T18:58:42Z",
       "side": 1,
       "message": "This is not enabled on GKI defconfig in 5.10 nor newer android kernels by defualt, its a security feature similar to selinux, android already uses selinux, its unused and also causes unecessary overhead.",
+      "revId": "9320713f2093921466c32e1a8ba65a59d72e0bbf",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d8a925fd_1e38f90f",
+        "filename": "arch/arm64/configs/vendor/kona-perf_defconfig",
+        "patchSetId": 11
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 34512
+      },
+      "writtenOn": "2025-09-04T19:30:40Z",
+      "side": 1,
+      "message": "yap",
+      "parentUuid": "9f7ff008_e281cc63",
       "revId": "9320713f2093921466c32e1a8ba65a59d72e0bbf",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     },
@@ -54,6 +90,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "46c35ae7_43399850",
+        "filename": "arch/arm64/configs/vendor/kona-perf_defconfig",
+        "patchSetId": 11
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 34512
+      },
+      "writtenOn": "2025-09-04T19:30:40Z",
+      "side": 1,
+      "message": "yap",
+      "parentUuid": "76c3d4a0_4b1b6588",
+      "revId": "9320713f2093921466c32e1a8ba65a59d72e0bbf",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "e0453e86_809eaea9",
         "filename": "arch/arm64/configs/vendor/kona-perf_defconfig",
         "patchSetId": 11
@@ -65,6 +119,30 @@
       "writtenOn": "2025-09-04T19:20:29Z",
       "side": 1,
       "message": "Fixed here\nhttps://github.com/LineageOS/android_kernel_qcom_sm8250/commit/3ff3e391fce34ea152147fff090314edd000f7bb\ntypo (apparmour vs. apparmor)",
+      "range": {
+        "startLine": 711,
+        "startChar": 0,
+        "endLine": 711,
+        "endChar": 89
+      },
+      "revId": "9320713f2093921466c32e1a8ba65a59d72e0bbf",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1de5467b_4678fedf",
+        "filename": "arch/arm64/configs/vendor/kona-perf_defconfig",
+        "patchSetId": 11
+      },
+      "lineNbr": 711,
+      "author": {
+        "id": 34512
+      },
+      "writtenOn": "2025-09-04T19:30:40Z",
+      "side": 1,
+      "message": "already fixed later on",
+      "parentUuid": "e0453e86_809eaea9",
       "range": {
         "startLine": 711,
         "startChar": 0,
