@@ -50,6 +50,29 @@
       "message": "Same as mentioned with other config, not enabled in gki defconfig, its mostly used for demo/testing programs, for desktop usage, android does not need that.",
       "revId": "9320713f2093921466c32e1a8ba65a59d72e0bbf",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e0453e86_809eaea9",
+        "filename": "arch/arm64/configs/vendor/kona-perf_defconfig",
+        "patchSetId": 11
+      },
+      "lineNbr": 711,
+      "author": {
+        "id": 24299
+      },
+      "writtenOn": "2025-09-04T19:20:29Z",
+      "side": 1,
+      "message": "Fixed here\nhttps://github.com/LineageOS/android_kernel_qcom_sm8250/commit/3ff3e391fce34ea152147fff090314edd000f7bb\ntypo (apparmour vs. apparmor)",
+      "range": {
+        "startLine": 711,
+        "startChar": 0,
+        "endLine": 711,
+        "endChar": 89
+      },
+      "revId": "9320713f2093921466c32e1a8ba65a59d72e0bbf",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
