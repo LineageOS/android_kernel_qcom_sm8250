@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "edb09a10_62760994",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 35065
+      },
+      "writtenOn": "2025-09-04T18:58:42Z",
+      "side": 1,
+      "message": "The configs are not needed to be enabled, they are not present in gki defconfig.",
+      "revId": "9320713f2093921466c32e1a8ba65a59d72e0bbf",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f7ff008_e281cc63",
+        "filename": "arch/arm64/configs/vendor/kona-perf_defconfig",
+        "patchSetId": 11
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 35065
+      },
+      "writtenOn": "2025-09-04T18:58:42Z",
+      "side": 1,
+      "message": "This is not enabled on GKI defconfig in 5.10 nor newer android kernels by defualt, its a security feature similar to selinux, android already uses selinux, its unused and also causes unecessary overhead.",
+      "revId": "9320713f2093921466c32e1a8ba65a59d72e0bbf",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "76c3d4a0_4b1b6588",
+        "filename": "arch/arm64/configs/vendor/kona-perf_defconfig",
+        "patchSetId": 11
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 35065
+      },
+      "writtenOn": "2025-09-04T18:58:42Z",
+      "side": 1,
+      "message": "Same as mentioned with other config, not enabled in gki defconfig, its mostly used for demo/testing programs, for desktop usage, android does not need that.",
+      "revId": "9320713f2093921466c32e1a8ba65a59d72e0bbf",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
