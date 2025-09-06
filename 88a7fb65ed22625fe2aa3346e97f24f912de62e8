@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "803ec981_5aa2eb21",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32245
+      },
+      "writtenOn": "2025-09-06T18:23:42Z",
+      "side": 1,
+      "message": "Fixes breakage after CIP merge",
+      "revId": "88a7fb65ed22625fe2aa3346e97f24f912de62e8",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
