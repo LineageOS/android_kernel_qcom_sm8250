@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "be5c01ea_6e134372",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32253
+      },
+      "writtenOn": "2025-09-09T05:45:56Z",
+      "side": 1,
+      "message": "i\u0027d rather do it on the device-specific fork instead (if needed).",
+      "revId": "6b9e696f4eed7ea254edfd6ed5eb24b8eeeb5435",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
