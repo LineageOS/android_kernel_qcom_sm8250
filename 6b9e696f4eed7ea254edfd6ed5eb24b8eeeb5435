@@ -16,6 +16,23 @@
       "message": "i\u0027d rather do it on the device-specific fork instead (if needed).",
       "revId": "6b9e696f4eed7ea254edfd6ed5eb24b8eeeb5435",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "70694e80_13c0415f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4550
+      },
+      "writtenOn": "2025-09-09T07:05:30Z",
+      "side": 1,
+      "message": "You can always fix your drivers like everyone else",
+      "revId": "6b9e696f4eed7ea254edfd6ed5eb24b8eeeb5435",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
