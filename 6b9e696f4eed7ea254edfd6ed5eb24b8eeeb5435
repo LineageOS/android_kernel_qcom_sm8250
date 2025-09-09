@@ -33,6 +33,23 @@
       "message": "You can always fix your drivers like everyone else",
       "revId": "6b9e696f4eed7ea254edfd6ed5eb24b8eeeb5435",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6d1d15d0_0806dbbc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 35551
+      },
+      "writtenOn": "2025-09-09T07:35:10Z",
+      "side": 1,
+      "message": "Acknowledge",
+      "revId": "6b9e696f4eed7ea254edfd6ed5eb24b8eeeb5435",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
