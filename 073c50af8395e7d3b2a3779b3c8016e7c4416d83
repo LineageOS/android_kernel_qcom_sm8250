@@ -52,6 +52,23 @@
       "parentUuid": "6097ebae_4c05e01d",
       "revId": "073c50af8395e7d3b2a3779b3c8016e7c4416d83",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "54ef2172_98e37355",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 35065
+      },
+      "writtenOn": "2025-09-12T13:46:09Z",
+      "side": 1,
+      "message": "I don\u0027t think they mean\u0027t they got a crash with this patch, code-wise its practically impossible to cause a crash, that or they had a crash from something else.",
+      "revId": "073c50af8395e7d3b2a3779b3c8016e7c4416d83",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
