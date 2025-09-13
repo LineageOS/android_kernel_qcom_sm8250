@@ -105,6 +105,23 @@
       "parentUuid": "88425e65_23902793",
       "revId": "073c50af8395e7d3b2a3779b3c8016e7c4416d83",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9959fd0d_f49b0a7a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 35551
+      },
+      "writtenOn": "2025-09-13T05:04:36Z",
+      "side": 1,
+      "message": "solved, other my driver cause conflict",
+      "revId": "073c50af8395e7d3b2a3779b3c8016e7c4416d83",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
