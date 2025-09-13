@@ -16,6 +16,24 @@
       "message": "once again, this belongs to the device specific fork.",
       "revId": "b6fe122f93988f7053348e5abe0dcb1162faab8e",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b325a0a8_eea74c57",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 35551
+      },
+      "writtenOn": "2025-09-13T08:20:55Z",
+      "side": 1,
+      "message": "looks like that not used everywhere, even on my oem config not define that config\n\nand other talk is here https://review.lineageos.org/c/LineageOS/android_kernel_samsung_sm8250/+/442016/comments/335d2bff_4e675ef1",
+      "parentUuid": "eeda2631_0a5723c6",
+      "revId": "b6fe122f93988f7053348e5abe0dcb1162faab8e",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
