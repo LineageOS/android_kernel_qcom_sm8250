@@ -5131,7 +5131,6 @@ void hugetlb_unshare_all_pmds(struct vm_area_struct *vma)
 	struct hstate *h = hstate_vma(vma);
 	unsigned long sz = huge_page_size(h);
 	struct mm_struct *mm = vma->vm_mm;
-	struct mmu_notifier_range range;
 	unsigned long address, start, end;
 	spinlock_t *ptl;
 	pte_t *ptep;
@@ -5149,9 +5148,7 @@ void hugetlb_unshare_all_pmds(struct vm_area_struct *vma)
 	 * No need to call adjust_range_if_pmd_sharing_possible(), because
 	 * we have already done the PUD_SIZE alignment.
 	 */
-	mmu_notifier_range_init(&range, MMU_NOTIFY_CLEAR, 0, vma, mm,
-				start, end);
-	mmu_notifier_invalidate_range_start(&range);
+	mmu_notifier_invalidate_range_start(mm, start, end);
 	i_mmap_lock_write(vma->vm_file->f_mapping);
 	for (address = start; address < end; address += PUD_SIZE) {
 		unsigned long tmp = address;
@@ -5170,6 +5167,6 @@ void hugetlb_unshare_all_pmds(struct vm_area_struct *vma)
 	 * No need to call mmu_notifier_invalidate_range(), see
 	 * Documentation/vm/mmu_notifier.rst.
 	 */
-	mmu_notifier_invalidate_range_end(&range);
+	mmu_notifier_invalidate_range_end(mm, start, end);
 }
 
