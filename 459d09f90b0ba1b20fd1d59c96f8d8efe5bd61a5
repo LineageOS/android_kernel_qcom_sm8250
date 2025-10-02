@@ -16,6 +16,23 @@
       "message": "fine on pro1x",
       "revId": "459d09f90b0ba1b20fd1d59c96f8d8efe5bd61a5",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7ee1f296_5220ef43",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 28223
+      },
+      "writtenOn": "2025-10-02T03:02:34Z",
+      "side": 1,
+      "message": "doesn\u0027t build, check #qcom",
+      "revId": "459d09f90b0ba1b20fd1d59c96f8d8efe5bd61a5",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
