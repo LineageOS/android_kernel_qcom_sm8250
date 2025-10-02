@@ -33,6 +33,23 @@
       "message": "doesn\u0027t build, check #qcom",
       "revId": "459d09f90b0ba1b20fd1d59c96f8d8efe5bd61a5",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b9d27ac_9dcbefa6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32245
+      },
+      "writtenOn": "2025-10-02T15:55:42Z",
+      "side": 1,
+      "message": "seems fine on umi so far",
+      "revId": "459d09f90b0ba1b20fd1d59c96f8d8efe5bd61a5",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
