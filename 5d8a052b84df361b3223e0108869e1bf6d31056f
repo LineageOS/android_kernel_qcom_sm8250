@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "762c9453_ad7009ee",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 34512
+      },
+      "writtenOn": "2025-10-05T20:04:14Z",
+      "side": 1,
+      "message": "How come we say \"into {android13-4.19-kona}\" ?",
+      "revId": "5d8a052b84df361b3223e0108869e1bf6d31056f",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
