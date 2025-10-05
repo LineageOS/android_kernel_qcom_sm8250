@@ -16,6 +16,24 @@
       "message": "OT but nice find! This fixes LTO after the backports which is amazing.",
       "revId": "dc60becba412dcaa344ff05bb2fce2af245d2488",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e28a2140_eca05071",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32222
+      },
+      "writtenOn": "2025-10-05T21:13:56Z",
+      "side": 1,
+      "message": "No worries :) I also had LTO break after I was done picking the backports onto my MediaTek kernel, and I was able to find the cause with https://github.com/bengris32/android_kernel_mediatek_4.19/commit/0db149109ada6a73d0525c23f5484d333d1f9664.",
+      "parentUuid": "1cc9c162_1ccb662b",
+      "revId": "dc60becba412dcaa344ff05bb2fce2af245d2488",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
