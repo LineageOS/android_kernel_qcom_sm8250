@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "74faa043_6989a1b2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 34512
+      },
+      "writtenOn": "2025-10-06T14:50:59Z",
+      "side": 1,
+      "message": "What is this needed for? And which upstream version of Linux was this taken from",
+      "revId": "2d7fee3a2a725be957f54b2d30fb660b4c282e35",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
