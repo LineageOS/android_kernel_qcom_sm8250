@@ -51,6 +51,24 @@
       "message": "this should not be a fixup commit.\n\nhttps://android-review.googlesource.com/c/kernel/common/+/1526948",
       "revId": "dc60becba412dcaa344ff05bb2fce2af245d2488",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f381e902_5a2ff35c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32222
+      },
+      "writtenOn": "2025-10-06T16:28:30Z",
+      "side": 1,
+      "message": "Really? Unless you mean it shouldn\u0027t be because you want to re-pick the LTO changes from android12-5.10-lto, this change very much already exists on this kernel, albeit an older version of the patch (Iddda881a52b7942781713b188d810b6100159a2b). I don\u0027t see why it shouldn\u0027t be a fixup?",
+      "parentUuid": "09debe7a_7eb60cc8",
+      "revId": "dc60becba412dcaa344ff05bb2fce2af245d2488",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
