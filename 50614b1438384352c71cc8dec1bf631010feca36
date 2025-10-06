@@ -16,6 +16,24 @@
       "message": "would be much better to just pick the upstream commit you mentioned and keep this upstream commit as it was.",
       "revId": "50614b1438384352c71cc8dec1bf631010feca36",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "99f0177c_91fa398d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32222
+      },
+      "writtenOn": "2025-10-06T16:36:05Z",
+      "side": 1,
+      "message": "I agree. It was just a quick fix to compile with CONFIG_HUGETLBFS\u003dy which is needed by some non-Android userspaces. It\u0027s theoretically optional (since we don\u0027t care about those here) but it would be nice to not have this config broken.",
+      "parentUuid": "7fd10dfd_dcab5b33",
+      "revId": "50614b1438384352c71cc8dec1bf631010feca36",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
