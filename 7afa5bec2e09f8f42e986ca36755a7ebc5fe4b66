@@ -16,6 +16,40 @@
       "message": "chain boots on \u0027lemonades\u0027",
       "revId": "7afa5bec2e09f8f42e986ca36755a7ebc5fe4b66",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b1bd1712_47bd41be",
+        "filename": "arch/arm64/configs/vendor/kona-perf_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 657,
+      "author": {
+        "id": 10067
+      },
+      "writtenOn": "2025-10-09T12:06:17Z",
+      "side": 1,
+      "message": "```\nconfig FUSE_DAX\n    bool \"Virtio Filesystem Direct Host Memory Access support\"\n```\n\nnot needed.",
+      "revId": "7afa5bec2e09f8f42e986ca36755a7ebc5fe4b66",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b58d1da_fc07148f",
+        "filename": "arch/arm64/configs/vendor/kona-perf_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 683,
+      "author": {
+        "id": 10067
+      },
+      "writtenOn": "2025-10-09T12:06:17Z",
+      "side": 1,
+      "message": "should be gone whenever you disable DAX.",
+      "revId": "7afa5bec2e09f8f42e986ca36755a7ebc5fe4b66",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
