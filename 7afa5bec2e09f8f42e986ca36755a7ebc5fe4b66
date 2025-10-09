@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b3372e00_e955df62",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 34512
+      },
+      "writtenOn": "2025-10-09T10:39:42Z",
+      "side": 1,
+      "message": "chain boots on \u0027lemonades\u0027",
+      "revId": "7afa5bec2e09f8f42e986ca36755a7ebc5fe4b66",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
