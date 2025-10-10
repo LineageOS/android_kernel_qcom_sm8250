@@ -16,6 +16,23 @@
       "message": "lmk what you think of this. This aligns to what google have in their gki_defconfig",
       "revId": "6ba949696d3a640b2f09ea2b5ad1d1bf2673696c",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e5acc538_10bf4edf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 10067
+      },
+      "writtenOn": "2025-10-10T15:53:53Z",
+      "side": 1,
+      "message": "we still don\u0027t want virtio",
+      "revId": "6ba949696d3a640b2f09ea2b5ad1d1bf2673696c",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
