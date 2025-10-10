@@ -33,6 +33,23 @@
       "message": "we still don\u0027t want virtio",
       "revId": "6ba949696d3a640b2f09ea2b5ad1d1bf2673696c",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b7569360_48ea858c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 34512
+      },
+      "writtenOn": "2025-10-10T15:55:27Z",
+      "side": 1,
+      "message": "mhm, I noticed it depends on DAX_DRIVER but even though DAX_DRIVER is disabled VIRTIO_FS still gets enabled in the out/.config lol\n\nig we can drop",
+      "revId": "6ba949696d3a640b2f09ea2b5ad1d1bf2673696c",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
