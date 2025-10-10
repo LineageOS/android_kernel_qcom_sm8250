@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "365443e6_ad8b0508",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 34512
+      },
+      "writtenOn": "2025-10-10T15:53:04Z",
+      "side": 1,
+      "message": "lmk what you think of this. This aligns to what google have in their gki_defconfig",
+      "revId": "6ba949696d3a640b2f09ea2b5ad1d1bf2673696c",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
