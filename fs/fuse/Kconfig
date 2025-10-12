@@ -54,6 +54,7 @@ config FUSE_DAX
 
 config FUSE_BPF
 	bool "Adds BPF to fuse"
+	depends on !SDCARD_FS
 	depends on FUSE_FS
 	depends on BPF
 	help
