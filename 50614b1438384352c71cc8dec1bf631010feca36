@@ -34,6 +34,23 @@
       "parentUuid": "7fd10dfd_dcab5b33",
       "revId": "50614b1438384352c71cc8dec1bf631010feca36",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3bbb2263_b773f2f0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 33569
+      },
+      "writtenOn": "2025-10-12T04:37:25Z",
+      "side": 1,
+      "message": "I also agree with Thomas. We already upstreamed bunch of stuff for mm. Imo, aligning it with upstream is more future-proof.",
+      "revId": "50614b1438384352c71cc8dec1bf631010feca36",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
