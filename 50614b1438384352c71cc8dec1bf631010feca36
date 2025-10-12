@@ -51,6 +51,23 @@
       "message": "I also agree with Thomas. We already upstreamed bunch of stuff for mm. Imo, aligning it with upstream is more future-proof.",
       "revId": "50614b1438384352c71cc8dec1bf631010feca36",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "23f82750_e12f585a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 33569
+      },
+      "writtenOn": "2025-10-12T04:40:04Z",
+      "side": 1,
+      "message": "I also checked Samsung SM8250 sources and seems like HUGETLBFS config isn\u0027t enabled while testing it, that\u0027s why it slipped from my eyes. Oops.",
+      "revId": "50614b1438384352c71cc8dec1bf631010feca36",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
