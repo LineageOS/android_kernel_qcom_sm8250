@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "50768dc9_333a1e28",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 34512
+      },
+      "writtenOn": "2025-10-14T09:08:11Z",
+      "side": 1,
+      "message": "whole chain boots lemonades, fuse bpf nodes confirmed working on other devices.",
+      "revId": "f717a2951480b9dd71996546429b85808ce1894a",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
