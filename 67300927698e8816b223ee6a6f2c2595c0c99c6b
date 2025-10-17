@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "206eba51_7ccc8c7d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3917
+      },
+      "writtenOn": "2025-10-17T06:51:45Z",
+      "side": 1,
+      "message": "fuse-bpf chain seems to work on bengal (gta4l) - but cannot be enabled (yet) since sdcardfs is rolled out. Tested OK both with and without now.",
+      "revId": "67300927698e8816b223ee6a6f2c2595c0c99c6b",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
