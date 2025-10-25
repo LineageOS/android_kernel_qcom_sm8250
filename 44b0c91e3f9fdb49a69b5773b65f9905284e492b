@@ -33,6 +33,24 @@
       "message": "chains work well on Apollon",
       "revId": "44b0c91e3f9fdb49a69b5773b65f9905284e492b",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dadbb6d3_3ae4c44d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 34512
+      },
+      "writtenOn": "2025-10-25T17:14:39Z",
+      "side": 1,
+      "message": "thank you for testing it, would you maybe be able to confirm this works as well?\nhttps://review.lineageos.org/c/LineageOS/android_kernel_qcom_sm8250/+/458239",
+      "parentUuid": "9f58951c_500133a7",
+      "revId": "44b0c91e3f9fdb49a69b5773b65f9905284e492b",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
