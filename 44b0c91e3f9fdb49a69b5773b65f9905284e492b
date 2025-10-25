@@ -16,6 +16,23 @@
       "message": "waiting on merge",
       "revId": "44b0c91e3f9fdb49a69b5773b65f9905284e492b",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9f58951c_500133a7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 22176
+      },
+      "writtenOn": "2025-10-25T17:12:02Z",
+      "side": 1,
+      "message": "chains work well on Apollon",
+      "revId": "44b0c91e3f9fdb49a69b5773b65f9905284e492b",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
