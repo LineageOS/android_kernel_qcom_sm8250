@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5cfc3cb3_7f78571a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3917
+      },
+      "writtenOn": "2025-11-24T22:49:05Z",
+      "side": 1,
+      "message": "Chain compiles and boots on gta4lwifi.\n\nTested on lineage-23.1.",
+      "revId": "50464f8488b4e7b0393237f4cc1abdd4fa807d61",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
