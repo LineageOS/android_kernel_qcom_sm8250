@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9846778a_44d8bdb2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 29551
+      },
+      "writtenOn": "2025-12-01T09:16:14Z",
+      "side": 1,
+      "message": "Hi, DaemonMCR, could you please add CONFIG_XDP_SOCKETS\u003dy to the qcom_8250 platform defconfig? This configuration is enabled by default in [5.4](https://github.com/LineageOS/android_kernel_qcom_sm8350/commit/246b8542c8d6ab6a867144b9ffa485bd6345e0f6) kernel",
+      "revId": "6f531d6b4f757f4124bf44a114a9eefbd2ef6bbe",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
