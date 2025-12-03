@@ -51,6 +51,24 @@
       "message": "gonna wait for the current chain I have to be submitted first",
       "revId": "6f531d6b4f757f4124bf44a114a9eefbd2ef6bbe",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "496f0b52_d48dbb03",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4550
+      },
+      "writtenOn": "2025-12-03T22:31:05Z",
+      "side": 1,
+      "message": "https://review.lineageos.org/c/LineageOS/android_kernel_qcom_sm8250/+/463142",
+      "parentUuid": "ad66f9a0_51b1e136",
+      "revId": "6f531d6b4f757f4124bf44a114a9eefbd2ef6bbe",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }

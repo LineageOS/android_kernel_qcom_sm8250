@@ -16,6 +16,24 @@
       "message": "I encountered a bpfloader-failed problem on some GSI images due to a missing bpf_create_map (xsk_port_map) [1]. These BPF programs require CONFIG_XDP_SOCKETS\u003dy to run properly. I encountered a compilation failure [2] when setting this config in kona-perf_defconfig. After merging this patch, I was able to compile successfully and start the Android system normally.\n\n```\n[1]:\n../net/xdp/xdp_umem.c:54:22: error: no member named \u0027umem\u0027 in \u0027struct netdev_rx_queue\u0027\n   54 |                 dev-\u003e_rx[queue_id].umem \u003d umem;\n      |                 ~~~~~~~~~~~~~~~~~~ ^\n../net/xdp/xdp_umem.c:56:22: error: no member named \u0027umem\u0027 in \u0027struct netdev_queue\u0027\n   56 |                 dev-\u003e_tx[queue_id].umem \u003d umem;\n      |                 ~~~~~~~~~~~~~~~~~~ ^\n../net/xdp/xdp_umem.c:63:29: error: no member named \u0027umem\u0027 in \u0027struct netdev_rx_queue\u0027\n   63 |                 return dev-\u003e_rx[queue_id].umem;\n      |                        ~~~~~~~~~~~~~~~~~~ ^\n../net/xdp/xdp_umem.c:65:29: error: no member named \u0027umem\u0027 in \u0027struct netdev_queue\u0027\n   65 |                 return dev-\u003e_tx[queue_id].umem;\n      |                        ~~~~~~~~~~~~~~~~~~ ^\n../net/xdp/xdp_umem.c:76:22: error: no member named \u0027umem\u0027 in \u0027struct netdev_rx_queue\u0027\n   76 |                 dev-\u003e_rx[queue_id].umem \u003d NULL;\n      |                 ~~~~~~~~~~~~~~~~~~ ^\n../net/xdp/xdp_umem.c:78:22: error: no member named \u0027umem\u0027 in \u0027struct netdev_queue\u0027\n   78 |                 dev-\u003e_tx[queue_id].umem \u003d NULL;\n      |                 ~~~~~~~~~~~~~~~~~~ ^\n6 errors generated.\nmake[3]: *** [../scripts/Makefile.build:338：net/xdp/xdp_umem.o] 错误 1\nmake[2]: *** [../scripts/Makefile.build:642：net/xdp] 错误 2\nmake[2]: *** 正在等待未完成的任务....\n```\n\n```\n[2]:\n\u003c15\u003e[    5.590299] NetBpfLoad: Loading ELF object /apex/com.android.tethering/etc/bpf/netd_shared/osrtpPolicy.o with license GPL\n\u003c15\u003e[    5.590309] NetBpfLoad: Section bpfloader_min_ver value is 41 [0x29]\n\u003c15\u003e[    5.590318] NetBpfLoad: Section bpfloader_max_ver value is 65536 [0x10000]\n\u003c15\u003e[    5.590321] NetBpfLoad: BpfLoader version 0x0002f processing ELF object /apex/com.android.tethering/etc/bpf/netd_shared/osrtpPolicy.o with ver [0x00029,0x10000)\n\u003c11\u003e[    5.591032] NetBpfLoad: bpf_create_map[mi_xsk_port_map] btf:0 -\u003e -1 errno:22\n\u003c11\u003e[    5.591037] NetBpfLoad: Failed to create maps: (ret\u003d-22) in /apex/com.android.tethering/etc/bpf/netd_shared/osrtpPolicy.o\n\u003c11\u003e[    5.591045] NetBpfLoad: Failed to load object: /apex/com.android.tethering/etc/bpf/netd_shared/osrtpPolicy.o, ret: Invalid argument\n\u003c11\u003e[    5.591053] NetBpfLoad: \u003d\u003d\u003d CRITICAL FAILURE LOADING BPF PROGRAMS FROM /apex/com.android.tethering/etc/bpf/netd_shared/ \u003d\u003d\u003d\n\u003c11\u003e[    5.591056] NetBpfLoad: If this triggers reliably, you\u0027re probably missing kernel options or patches.\n\u003c11\u003e[    5.591058] NetBpfLoad: If this triggers randomly, you might be hitting some memory allocation problems or startup script race.\n\u003c11\u003e[    5.591060] NetBpfLoad: --- DO NOT EXPECT SYSTEM TO BOOT SUCCESSFULLY ---\n```",
       "revId": "403e12cbd74441e8040b3e546f255054eb788252",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a9330d2c_21e90c90",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4550
+      },
+      "writtenOn": "2025-12-03T22:31:05Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "c03b940c_e2a23567",
+      "revId": "403e12cbd74441e8040b3e546f255054eb788252",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
