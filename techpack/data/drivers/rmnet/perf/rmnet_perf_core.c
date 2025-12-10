@@ -147,7 +147,7 @@ void rmnet_perf_core_set_ingress_hook(void)
 {
 	if (rmnet_perf_core_is_deag_mode()) {
 		RCU_INIT_POINTER(rmnet_perf_deag_entry,
-				 rmnet_perf_core_deaggregate);
+				 (void*)rmnet_perf_core_deaggregate);
 		RCU_INIT_POINTER(rmnet_perf_desc_entry, NULL);
 	} else {
 		RCU_INIT_POINTER(rmnet_perf_deag_entry, NULL);
