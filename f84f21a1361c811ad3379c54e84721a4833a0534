@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f5a22b30_822fd069",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3917
+      },
+      "writtenOn": "2025-12-15T22:31:37Z",
+      "side": 1,
+      "message": "Fixes ugly warning after modem restart (verified on alioth) and\n1) Is present on https://github.com/LineageOS/android_kernel_qcom_sm8450/commit/c0b324ff72b17d29c9ccfdb3b4a03434dae8b010\n2) Is present in oneplus sm8250 under cdf57c4ee1fc4ff6fc0c80602a42b9a52e77fbc9\n3) Is a CVE fix for CVE-2021-46970",
+      "revId": "f84f21a1361c811ad3379c54e84721a4833a0534",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
