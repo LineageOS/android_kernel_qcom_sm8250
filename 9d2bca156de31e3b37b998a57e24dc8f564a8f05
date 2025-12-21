@@ -16,6 +16,24 @@
       "message": "reason for revert??",
       "revId": "9d2bca156de31e3b37b998a57e24dc8f564a8f05",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "97894978_2fc02c83",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 10258
+      },
+      "writtenOn": "2025-12-21T13:49:42Z",
+      "side": 1,
+      "message": "the next change in the cl properly fixes it",
+      "parentUuid": "26f3c3bd_bfc6faf1",
+      "revId": "9d2bca156de31e3b37b998a57e24dc8f564a8f05",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
