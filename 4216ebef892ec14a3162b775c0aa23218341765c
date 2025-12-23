@@ -16,6 +16,23 @@
       "message": "arch/arm64/include/asm/unistd.h needs to be edited for the new syscall",
       "revId": "4216ebef892ec14a3162b775c0aa23218341765c",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "39d954e6_4cb1bdb1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 34512
+      },
+      "writtenOn": "2025-12-23T14:39:47Z",
+      "side": 1,
+      "message": "I dont see what you mean, the upstream commit does not touch that file, and NR_compat_syscalls is still within the correct range.",
+      "revId": "4216ebef892ec14a3162b775c0aa23218341765c",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
