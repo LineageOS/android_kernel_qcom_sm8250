@@ -16,6 +16,23 @@
       "message": "What device are you seeing this issue on? I built kona/lito/bengal and I didn\u0027t hit it",
       "revId": "f465b3c708e9a3c73930d0fc914ffe435fa71ff4",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c4905dfa_2ffc77fe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 34512
+      },
+      "writtenOn": "2026-01-06T09:04:32Z",
+      "side": 1,
+      "message": "hit it on bengal with previous commits in chain, READ_ONCE stuff",
+      "revId": "f465b3c708e9a3c73930d0fc914ffe435fa71ff4",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
