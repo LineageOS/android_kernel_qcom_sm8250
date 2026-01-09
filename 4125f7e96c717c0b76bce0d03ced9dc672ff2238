@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0af802a9_5a4a0d4f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 34512
+      },
+      "writtenOn": "2026-01-09T15:11:28Z",
+      "side": 1,
+      "message": "Reference to where this came from\n\n```\n@thomas_turner36 Hi, how are you, i added lindroid in lineage 23.1 for fun on beryllium 419 but it either froze or crashed but it worked fine on older kernel that i compiled. I checked fs/file.c commits and a upstream commit is missed causing this bug.\n\nthis commit is not picked or was missed for qcom_sm8250 419, ig, after manually(conflicts otherwise) applying it, lindroid works fine\n```",
+      "revId": "4125f7e96c717c0b76bce0d03ced9dc672ff2238",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
