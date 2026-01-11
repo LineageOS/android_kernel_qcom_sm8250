@@ -313,7 +313,8 @@
 			qupv3_se12_2uart_sleep: qupv3_se12_2uart_sleep {
 				mux {
 					pins = "gpio34", "gpio35";
-					function = "gpio";
+					drive-strength = <2>;
+					bias-pull-down;
 				};
 
 				config {
