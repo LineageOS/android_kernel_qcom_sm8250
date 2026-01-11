@@ -51,6 +51,24 @@
       "parentUuid": "b6b931b3_ea3152be",
       "revId": "16b82eb353f0b63afa7b111bf6e62e3413eedc98",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1cf111a8_0d7ef118",
+        "filename": "arch/arm64/boot/dts/vendor/qcom/kona-pinctrl.dtsi",
+        "patchSetId": 1
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 34512
+      },
+      "writtenOn": "2026-01-11T21:17:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "07b3f341_14e7d12e",
+      "revId": "16b82eb353f0b63afa7b111bf6e62e3413eedc98",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
