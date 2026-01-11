@@ -16,6 +16,24 @@
       "message": "You should add \"Conflicts: x, y, z file\"",
       "revId": "f958dbd6dcbf577c6383833a679f90e6d5ff5c2b",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e57fc046_d2944864",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2026-01-11T21:54:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f1460a67_ebf3b9ab",
+      "revId": "f958dbd6dcbf577c6383833a679f90e6d5ff5c2b",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
