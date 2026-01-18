@@ -16,6 +16,23 @@
       "message": "Reference to where this came from\n\n```\n@thomas_turner36 Hi, how are you, i added lindroid in lineage 23.1 for fun on beryllium 419 but it either froze or crashed but it worked fine on older kernel that i compiled. I checked fs/file.c commits and a upstream commit is missed causing this bug.\n\nthis commit is not picked or was missed for qcom_sm8250 419, ig, after manually(conflicts otherwise) applying it, lindroid works fine\n```",
       "revId": "4125f7e96c717c0b76bce0d03ced9dc672ff2238",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "264a858c_b9c64587",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 35755
+      },
+      "writtenOn": "2026-01-18T05:51:37Z",
+      "side": 1,
+      "message": "hi, another issue related to this missing commit, chroot (ubuntu, debian, arch or any) in termux fails to work with sudo or su in chroot env freezing or other unknown error and it using 100% cpu. there are no logs about it in dmesg or logcat.",
+      "revId": "4125f7e96c717c0b76bce0d03ced9dc672ff2238",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
