@@ -33,6 +33,23 @@
       "message": "hi, another issue related to this missing commit, chroot (ubuntu, debian, arch or any) in termux fails to work with sudo or su in chroot env freezing or other unknown error and it using 100% cpu. there are no logs about it in dmesg or logcat.",
       "revId": "4125f7e96c717c0b76bce0d03ced9dc672ff2238",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d90e637_0b9d3350",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 34512
+      },
+      "writtenOn": "2026-01-18T12:16:38Z",
+      "side": 1,
+      "message": "ah wouldve added u to reviewer if I knew u were on gerrit, if this fixes those issues please can you drop a CR/V+ here",
+      "revId": "4125f7e96c717c0b76bce0d03ced9dc672ff2238",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
