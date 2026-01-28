@@ -16,6 +16,23 @@
       "message": "Fix nfchal crash. for xiaomi kona, only nq-nci.c needs changes; other models still need testing",
       "revId": "ed12bfbf94c2c587324989f3012c42616ccb938c",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e69fdea_518f4c41",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 16185
+      },
+      "writtenOn": "2026-01-28T05:25:32Z",
+      "side": 1,
+      "message": "@504380454t@gmail.com need v+ from you",
+      "revId": "ed12bfbf94c2c587324989f3012c42616ccb938c",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
