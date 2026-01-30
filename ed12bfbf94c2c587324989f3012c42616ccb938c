@@ -50,6 +50,24 @@
       "message": "Wrap lines at 80 characters per linux kernel code style.",
       "revId": "ed12bfbf94c2c587324989f3012c42616ccb938c",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "91b3d7e2_5474a56a",
+        "filename": "drivers/nfc/nq-nci.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 386,
+      "author": {
+        "id": 34512
+      },
+      "writtenOn": "2026-01-30T23:03:15Z",
+      "side": 1,
+      "message": "done",
+      "parentUuid": "1ba3e217_2b15a957",
+      "revId": "ed12bfbf94c2c587324989f3012c42616ccb938c",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
