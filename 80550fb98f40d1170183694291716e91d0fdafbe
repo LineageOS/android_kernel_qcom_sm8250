@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a02b177_562485e9",
+        "filename": "security/lockdown/lockdown.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 33118
+      },
+      "writtenOn": "2026-01-30T10:44:59Z",
+      "side": 1,
+      "message": "Should be after `[LOCKDOWN_INTEGRITY_MAX] \u003d \"integrity\",`",
+      "revId": "80550fb98f40d1170183694291716e91d0fdafbe",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
