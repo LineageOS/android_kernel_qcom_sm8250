@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "936820cb_f589e1c7",
+        "filename": "drivers/nfc/nq-nci.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 396,
+      "author": {
+        "id": 16185
+      },
+      "writtenOn": "2026-02-01T15:52:34Z",
+      "side": 1,
+      "message": "still over 80",
+      "range": {
+        "startLine": 396,
+        "startChar": 0,
+        "endLine": 396,
+        "endChar": 96
+      },
+      "revId": "8479bce0e96b85d28557c4161138a8642e937b68",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
