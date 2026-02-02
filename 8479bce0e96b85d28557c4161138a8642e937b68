@@ -46,6 +46,30 @@
       },
       "revId": "8479bce0e96b85d28557c4161138a8642e937b68",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "19eedddc_d992afd4",
+        "filename": "drivers/nfc/nq-nci.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 396,
+      "author": {
+        "id": 34512
+      },
+      "writtenOn": "2026-02-02T14:59:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "defa0e7c_35a8812e",
+      "range": {
+        "startLine": 396,
+        "startChar": 0,
+        "endLine": 396,
+        "endChar": 96
+      },
+      "revId": "8479bce0e96b85d28557c4161138a8642e937b68",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
