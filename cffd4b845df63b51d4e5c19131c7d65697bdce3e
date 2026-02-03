@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "86db1ee2_d58b565d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 34512
+      },
+      "writtenOn": "2026-02-03T09:08:35Z",
+      "side": 1,
+      "message": "hmm gerrit editor doesnt do tabs ig",
+      "revId": "cffd4b845df63b51d4e5c19131c7d65697bdce3e",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
