@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "90e2bda4_a763c941",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 29551
+      },
+      "writtenOn": "2026-02-04T11:11:10Z",
+      "side": 1,
+      "message": "Most of our device vendor image (such as Xiaomi and OnePlus) use the EROFS filesystem. Therefore, we added `CONFIG_EROFS_FS\u003dy` to `qcom_8250` to enable it by default, instead of enabling `CONFIG_EROFS_FS` separately in the device configuration. Additionally, to improve decompression latency, we also enabled `CONFIG_EROFS_FS_PCPU_KTHREAD` and `CONFIG_EROFS_FS_PCPU_KTHREAD_HIPRI` by default.",
+      "revId": "aefc2496989e32e9d734f01c81ba3e5313908b4c",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
