@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "84ad4042_3cb0c1ff",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 16185
+      },
+      "writtenOn": "2026-02-06T18:53:39Z",
+      "side": 1,
+      "message": "can you comment why/purpose of these on the commit groups?",
+      "revId": "ebd0f83f5fe0b0a5f37a5b86ec16639da38fa842",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
