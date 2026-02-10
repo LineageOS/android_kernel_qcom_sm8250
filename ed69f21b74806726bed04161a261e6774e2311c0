@@ -16,6 +16,23 @@
       "message": "Test: kona compile",
       "revId": "ed69f21b74806726bed04161a261e6774e2311c0",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e4674b4b_f93d768f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 34512
+      },
+      "writtenOn": "2026-02-10T13:48:10Z",
+      "side": 1,
+      "message": "Test: boot lemonades",
+      "revId": "ed69f21b74806726bed04161a261e6774e2311c0",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
