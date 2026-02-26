@@ -33,6 +33,23 @@
       "message": "Test: boot lemonades",
       "revId": "ed69f21b74806726bed04161a261e6774e2311c0",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "24ee77d5_cde3d16e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 16185
+      },
+      "writtenOn": "2026-02-26T07:07:03Z",
+      "side": 1,
+      "message": "vote applies to chain.",
+      "revId": "ed69f21b74806726bed04161a261e6774e2311c0",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
