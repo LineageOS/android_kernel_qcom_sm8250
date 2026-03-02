@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e6c2170_a607cc90",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 34512
+      },
+      "writtenOn": "2026-03-02T21:04:38Z",
+      "side": 1,
+      "message": "Fixed issue, works on lemonades oplus_sm8250 now",
+      "revId": "f87f5166580716d6361d8858bf0601dd6c50c492",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
