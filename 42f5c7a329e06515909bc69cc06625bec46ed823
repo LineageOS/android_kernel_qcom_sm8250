@@ -16,6 +16,23 @@
       "message": "works fine on lemonades",
       "revId": "42f5c7a329e06515909bc69cc06625bec46ed823",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "25611008_8419781a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3917
+      },
+      "writtenOn": "2026-03-12T21:07:15Z",
+      "side": 1,
+      "message": "Alioth +1",
+      "revId": "42f5c7a329e06515909bc69cc06625bec46ed823",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
