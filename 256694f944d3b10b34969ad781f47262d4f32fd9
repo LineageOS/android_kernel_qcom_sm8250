@@ -16,6 +16,23 @@
       "message": "Doesn\u0027t build:\n\n/home/edwin/lineage/kernel/oneplus/sm8250/fs/f2fs/file.c:579:2: error: implicit \ndeclaration of function \u0027filemap_invalidate_lock\u0027 [-Werror,-Wimplicit-function-d\neclaration]\n  579 |         filemap_invalidate_lock(inode-\u003ei_mapping);\n  \n/home/edwin/lineage/kernel/oneplus/sm8250/fs/f2fs/file.c:584:2: error: implicit \ndeclaration of function \u0027filemap_invalidate_unlock\u0027 [-Werror,-Wimplicit-function\n-declaration]\n  584 |         filemap_invalidate_unlock(inode-\u003ei_mapping);\n\n\nNeither of these functions seem to be present on 4.19.",
       "revId": "256694f944d3b10b34969ad781f47262d4f32fd9",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ac390c2_e61d94f8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 34512
+      },
+      "writtenOn": "2026-03-13T17:52:07Z",
+      "side": 1,
+      "message": "1s",
+      "revId": "256694f944d3b10b34969ad781f47262d4f32fd9",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
