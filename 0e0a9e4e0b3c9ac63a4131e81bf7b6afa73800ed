@@ -16,6 +16,24 @@
       "message": "this shouldn’t be enabled on the common kernel",
       "revId": "0e0a9e4e0b3c9ac63a4131e81bf7b6afa73800ed",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4d78c6df_741c923b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4550
+      },
+      "writtenOn": "2026-03-17T17:22:30Z",
+      "side": 1,
+      "message": "IMO it should since it\u0027s a requirement for FCM 7",
+      "parentUuid": "8a0977bd_6473fcf8",
+      "revId": "0e0a9e4e0b3c9ac63a4131e81bf7b6afa73800ed",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
