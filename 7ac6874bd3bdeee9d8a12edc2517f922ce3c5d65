@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f03d502_3862cdd1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 34512
+      },
+      "writtenOn": "2026-03-25T20:27:52Z",
+      "side": 1,
+      "message": "hold, breaks qcacld-3.0 driver atm",
+      "revId": "7ac6874bd3bdeee9d8a12edc2517f922ce3c5d65",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
