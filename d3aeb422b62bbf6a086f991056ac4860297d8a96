@@ -34,6 +34,23 @@
       "parentUuid": "89da4db9_08ce8568",
       "revId": "d3aeb422b62bbf6a086f991056ac4860297d8a96",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a728d2a4_7a177987",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19979
+      },
+      "writtenOn": "2026-03-29T19:34:49Z",
+      "side": 1,
+      "message": "Actually a good chunk of these are in https://android.googlesource.com/kernel/msm android-msm-redbull-4.19-android14-qpr3",
+      "revId": "d3aeb422b62bbf6a086f991056ac4860297d8a96",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
