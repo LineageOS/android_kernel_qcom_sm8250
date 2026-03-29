@@ -153,9 +153,10 @@ static int hfi_process_event_notify(u32 device_id,
 }
 
 static int hfi_process_sys_init_done(u32 device_id,
-		struct cvp_hfi_msg_sys_init_done_packet *pkt,
-		struct msm_cvp_cb_info *info)
+		void *hdr, struct msm_cvp_cb_info *info)
 {
+	struct cvp_hfi_msg_sys_init_done_packet *pkt =
+			(struct cvp_hfi_msg_sys_init_done_packet *)hdr;
 	struct msm_cvp_cb_cmd_done cmd_done = {0};
 	enum cvp_status status = CVP_ERR_NONE;
 
@@ -717,9 +718,10 @@ static void hfi_process_sys_get_prop_image_version(
 }
 
 static int hfi_process_sys_property_info(u32 device_id,
-		struct cvp_hfi_msg_sys_property_info_packet *pkt,
-		struct msm_cvp_cb_info *info)
+		void *hdr, struct msm_cvp_cb_info *info)
 {
+	struct cvp_hfi_msg_sys_property_info_packet *pkt =
+			(struct cvp_hfi_msg_sys_property_info_packet *)hdr;
 	if (!pkt) {
 		dprintk(CVP_ERR, "%s: invalid param\n", __func__);
 		return -EINVAL;
