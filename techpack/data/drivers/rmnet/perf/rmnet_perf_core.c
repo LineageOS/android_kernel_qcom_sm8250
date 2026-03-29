@@ -486,14 +486,8 @@ void rmnet_perf_core_ps_off(void *port)
 }
 
 void
-rmnet_perf_core_handle_map_control_start_v2(struct rmnet_map_dl_ind_hdr *dlhdr,
+rmnet_perf_core_handle_map_control_start(struct rmnet_map_dl_ind_hdr *dlhdr,
 				struct rmnet_map_control_command_header *qcmd)
-{
-	rmnet_perf_core_handle_map_control_start(dlhdr);
-}
-
-void
-rmnet_perf_core_handle_map_control_start(struct rmnet_map_dl_ind_hdr *dlhdr)
 {
 	struct rmnet_perf *perf = rmnet_perf_config_get_perf();
 	struct rmnet_perf_core_burst_marker_state *bm_state;
@@ -525,13 +519,8 @@ rmnet_perf_core_handle_map_control_start(struct rmnet_map_dl_ind_hdr *dlhdr)
 		rmnet_perf_core_release_lock();
 }
 
-void rmnet_perf_core_handle_map_control_end_v2(struct rmnet_map_dl_ind_trl *dltrl,
+void rmnet_perf_core_handle_map_control_end(struct rmnet_map_dl_ind_trl *dltrl,
 				struct rmnet_map_control_command_header *qcmd)
-{
-	rmnet_perf_core_handle_map_control_end(dltrl);
-}
-
-void rmnet_perf_core_handle_map_control_end(struct rmnet_map_dl_ind_trl *dltrl)
 {
 	struct rmnet_perf *perf = rmnet_perf_config_get_perf();
 	struct rmnet_perf_core_burst_marker_state *bm_state;

@@ -88,58 +88,28 @@ static void rmnet_map_send_ack(struct sk_buff *skb,
 }
 
 void
-rmnet_map_dl_hdr_notify_v2(struct rmnet_port *port,
-			   struct rmnet_map_dl_ind_hdr *dlhdr,
-			   struct rmnet_map_control_command_header *qcmd)
-{
-	struct rmnet_map_dl_ind *tmp;
-
-	port->dl_marker_flush = 0;
-
-	list_for_each_entry(tmp, &port->dl_list, list)
-		tmp->dl_hdr_handler_v2(dlhdr, qcmd);
-}
-
-void
 rmnet_map_dl_hdr_notify(struct rmnet_port *port,
-			struct rmnet_map_dl_ind_hdr *dlhdr)
+			struct rmnet_map_dl_ind_hdr *dlhdr,
+			struct rmnet_map_control_command_header *qcmd)
 {
 	struct rmnet_map_dl_ind *tmp;
 
 	port->dl_marker_flush = 0;
 
 	list_for_each_entry(tmp, &port->dl_list, list)
-		tmp->dl_hdr_handler(dlhdr);
-}
-
-void
-rmnet_map_dl_trl_notify_v2(struct rmnet_port *port,
-			   struct rmnet_map_dl_ind_trl *dltrl,
-			   struct rmnet_map_control_command_header *qcmd)
-{
-	struct rmnet_map_dl_ind *tmp;
-	struct napi_struct *napi;
-
-	list_for_each_entry(tmp, &port->dl_list, list)
-		tmp->dl_trl_handler_v2(dltrl, qcmd);
-
-	if (port->dl_marker_flush) {
-		napi = get_current_napi_context();
-		napi_gro_flush(napi, false);
-	}
-
-	port->dl_marker_flush = -1;
+		tmp->dl_hdr_handler(dlhdr, qcmd);
 }
 
 void
 rmnet_map_dl_trl_notify(struct rmnet_port *port,
-			struct rmnet_map_dl_ind_trl *dltrl)
+			struct rmnet_map_dl_ind_trl *dltrl,
+			struct rmnet_map_control_command_header *qcmd)
 {
 	struct rmnet_map_dl_ind *tmp;
 	struct napi_struct *napi;
 
 	list_for_each_entry(tmp, &port->dl_list, list)
-		tmp->dl_trl_handler(dltrl);
+		tmp->dl_trl_handler(dltrl, qcmd);
 
 	if (port->dl_marker_flush) {
 		napi = get_current_napi_context();
@@ -185,10 +155,7 @@ static void rmnet_map_process_flow_start(struct sk_buff *skb,
 	port->stats.dl_hdr_total_pkts += port->stats.dl_hdr_last_pkts;
 	port->stats.dl_hdr_count++;
 
-	if (is_dl_mark_v2)
-		rmnet_map_dl_hdr_notify_v2(port, dlhdr, qcmd);
-	else
-		rmnet_map_dl_hdr_notify(port, dlhdr);
+	rmnet_map_dl_hdr_notify(port, dlhdr, qcmd);
 
 	if (rmnet_perf) {
 		unsigned int pull_size;
@@ -228,10 +195,7 @@ static void rmnet_map_process_flow_end(struct sk_buff *skb,
 	port->stats.dl_trl_last_seq = dltrl->seq_le;
 	port->stats.dl_trl_count++;
 
-	if (is_dl_mark_v2)
-		rmnet_map_dl_trl_notify_v2(port, dltrl, qcmd);
-	else
-		rmnet_map_dl_trl_notify(port, dltrl);
+	rmnet_map_dl_trl_notify(port, dltrl, qcmd);
 
 	if (rmnet_perf) {
 		unsigned int pull_size;
