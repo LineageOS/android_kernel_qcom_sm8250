@@ -237,7 +237,7 @@ rmnet_frag_process_flow_start(struct rmnet_map_control_command_header *cmd,
 	if (is_dl_mark_v2)
 		rmnet_map_dl_hdr_notify_v2(port, dlhdr, cmd);
 	else
-		rmnet_map_dl_hdr_notify(port, dlhdr);
+		rmnet_map_dl_hdr_notify(port, dlhdr, cmd);
 }
 
 static void
@@ -265,7 +265,7 @@ rmnet_frag_process_flow_end(struct rmnet_map_control_command_header *cmd,
 	if (is_dl_mark_v2)
 		rmnet_map_dl_trl_notify_v2(port, dltrl, cmd);
 	else
-		rmnet_map_dl_trl_notify(port, dltrl);
+		rmnet_map_dl_trl_notify(port, dltrl, cmd);
 }
 
 /* Process MAP command frame and send N/ACK message as appropriate. Message cmd
