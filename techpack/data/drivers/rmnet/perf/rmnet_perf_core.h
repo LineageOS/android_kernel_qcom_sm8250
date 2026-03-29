@@ -157,14 +157,10 @@ void rmnet_perf_core_desc_entry(struct rmnet_frag_descriptor *frag_desc,
 u32 rmnet_perf_core_compute_flow_hash(struct rmnet_perf_pkt_info *pkt_info);
 void rmnet_perf_core_flush_single_gro_flow(u32 hash_key);
 void
-rmnet_perf_core_handle_map_control_end_v2(struct rmnet_map_dl_ind_trl *dltrl,
+rmnet_perf_core_handle_map_control_end(struct rmnet_map_dl_ind_trl *dltrl,
 				struct rmnet_map_control_command_header *qcmd);
 void
-rmnet_perf_core_handle_map_control_start_v2(struct rmnet_map_dl_ind_hdr *dlhdr,
+rmnet_perf_core_handle_map_control_start(struct rmnet_map_dl_ind_hdr *dlhdr,
 				struct rmnet_map_control_command_header *qcmd);
-void
-rmnet_perf_core_handle_map_control_end(struct rmnet_map_dl_ind_trl *dltrl);
-void
-rmnet_perf_core_handle_map_control_start(struct rmnet_map_dl_ind_hdr *dlhdr);
 
 #endif /* _RMNET_PERF_CORE_H_ */
