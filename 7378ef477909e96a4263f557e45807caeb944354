@@ -16,6 +16,24 @@
       "message": "Would this be a better replacement\nhttps://github.com/LineageOS/android_kernel_google_redbull/commit/92467b3a8285cbf35c1f0287799cf04586b3af90",
       "revId": "7378ef477909e96a4263f557e45807caeb944354",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "627f6cee_39ae1bbe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 34512
+      },
+      "writtenOn": "2026-03-30T20:20:31Z",
+      "side": 1,
+      "message": "this doesn\u0027t work, since kobject is still being initialised with module_ktype which expects slightly different parameters to what we currently pass to limits_isense_cdsp_data_show",
+      "parentUuid": "cc96e48b_48bd71c0",
+      "revId": "7378ef477909e96a4263f557e45807caeb944354",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
