@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc96e48b_48bd71c0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19979
+      },
+      "writtenOn": "2026-03-30T19:38:13Z",
+      "side": 1,
+      "message": "Would this be a better replacement\nhttps://github.com/LineageOS/android_kernel_google_redbull/commit/92467b3a8285cbf35c1f0287799cf04586b3af90",
+      "revId": "7378ef477909e96a4263f557e45807caeb944354",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
