@@ -51,6 +51,24 @@
       "message": "same thoughts here",
       "revId": "0e0a9e4e0b3c9ac63a4131e81bf7b6afa73800ed",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "34f67a37_8c029dfe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 33118
+      },
+      "writtenOn": "2026-04-03T12:12:59Z",
+      "side": 1,
+      "message": "Have you verified boot with CFI enabled instead of just enabling it? Because CFI breaks boot on redwood (sm7325, part of sm8350 family)",
+      "parentUuid": "8f5db110_285a9ae6",
+      "revId": "0e0a9e4e0b3c9ac63a4131e81bf7b6afa73800ed",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
