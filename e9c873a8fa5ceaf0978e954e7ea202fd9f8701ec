@@ -16,6 +16,23 @@
       "message": "didn’t know it was a requirement, still meh but i guess i’ll have to live with it.",
       "revId": "e9c873a8fa5ceaf0978e954e7ea202fd9f8701ec",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1122a197_150c8399",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 16185
+      },
+      "writtenOn": "2026-04-17T17:54:20Z",
+      "side": 1,
+      "message": "Drop this.\n\nall 3 of my devices fail to boot, can\u0027t do this mid cycle.\n\nThis entire merge minus the CFI\u003dy works fine.",
+      "revId": "e9c873a8fa5ceaf0978e954e7ea202fd9f8701ec",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
