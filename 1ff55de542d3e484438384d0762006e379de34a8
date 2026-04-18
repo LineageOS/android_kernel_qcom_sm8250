@@ -232,6 +232,24 @@
       "parentUuid": "560160fa_e1f166f5",
       "revId": "1ff55de542d3e484438384d0762006e379de34a8",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6c02f9e_3862496a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 34512
+      },
+      "writtenOn": "2026-04-18T15:57:28Z",
+      "side": 1,
+      "message": "\"This fetish of trying to align with 5.10\nstrictly without knowing why you are doing it in the first place is absolutely\nridiculous\"\n\nDo you seriously think I compared the KFENCE backport commit across all Kvers in the android common kernel to see how it varied, of course not that is absurd, so my assumptions were that KCSAN was required, what a ridiculous thing to say.",
+      "parentUuid": "1575b99f_b5e87610",
+      "revId": "1ff55de542d3e484438384d0762006e379de34a8",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
