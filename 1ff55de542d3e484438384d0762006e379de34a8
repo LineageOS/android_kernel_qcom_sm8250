@@ -250,6 +250,24 @@
       "parentUuid": "1575b99f_b5e87610",
       "revId": "1ff55de542d3e484438384d0762006e379de34a8",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ea7a2cc_b1deb6a9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 33118
+      },
+      "writtenOn": "2026-04-18T19:07:53Z",
+      "side": 1,
+      "message": "Why would you assume instead of just verifying? Just read the code. I don\u0027t understand what you meant by \"Google chose the easy way route\". What easy way? That they backported KFENCE without being dependent on KCSAN patches? Is that not how a backport works? If KCSAN was required for KFENCE to function, it would have never made it to android12-5.4 then. Backport doesn\u0027t mean breaking functionality. Anyways that\u0027s the end of discussion for this from me. Don\u0027t want pointless arguments to fill-up the thread and shift the focus from the actual issue. Consider abandoning this patch and properly backporting KFENCE the right way. Peace.",
+      "parentUuid": "f6c02f9e_3862496a",
+      "revId": "1ff55de542d3e484438384d0762006e379de34a8",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
