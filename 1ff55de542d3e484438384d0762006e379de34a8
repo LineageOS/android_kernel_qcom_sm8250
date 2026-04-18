@@ -160,6 +160,24 @@
       "parentUuid": "c0883769_34a5393f",
       "revId": "1ff55de542d3e484438384d0762006e379de34a8",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fffd050d_c3ca54a1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 34512
+      },
+      "writtenOn": "2026-04-18T13:40:51Z",
+      "side": 1,
+      "message": "KFENCE inherits some includes from kcsan parts of the kernel so look there if u r interested",
+      "parentUuid": "250b517a_3fde1c11",
+      "revId": "1ff55de542d3e484438384d0762006e379de34a8",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
