@@ -214,6 +214,24 @@
       "parentUuid": "90292a0a_486e8e70",
       "revId": "1ff55de542d3e484438384d0762006e379de34a8",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1575b99f_b5e87610",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 33118
+      },
+      "writtenOn": "2026-04-18T15:42:09Z",
+      "side": 1,
+      "message": "How does that justify adding KCSAN infra to the kernel, which is \ndisabled by default for all architectures? Just adapt your include bits for KFENCE \nor use from `android12-5.4`. This fetish of trying to align with 5.10 \nstrictly without knowing why you are doing it in the first place is absolutely \nridiculous, when you can\u0027t provide any good reason at all. Check if \npatches with `FROMLIST` are any different in functionality from \n`android12-5.4`, if yes, then backport accordingly from 5.10.",
+      "parentUuid": "560160fa_e1f166f5",
+      "revId": "1ff55de542d3e484438384d0762006e379de34a8",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
