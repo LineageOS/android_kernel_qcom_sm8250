@@ -70,6 +70,24 @@
       "parentUuid": "e68d899b_2f2f78a3",
       "revId": "1ff55de542d3e484438384d0762006e379de34a8",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e2a7e744_d11d3729",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 29080
+      },
+      "writtenOn": "2026-04-18T10:01:57Z",
+      "side": 1,
+      "message": "I have no idea why you think that it does\nhttps://github.com/dereference23/kernel_xiaomi_sm6375/commits/09c81a756f1252b340a7aa3480372c8fe6797bce/\n\n`android12-5.4` doesn\u0027t have any KCSAN patches either",
+      "parentUuid": "d3ef6434_0934bea2",
+      "revId": "1ff55de542d3e484438384d0762006e379de34a8",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
