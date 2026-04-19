@@ -16,6 +16,24 @@
       "message": "- drivers/platform/msm/msm_11ad/Makefile\n\n   MSM_11AD_PATH \u003d drivers/platform/msm/msm_11ad\n   CFLAGS_wil_platform.o :\u003d -I$(MSM_11AD_PATH)\n\n\n- drivers/net/wireless/ath/wil6210/Makefile\n\n   WIL_11AD_PATH \u003d drivers/net/wireless/ath/wil6210\n   subdir-ccflags-y +\u003d -I$(WIL_11AD_PATH)",
       "revId": "09cad950dd92e6e4be8846c509ee3a856cbcceb7",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "af08ffbb_619c7862",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 34512
+      },
+      "writtenOn": "2026-04-19T16:20:50Z",
+      "side": 1,
+      "message": "done",
+      "parentUuid": "5051cf3b_147109c3",
+      "revId": "09cad950dd92e6e4be8846c509ee3a856cbcceb7",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
