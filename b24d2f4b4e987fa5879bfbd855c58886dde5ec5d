@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e3833a0_04a68bc1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 34512
+      },
+      "writtenOn": "2026-04-19T08:05:36Z",
+      "side": 1,
+      "message": "Working on fxtec moto and OnePlus families now, so there is still the possibility to get it into the common kernel",
+      "revId": "b24d2f4b4e987fa5879bfbd855c58886dde5ec5d",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
