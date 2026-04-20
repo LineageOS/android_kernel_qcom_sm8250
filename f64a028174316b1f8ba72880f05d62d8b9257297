@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1cc62e37_f6418932",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32253
+      },
+      "writtenOn": "2026-04-20T16:14:08Z",
+      "side": 1,
+      "message": "Fixes compilation for kona w/ `CONFIG_BUILD_ARM64_DT_OVERLAY\u003dn\n` (both lito and bengal compiles as expected)",
+      "revId": "f64a028174316b1f8ba72880f05d62d8b9257297",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
