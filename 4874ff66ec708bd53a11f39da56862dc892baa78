@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "df05474a_96813998",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 16185
+      },
+      "writtenOn": "2026-04-20T23:59:09Z",
+      "side": 1,
+      "message": "Preps the tree for CFI, I have CFI itself working on pro1x and moto_sm8250.",
+      "revId": "4874ff66ec708bd53a11f39da56862dc892baa78",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
