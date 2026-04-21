@@ -16,6 +16,24 @@
       "message": "Actually, sm8450 seems to have a fix:\n\n```\n    BACKPORT: FROMGIT:  mm: Allow architectures to request \u0027old\u0027 entries when prefaulting\n\n    Commit 5c0a85fad949 (\"mm: make faultaround produce old ptes\") changed\n    the \"faultaround\" behaviour to initialise prefaulted PTEs as \u0027old\u0027,\n    since this avoids vmscan wrongly assuming that they are hot, despite\n    having never been explicitly accessed by userspace. The change has been\n    shown to benefit numerous arm64 micro-architectures (with hardware\n    access flag) running Android, where both application launch latency and\n    direct reclaim time are significantly reduced (by 10%+ and ~80%\n    respectively).\n\n    Unfortunately, commit 315d09bf30c2 (\"Revert \"mm: make faultaround\n    produce old ptes\"\") reverted the change due to it being identified as\n    the cause of a ~6% regression in unixbench on x86. Experiments on a\n    variety of recent arm64 micro-architectures indicate that unixbench is\n    not affected by the original commit, which appears to yield a 0-1%\n    performance improvement.\n\n    Since one size does not fit all for the initial state of prefaulted\n    PTEs, introduce arch_wants_old_prefaulted_pte(), which allows an\n    architecture to opt-in to \u0027old\u0027 prefaulted PTEs at runtime based on\n    whatever criteria it may have.\n\n    Cc: Jan Kara \u003cjack@suse.cz\u003e\n    Cc: Minchan Kim \u003cminchan@kernel.org\u003e\n    Cc: Andrew Morton \u003cakpm@linux-foundation.org\u003e\n    Cc: Kirill A. Shutemov \u003ckirill.shutemov@linux.intel.com\u003e\n    Cc: Linus Torvalds \u003ctorvalds@linux-foundation.org\u003e\n    Reported-by: Vinayak Menon \u003cvinmenon@codeaurora.org\u003e\n    Signed-off-by: Will Deacon \u003cwill@kernel.org\u003e\n    Change-Id: Ic45c238147f4103de99e2a033d9ef8ee1c8d0f04\n    Bug: 171278850\n    (cherry picked from commit 46bdb4277f98e70d0c91f4289897ade533fe9e80\n    https://git.kernel.org/pub/scm/linux/kernel/git/arm64/linux.git/log/?h\u003dfor-next/faultaround)\n    Signed-off-by:```\n    \n    Please assess if this is usable.",
       "revId": "7c266c1cc419ccce1fd83a5652cc637b2314e5ee",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "20f21d35_16ad3b33",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 33118
+      },
+      "writtenOn": "2026-04-21T03:44:55Z",
+      "side": 1,
+      "message": "You are talking about the annotated [1] reference which I already provided in the commit description of mine. It introduced separate handling for both arm64 and x86. But I do not see why this patch was reverted in the first place to begin with. Hence reapplying this looked correct. Better to not do useless reverts and then import fixes for them.",
+      "parentUuid": "3d86e2b3_f442ca3b",
+      "revId": "7c266c1cc419ccce1fd83a5652cc637b2314e5ee",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
