@@ -34,6 +34,24 @@
       "parentUuid": "3621db55_7406e774",
       "revId": "b977cf595831b8924888d7e62feb6c36045937a6",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "33757d61_6c9e6a61",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19979
+      },
+      "writtenOn": "2026-04-21T19:53:31Z",
+      "side": 1,
+      "message": "Looks like this is the result of google picking the same commit twice:\n\nhttps://github.com/LineageOS/android_kernel_qcom_sm8250/commit/f7c2472acbadea4a3d23a49f18fd27111df4697c\n\nhttps://github.com/LineageOS/android_kernel_qcom_sm8250/commit/92c6dd6a650e1c9161b3e9b37cb7e34b98c32b06",
+      "parentUuid": "a7854d12_1b447b6c",
+      "revId": "b977cf595831b8924888d7e62feb6c36045937a6",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
