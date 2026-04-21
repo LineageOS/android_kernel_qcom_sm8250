@@ -16,6 +16,24 @@
       "message": "I found this duplicate in other kernels as well. Something must have gone wrong while picking the commits\nhttps://github.com/LineageOS/android_kernel_qcom_sm8250/commit/92c6dd6a650e1c9161b3e9b37cb7e34b98c32b06\nhttps://github.com/LineageOS/android_kernel_qcom_sm8250/commit/f7c2472acbadea4a3d23a49f18fd27111df4697c\n\nSome of the affected kernels:\nandroid_kernel_qcom_sm8150\nandroid_kernel_qcom_sdm660\nandroid_kernel_google_msm-4.14\nandroid_kernel_google_redbull",
       "revId": "b977cf595831b8924888d7e62feb6c36045937a6",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a7854d12_1b447b6c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 16185
+      },
+      "writtenOn": "2026-04-21T16:13:51Z",
+      "side": 1,
+      "message": "pls find the originally offending commit w/ git blame and then git commit --fixup this. I can pick it to other kernels for ya",
+      "parentUuid": "3621db55_7406e774",
+      "revId": "b977cf595831b8924888d7e62feb6c36045937a6",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
