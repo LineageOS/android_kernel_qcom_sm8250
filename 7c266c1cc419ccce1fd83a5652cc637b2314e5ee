@@ -52,6 +52,23 @@
       "parentUuid": "20f21d35_16ad3b33",
       "revId": "7c266c1cc419ccce1fd83a5652cc637b2314e5ee",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "548bfcfe_079755cc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 16185
+      },
+      "writtenOn": "2026-04-21T04:58:13Z",
+      "side": 1,
+      "message": "Actually, you\u0027re right, we want to drop the revert, and then pick the upstream commit as well.",
+      "revId": "7c266c1cc419ccce1fd83a5652cc637b2314e5ee",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
