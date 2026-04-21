@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e611aeac_219f3286",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19979
+      },
+      "writtenOn": "2026-04-21T20:15:15Z",
+      "side": 1,
+      "message": "@johnsonnolen@gmail.com I already took care of sm8150\nhttps://review.lineageos.org/c/LineageOS/android_kernel_qcom_sm8150/+/481446",
+      "revId": "e6bff35ad804ff5b04f7df7339f48b7c5cd5e5a7",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
