@@ -34,6 +34,23 @@
       "parentUuid": "56d2aadb_085ff731",
       "revId": "1a629edba76c5483ffa4b6cb18460315340a59d2",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cba177dc_7bb07aad",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 16185
+      },
+      "writtenOn": "2026-04-21T02:54:07Z",
+      "side": 1,
+      "message": "Interesting, is valid enough - this repository is arm64 only.",
+      "revId": "1a629edba76c5483ffa4b6cb18460315340a59d2",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
