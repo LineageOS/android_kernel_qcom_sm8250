@@ -46,6 +46,23 @@
       },
       "revId": "9d54f9ffdb41ab33c6502d47963e29a04605d3de",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "65dc2a12_fc971599",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 16185
+      },
+      "writtenOn": "2026-04-25T22:56:00Z",
+      "side": 1,
+      "message": "For others - this is a no-op, but corrects the OG commits screwup - no one using this kernel _needs_ this, so don\u0027t feel like you need to merge common kernel for this.",
+      "revId": "9d54f9ffdb41ab33c6502d47963e29a04605d3de",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
