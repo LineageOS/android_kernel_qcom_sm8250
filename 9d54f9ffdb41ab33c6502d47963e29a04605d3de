@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28a83930_3e5457e9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 16185
+      },
+      "writtenOn": "2026-04-25T22:36:27Z",
+      "side": 1,
+      "message": "```suggestion\nFor KVER \u003e 4.12.0 we use nla_parse\n```",
+      "range": {
+        "startLine": 9,
+        "startChar": 4,
+        "endLine": 9,
+        "endChar": 18
+      },
+      "revId": "9d54f9ffdb41ab33c6502d47963e29a04605d3de",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
