@@ -16,6 +16,24 @@
       "message": "It *is* checked in 5.10: https://android-review.googlesource.com/c/kernel/common/+/1938905\n\nThis kernel has received significant backports and works fine on multiple devices, where are you hitting this issue?",
       "revId": "162dd9a9c897e5575cf289ebc514157fe9f55ed9",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d07806f7_6983f7e8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 36052
+      },
+      "writtenOn": "2026-05-10T14:13:14Z",
+      "side": 1,
+      "message": "I hit this in a clean build environment. Syncconfig fails because `scripts/as-version.sh` calls `scripts/min-tool-version.sh`, but that helper is not present in this 4.19 tree:\n\n`../scripts/as-version.sh: 59: ../scripts/min-tool-version.sh: not found`\n`scripts/Kconfig.include:56: Sorry, this assembler is not supported.`\n\nSo the issue is not the assembler version itself, but the missing helper used by\nthe minimum version check.\n\nNathan\u0027s 5.10 backport also drops the minimum version checking part, which is\nthe reasoning I followed here:\nhttps://github.com/aosp-mirror/kernel_common/commit/83f55e6f298e9e79a38b92d771179090ff0ac771",
+      "parentUuid": "677a22dc_fc9a2455",
+      "revId": "162dd9a9c897e5575cf289ebc514157fe9f55ed9",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
