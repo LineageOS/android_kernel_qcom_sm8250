@@ -16,6 +16,23 @@
       "message": "verified whole chain on oplus sm8250",
       "revId": "543813ab78fbfb00667a22fa02edebe18a4f538c",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d375882e_feb568f1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 16185
+      },
+      "writtenOn": "2026-06-01T00:40:05Z",
+      "side": 1,
+      "message": "FUSE BPF is great to have working finally.",
+      "revId": "543813ab78fbfb00667a22fa02edebe18a4f538c",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
