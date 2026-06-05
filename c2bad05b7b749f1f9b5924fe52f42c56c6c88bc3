@@ -16,6 +16,24 @@
       "message": "```suggestion\n\tVM_BUG_ON(!rwsem_is_locked(\u0026mm-\u003emmap_lock));\n```",
       "revId": "c2bad05b7b749f1f9b5924fe52f42c56c6c88bc3",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f62818d1_094caeb7",
+        "filename": "fs/userfaultfd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 16185
+      },
+      "writtenOn": "2026-06-05T17:11:41Z",
+      "side": 1,
+      "message": "not sure which, but this must have been fixed in a follow on, as current HEAD has the latter.",
+      "parentUuid": "24cb95b8_2772619a",
+      "revId": "c2bad05b7b749f1f9b5924fe52f42c56c6c88bc3",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
