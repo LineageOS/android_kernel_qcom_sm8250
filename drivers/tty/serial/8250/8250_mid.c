@@ -164,7 +164,7 @@ static int dnv_handle_irq(struct uart_port *p)
 
 #define DNV_DMA_CHAN_OFFSET 0x80
 
-static int dnv_setup(struct mid8250 *mid, struct uart_port *p)
+static int __maybe_unused dnv_setup(struct mid8250 *mid, struct uart_port *p)
 {
 	struct hsu_dma_chip *chip = &mid->dma_chip;
 	struct pci_dev *pdev = to_pci_dev(p->dev);
@@ -195,7 +195,7 @@ static int dnv_setup(struct mid8250 *mid, struct uart_port *p)
 	return 0;
 }
 
-static void dnv_exit(struct mid8250 *mid)
+static void __maybe_unused dnv_exit(struct mid8250 *mid)
 {
 	if (!mid->dma_dev)
 		return;
@@ -373,8 +373,16 @@ static const struct mid8250_board dnv_board = {
 	.freq = 133333333,
 	.base_baud = 115200,
 	.bar = 1,
-	.setup = dnv_setup,
-	.exit = dnv_exit,
+	/*
+	 * Errata:
+	 * HSUART May Stop Functioning when DMA is Active.
+	 *
+	 * - Denverton document #572409, rev 3.4, DNV60
+	 * - Ice Lake Xeon D document #714070, ICXD65
+	 * - Snowridge document #731931, SNR44
+	 */
+	.setup = NULL,
+	.exit = NULL,
 };
 
 #define MID_DEVICE(id, board) { PCI_VDEVICE(INTEL, id), (kernel_ulong_t)&board }
