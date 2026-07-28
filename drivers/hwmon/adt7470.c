@@ -1061,8 +1061,10 @@ static ssize_t set_pwm_auto_temp(struct device *dev,
 	if (temp < 0)
 		return temp;
 
+	if (temp > 0xF)
+		return -EINVAL;
+
 	mutex_lock(&data->lock);
-	data->pwm_automatic[attr->index] = temp;
 	reg = i2c_smbus_read_byte_data(client, pwm_auto_reg);
 
 	if (!(attr->index % 2)) {
@@ -1073,7 +1075,8 @@ static ssize_t set_pwm_auto_temp(struct device *dev,
 		reg |= temp & 0xF;
 	}
 
-	i2c_smbus_write_byte_data(client, pwm_auto_reg, reg);
+	if (!i2c_smbus_write_byte_data(client, pwm_auto_reg, reg))
+		data->pwm_auto_temp[attr->index] = temp;
 	mutex_unlock(&data->lock);
 
 	return count;
