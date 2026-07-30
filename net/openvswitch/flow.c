@@ -548,8 +548,6 @@ static int parse_nsh(struct sk_buff *skb, struct sw_flow_key *key)
  * Ethernet header
  * @key: output flow key
  *
- * The caller must ensure that skb->len >= ETH_HLEN.
- *
  * Returns 0 if successful, otherwise a negative errno value.
  *
  * Initializes @skb header fields as follows:
@@ -570,7 +568,6 @@ static int parse_nsh(struct sk_buff *skb, struct sw_flow_key *key)
 static int key_extract(struct sk_buff *skb, struct sw_flow_key *key)
 {
 	int error;
-	struct ethhdr *eth;
 
 	/* Flags are always used as part of stats */
 	key->tp.flags = 0;
@@ -586,6 +583,13 @@ static int key_extract(struct sk_buff *skb, struct sw_flow_key *key)
 		skb_reset_network_header(skb);
 		key->eth.type = skb->protocol;
 	} else {
+		struct ethhdr *eth;
+		int err;
+
+		err = check_header(skb, ETH_HLEN);
+		if (unlikely(err))
+			return err;
+
 		eth = eth_hdr(skb);
 		ether_addr_copy(key->eth.src, eth->h_source);
 		ether_addr_copy(key->eth.dst, eth->h_dest);
