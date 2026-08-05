@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "058c8eb9_dbd1c098",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 34491
+      },
+      "writtenOn": "2026-08-05T10:07:41Z",
+      "side": 1,
+      "message": "Fixed:\n/home/flicker/AOSP/kernel/xiaomi/sm8250/scripts/mod/modpost.c:807:10: warning: initializing \u0027char *\u0027 with an expression of type \u0027const char *\u0027 discards qualifiers [-Wincompatible-pointer-types-discards-qualifiers]\n  807 |                         char *here \u003d strstr(sym, bare);\n      |",
+      "revId": "662289eeb3dd00b79d36b5f8f0f834d7df306bdc",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
