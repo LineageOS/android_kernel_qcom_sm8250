@@ -397,7 +397,6 @@ int rmnet_vnd_dellink(u8 id, struct rmnet_port *port,
 	if (id >= RMNET_MAX_LOGICAL_EP || !ep->egress_dev)
 		return -EINVAL;
 
-	ep->egress_dev = NULL;
 	port->nr_rmnet_devs--;
 	return 0;
 }
