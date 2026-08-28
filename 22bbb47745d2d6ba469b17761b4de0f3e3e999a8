@@ -16,6 +16,23 @@
       "message": "This chain fixes a kernel panic upon rebooting, doesn\u0027t trigger every reboot, more noticeable on older hardware.",
       "revId": "22bbb47745d2d6ba469b17761b4de0f3e3e999a8",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e6b858c_64d18762",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 34512
+      },
+      "writtenOn": "2026-08-28T22:23:07Z",
+      "side": 1,
+      "message": "so far tested on barbet and a21s",
+      "revId": "22bbb47745d2d6ba469b17761b4de0f3e3e999a8",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
