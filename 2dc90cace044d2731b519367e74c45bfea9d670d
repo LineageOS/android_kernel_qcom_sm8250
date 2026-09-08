@@ -16,6 +16,24 @@
       "message": "This is also missing on bengal-perf",
       "revId": "2dc90cace044d2731b519367e74c45bfea9d670d",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5539df4a_ad448c56",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 16185
+      },
+      "writtenOn": "2026-09-08T19:19:21Z",
+      "side": 1,
+      "message": "https://review.lineageos.org/c/LineageOS/android_kernel_qcom_sm8250/+/501667",
+      "parentUuid": "836c3a76_a67e40b4",
+      "revId": "2dc90cace044d2731b519367e74c45bfea9d670d",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ],
   "submitRequirementResults": [
