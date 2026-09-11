@@ -35,6 +35,9 @@ bool seg6_validate_srh(struct ipv6_sr_hdr *srh, int len)
 	int trailing;
 	unsigned int tlv_offset;
 
+	if (len < sizeof(*srh))
+		return false;
+
 	if (srh->type != IPV6_SRCRT_TYPE_4)
 		return false;
 

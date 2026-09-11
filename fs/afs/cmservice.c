@@ -342,7 +342,6 @@ static int afs_deliver_cb_init_call_back_state3(struct afs_call *call)
 				       11 * sizeof(__be32), false);
 		switch (ret) {
 		case 0:		break;
-		case -EAGAIN:	return 0;
 		default:	return ret;
 		}
 
@@ -461,7 +460,6 @@ static int afs_deliver_cb_probe_uuid(struct afs_call *call)
 				       11 * sizeof(__be32), false);
 		switch (ret) {
 		case 0:		break;
-		case -EAGAIN:	return 0;
 		default:	return ret;
 		}
 
