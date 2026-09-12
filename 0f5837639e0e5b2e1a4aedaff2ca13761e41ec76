@@ -16,6 +16,24 @@
       "message": "If you deleted this line do you even need to save and restore?",
       "revId": "0f5837639e0e5b2e1a4aedaff2ca13761e41ec76",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "845a613f_bc7e46d2",
+        "filename": "drivers/usb/gadget/function/f_fs.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1347,
+      "author": {
+        "id": 34512
+      },
+      "writtenOn": "2026-09-12T19:14:12Z",
+      "side": 0,
+      "message": "I\u0027m tempted to just keep the entirety of HEAD here, from looking at the qcom changes creating the conflict it seems as if this might address the issue the upstream commit is trying to address.",
+      "parentUuid": "23a06024_507daf7a",
+      "revId": "0f5837639e0e5b2e1a4aedaff2ca13761e41ec76",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
