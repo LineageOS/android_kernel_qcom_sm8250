@@ -18,6 +18,24 @@
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "62bb224a_65c52d18",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 10067
+      },
+      "writtenOn": "2026-09-14T07:28:15Z",
+      "side": 1,
+      "message": "ah, i used my script to reapply it... will fix shortly.",
+      "parentUuid": "fa987b86_284ff6f4",
+      "revId": "8c01ef0461f2021d96f630623105bad212b071d6",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "cebf1a1b_ccf661a0",
