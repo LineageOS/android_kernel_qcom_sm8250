@@ -16,6 +16,24 @@
       "message": "Why is this patch needed?",
       "revId": "4ac5b69d5196fae8beb2b818a65353c7f828bd7f",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6efc572b_6c87e046",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 36983
+      },
+      "writtenOn": "2026-09-27T08:08:56Z",
+      "side": 1,
+      "message": "chromium browsers doesn\u0027t work without it on A17, also CONFIG_SECURITYFS\u003dy is needed to be enabled in the relevant kernel config",
+      "parentUuid": "7748e7f4_22540e9b",
+      "revId": "4ac5b69d5196fae8beb2b818a65353c7f828bd7f",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
