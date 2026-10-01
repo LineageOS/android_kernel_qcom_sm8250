@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c6c9127d_499b0cdc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 29551
+      },
+      "writtenOn": "2026-10-01T10:07:41Z",
+      "side": 1,
+      "message": "lzo-rle demonstrates more stable behavior than lz4 under Android memory pressure (referring here to throughput and memory overhead rather than raw performance); while lz4 offers optimal performance for a freshly initialized zram device, its stability degrades over time due to inherent limitations of zram.\nThis patch set has been tested on various devices of mine.",
+      "revId": "0af068ccaa5f8a0fdc7338661ce6d1e7876b3052",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
