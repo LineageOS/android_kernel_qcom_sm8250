@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f707cfd7_8b7a9732",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 16779
+      },
+      "writtenOn": "2026-10-07T16:44:25Z",
+      "side": 1,
+      "message": "TODO: Create a separate v4l2-controls header",
+      "revId": "a8550236da9c8bd14a97e8d6f3d98b924367a986",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
