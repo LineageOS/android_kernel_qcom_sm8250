@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ffd9ec50_bef661b3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 16779
+      },
+      "writtenOn": "2026-10-07T16:50:16Z",
+      "side": 1,
+      "message": "These changes to the msm_geni_serial driver might break things on newer platforms, probably should create msm_geni_serial_legacy",
+      "revId": "2d8d0616f4c2204c50aa05842194627fc34715ed",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
