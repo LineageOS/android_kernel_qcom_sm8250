@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "01b73f85_6b6ac688",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 16779
+      },
+      "writtenOn": "2026-10-07T16:52:12Z",
+      "side": 1,
+      "message": "TODO: Create a msm_media_info_legacy header, as this will break newer platforms",
+      "revId": "6f4b64a150515d12503a455b15b592cb84de02e7",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
