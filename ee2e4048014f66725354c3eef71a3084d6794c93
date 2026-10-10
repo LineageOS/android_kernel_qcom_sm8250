@@ -16,6 +16,24 @@
       "message": "ifdef in uapi headers doesn\u0027t really work unless you also define this in userspace in the module you are including this header. Is the affected struct used in userspace?",
       "revId": "ee2e4048014f66725354c3eef71a3084d6794c93",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e09656cd_53b13247",
+        "filename": "include/uapi/media/msm_vidc_utils_legacy.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 16779
+      },
+      "writtenOn": "2026-10-10T14:09:08Z",
+      "side": 1,
+      "message": "This is a leftover of when I was using OMX (see 355146), but with C2 it\u0027s probably not needed.\n\nI\u0027ll check if it works without this change",
+      "parentUuid": "3af01e1c_424162c3",
+      "revId": "ee2e4048014f66725354c3eef71a3084d6794c93",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
