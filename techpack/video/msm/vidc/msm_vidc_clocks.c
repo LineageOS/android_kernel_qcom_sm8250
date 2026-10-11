@@ -30,8 +30,8 @@ struct msm_vidc_core_ops core_ops_ar50 = {
 	.calc_freq = msm_vidc_calc_freq_ar50,
 	.decide_work_route = NULL,
 	.decide_work_mode = msm_vidc_decide_work_mode_ar50,
-	.decide_core_and_power_mode = NULL,
-	.calc_bw = NULL,
+	.decide_core_and_power_mode = msm_vidc_decide_core_and_power_mode_iris1,
+	.calc_bw = calc_bw_ar50,
 };
 
 struct msm_vidc_core_ops core_ops_ar50lt = {
