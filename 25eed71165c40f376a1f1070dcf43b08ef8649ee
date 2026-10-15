@@ -16,6 +16,24 @@
       "message": "it is bit messy keeping sdm845 device tree here with other unused dt\u0027s, it should be later moved to vendor/qcom(still messy) or vendor/qcom_legacy instead of here, NO?",
       "revId": "25eed71165c40f376a1f1070dcf43b08ef8649ee",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba1595eb_c05adc08",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 16779
+      },
+      "writtenOn": "2026-10-15T13:22:09Z",
+      "side": 1,
+      "message": "Not worth it in my opinion",
+      "parentUuid": "d4ed4559_dd35a1d8",
+      "revId": "25eed71165c40f376a1f1070dcf43b08ef8649ee",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
