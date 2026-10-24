@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "31d9d2a7_9c3792fc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2026-10-24T23:01:53Z",
+      "side": 1,
+      "message": "Spotted the lack of this knob on 5.15, so I thought we could backport it here as well.\n\nAndroid’s ReadKernelCmaUsageKb() calculates outstanding allocations as allocated pages − released pages, requiring release_pages_success.",
+      "revId": "b9dd9b4fabf3669b14a0eebfb31a001403fa4993",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
