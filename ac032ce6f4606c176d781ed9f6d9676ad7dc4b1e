@@ -52,6 +52,23 @@
       "parentUuid": "40d92d42_68586e50",
       "revId": "ac032ce6f4606c176d781ed9f6d9676ad7dc4b1e",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "260f7d4e_f6c1353e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 16185
+      },
+      "writtenOn": "2026-10-28T22:17:57Z",
+      "side": 1,
+      "message": "DAemonMCR: We don\u0027t wait for AOSP or linux (or linux-CIP) to merge things if they\u0027re correct, if it propogrates through CIP later, it won\u0027t matter.",
+      "revId": "ac032ce6f4606c176d781ed9f6d9676ad7dc4b1e",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
