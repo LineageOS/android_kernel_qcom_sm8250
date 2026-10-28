@@ -16,6 +16,24 @@
       "message": "\u003e it requires the following upstream patches to function as intended:\n\nThen pick those patches and submit to linux-cip",
       "revId": "ac032ce6f4606c176d781ed9f6d9676ad7dc4b1e",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "40d92d42_68586e50",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 16185
+      },
+      "writtenOn": "2026-10-28T17:37:52Z",
+      "side": 1,
+      "message": "I agree - but that doesn\u0027t mean we can\u0027t carry it here until/if they take it upstream",
+      "parentUuid": "c7abfbca_f2bdf540",
+      "revId": "ac032ce6f4606c176d781ed9f6d9676ad7dc4b1e",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
