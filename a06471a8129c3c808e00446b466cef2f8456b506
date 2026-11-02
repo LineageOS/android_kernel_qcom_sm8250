@@ -52,6 +52,24 @@
       "parentUuid": "719c6f57_6f38aba2",
       "revId": "a06471a8129c3c808e00446b466cef2f8456b506",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6fc2f4b3_724c1e6a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 16185
+      },
+      "writtenOn": "2026-11-02T21:45:26Z",
+      "side": 1,
+      "message": "it\u0027s semantic and we don\u0027t have that enforced. That\u0027s mostly a me-ism.",
+      "parentUuid": "dac5610e_750db6ac",
+      "revId": "a06471a8129c3c808e00446b466cef2f8456b506",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
