@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "69ad9b1d_b8636e76",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 29551
+      },
+      "writtenOn": "2026-11-03T18:02:08Z",
+      "side": 1,
+      "message": "The correct fix has now been submitted; however, our kernel tree differs from CIP-LTS.",
+      "revId": "12bd109826c6cc986926736f97b887316c652cbc",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
