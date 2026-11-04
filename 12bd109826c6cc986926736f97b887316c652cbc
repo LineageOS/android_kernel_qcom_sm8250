@@ -16,6 +16,23 @@
       "message": "The correct fix has now been submitted; however, our kernel tree differs from CIP-LTS.",
       "revId": "12bd109826c6cc986926736f97b887316c652cbc",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f58063dd_2bb60f5c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 34512
+      },
+      "writtenOn": "2026-11-04T09:38:08Z",
+      "side": 1,
+      "message": "Need to pick Tula upstream commits",
+      "revId": "12bd109826c6cc986926736f97b887316c652cbc",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
