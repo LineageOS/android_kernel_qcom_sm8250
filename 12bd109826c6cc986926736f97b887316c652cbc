@@ -51,6 +51,24 @@
       "parentUuid": "f58063dd_2bb60f5c",
       "revId": "12bd109826c6cc986926736f97b887316c652cbc",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d332ada_d1086272",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 29551
+      },
+      "writtenOn": "2026-11-04T11:04:47Z",
+      "side": 1,
+      "message": "The \"linux-cip-lts\" kernel differs from the one we are currently using. Our kernel incorporates \"f2fs-stable\" (\"https://github.com/LineageOS/android_kernel_qcom_sm8250/commit/c7b7e54aee930bf333b83c66e9ca7d87b39206e1\"), which includes commit c72889093 (\"f2fs: Add f2fs stats to sysfs\"). This patch introduces the `F2FS_STAT_ATTR` macro. However, this macro is not present in the \"linux-cip-lts\" version (\"https://git.kernel.org/pub/scm/linux/kernel/git/cip/linux-cip.git/tree/fs/f2fs/sysfs.c?h\u003dv4.19.325-cip136\"). Consequently, after merging cip-lts into our kernel, the F2FS_STAT_ATTR macro lacks the \".size\" field, leading to undefined behavior. This issue can be resolved by simply adding the missing \".size\" field to the macro definition.",
+      "parentUuid": "5b084ccb_a129713b",
+      "revId": "12bd109826c6cc986926736f97b887316c652cbc",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
