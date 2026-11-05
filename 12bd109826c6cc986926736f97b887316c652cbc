@@ -69,6 +69,23 @@
       "parentUuid": "5b084ccb_a129713b",
       "revId": "12bd109826c6cc986926736f97b887316c652cbc",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f5ee782_68cfb14b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32442
+      },
+      "writtenOn": "2026-11-05T04:13:43Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this be a revert + pick UPSTREAM, considering how we\u0027ve done it in past?",
+      "revId": "12bd109826c6cc986926736f97b887316c652cbc",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
