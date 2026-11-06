@@ -104,6 +104,23 @@
       "parentUuid": "2f5ee782_68cfb14b",
       "revId": "12bd109826c6cc986926736f97b887316c652cbc",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d1de25cb_76d3c2f8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 16185
+      },
+      "writtenOn": "2026-11-06T01:39:27Z",
+      "side": 1,
+      "message": "stage the revert + pick, this is not right as is",
+      "revId": "12bd109826c6cc986926736f97b887316c652cbc",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
