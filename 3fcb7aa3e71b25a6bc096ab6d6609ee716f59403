@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "af0d4577_3d6bf381",
+        "filename": "fs/f2fs/sysfs.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 867,
+      "author": {
+        "id": 32442
+      },
+      "writtenOn": "2026-11-08T12:12:48Z",
+      "side": 1,
+      "message": "This line was not there in the previous merged upstream change.",
+      "revId": "3fcb7aa3e71b25a6bc096ab6d6609ee716f59403",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
