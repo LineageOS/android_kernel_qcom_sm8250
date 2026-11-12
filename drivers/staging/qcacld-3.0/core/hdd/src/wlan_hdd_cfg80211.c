@@ -20870,6 +20870,9 @@ static int wlan_hdd_cfg80211_set_privacy(struct hdd_adapter *adapter,
 
 	sta_ctx = WLAN_HDD_GET_STATION_CTX_PTR(adapter);
 	sta_ctx->wpa_versions = req->crypto.wpa_versions;
+	/* WPA3 uses the RSN IE like WPA2 */
+	if (sta_ctx->wpa_versions & NL80211_WPA_VERSION_3)
+		sta_ctx->wpa_versions |= NL80211_WPA_VERSION_2;
 	roam_profile = hdd_roam_profile(adapter);
 
 	/* populate auth,akm and cipher params for crypto */
