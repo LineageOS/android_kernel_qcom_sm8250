@@ -16,6 +16,24 @@
       "message": "ask your llm to see if there\u0027s an upstream change that\u0027d fix your issue in `git clone https://git.codelinaro.org/clo/la/platform/vendor/qcom-opensource/wlan/qcacld-3.0 -b LA.UM.9.14.1.r1-21700-QCM6490.QISI15.0` and upload that instead.",
       "revId": "68b9c4764c9da631da1213acf065b49fe27544af",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32528c95_ea71f0e8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 38577
+      },
+      "writtenOn": "2026-11-12T22:52:32Z",
+      "side": 1,
+      "message": "no fix in that branch for that function, upstream does it differently. they use a rebuilt scan filter instead. backport would be a lot more than just 3 lines.\n\nhere are the commits in each repository:\n- qcacld-3.0 [`4b9273d712`](https://git.codelinaro.org/clo/la/platform/vendor/qcom-opensource/wlan/qcacld-3.0/-/commit/4b9273d71243f5000e84ec921fa9b1e9145fbdf7) \"use crypto from vdev to fill the scan filter\"\n- qca-wifi-host-cmn [`9cf786a2a`](https://git.codelinaro.org/clo/la/platform/vendor/qcom-opensource/wlan/qca-wifi-host-cmn/-/commit/9cf786a2ab305430e3b16bc9998efc2dae77959e) \"qcacmn: Use crypto APIs in scan filter\"\n\nother related commits would be qcacld-3.0 `e34b54a7b7`, qca-wifi-host-cmn `0d404e731` and `60f7ef7fb`, as well as follow-up fixes for the new filter, like qcacld-3.0 `99f45408a0`; related: `c91578c420`.\n\nWould you prefer the backport or the proposed fix?",
+      "parentUuid": "277213a3_b4b06a53",
+      "revId": "68b9c4764c9da631da1213acf065b49fe27544af",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
