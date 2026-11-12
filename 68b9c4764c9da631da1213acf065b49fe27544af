@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "277213a3_b4b06a53",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 10067
+      },
+      "writtenOn": "2026-11-12T22:02:06Z",
+      "side": 1,
+      "message": "ask your llm to see if there\u0027s an upstream change that\u0027d fix your issue in `git clone https://git.codelinaro.org/clo/la/platform/vendor/qcom-opensource/wlan/qcacld-3.0 -b LA.UM.9.14.1.r1-21700-QCM6490.QISI15.0` and upload that instead.",
+      "revId": "68b9c4764c9da631da1213acf065b49fe27544af",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
