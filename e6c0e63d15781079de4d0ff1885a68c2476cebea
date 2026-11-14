@@ -16,6 +16,24 @@
       "message": "Isn\u0027t this duplicated?",
       "revId": "e6c0e63d15781079de4d0ff1885a68c2476cebea",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b8538fb_03b8b08a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 16779
+      },
+      "writtenOn": "2026-11-14T21:24:29Z",
+      "side": 1,
+      "message": "I can squash them if you think it\u0027s appropriate, but they were submited as separate changes here:\n\nhttps://review.lineageos.org/c/LineageOS/android_kernel_qcom_sm8250/+/404474",
+      "parentUuid": "87bb680a_644e916b",
+      "revId": "e6c0e63d15781079de4d0ff1885a68c2476cebea",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
