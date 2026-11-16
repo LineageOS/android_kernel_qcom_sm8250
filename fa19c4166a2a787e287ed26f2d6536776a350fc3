@@ -52,6 +52,24 @@
       "parentUuid": "cef546c1_81267b72",
       "revId": "fa19c4166a2a787e287ed26f2d6536776a350fc3",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "af5b4c5d_f73945a6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 38577
+      },
+      "writtenOn": "2026-11-16T20:55:22Z",
+      "side": 1,
+      "message": "Sorry, I backported it [here](https://review.lineageos.org/c/LineageOS/android_kernel_qcom_sm8250/+/513941), keeping the bounds check from [`a6ccfb8628`](https://github.com/LineageOS/android_kernel_qcom_sm8250/commit/a6ccfb8628df3fd798124a0005376a04baf68bae).",
+      "parentUuid": "49b677f4_e95317f4",
+      "revId": "fa19c4166a2a787e287ed26f2d6536776a350fc3",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
