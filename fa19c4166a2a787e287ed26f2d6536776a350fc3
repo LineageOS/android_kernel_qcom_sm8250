@@ -16,6 +16,24 @@
       "message": "keep assisted-by off cherry picked changes and use original commit metadata/msg.",
       "revId": "fa19c4166a2a787e287ed26f2d6536776a350fc3",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cef546c1_81267b72",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 38577
+      },
+      "writtenOn": "2026-11-16T20:37:04Z",
+      "side": 1,
+      "message": "gotcha, what about [`819a3a588`](https://git.codelinaro.org/clo/la/platform/vendor/qcom-opensource/wlan/qca-wifi-host-cmn/-/commit/819a3a588817ca2073cac200d79f5c60f4102964)? it didn\u0027t apply cleanly so it\u0027s not exactly the original commit.",
+      "parentUuid": "8a809be9_d7985441",
+      "revId": "fa19c4166a2a787e287ed26f2d6536776a350fc3",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
