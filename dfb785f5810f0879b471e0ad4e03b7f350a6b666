@@ -33,6 +33,24 @@
       "message": "probably should be tested on 8250 like you said ^^",
       "revId": "dfb785f5810f0879b471e0ad4e03b7f350a6b666",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4c358c98_6fa666c3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2026-11-27T14:13:00Z",
+      "side": 1,
+      "message": "I don\u0027t experience any regression on Samsung sm8250.",
+      "parentUuid": "f1500aa4_e5421665",
+      "revId": "dfb785f5810f0879b471e0ad4e03b7f350a6b666",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
