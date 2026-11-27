@@ -51,6 +51,24 @@
       "parentUuid": "f1500aa4_e5421665",
       "revId": "dfb785f5810f0879b471e0ad4e03b7f350a6b666",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bfd65c7b_1e6871fd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 16779
+      },
+      "writtenOn": "2026-11-27T14:14:13Z",
+      "side": 1,
+      "message": "Also tested on kebab, no issues.",
+      "parentUuid": "4c358c98_6fa666c3",
+      "revId": "dfb785f5810f0879b471e0ad4e03b7f350a6b666",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
