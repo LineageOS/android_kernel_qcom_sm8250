@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "98d37790_5e367f53",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 29551
+      },
+      "writtenOn": "2026-11-28T14:22:47Z",
+      "side": 1,
+      "message": "This patch improves system fluidity under memory pressure on devices with limited RAM (e.g. the mi8937 with 3GB of RAM) and can slightly reduce system power consumption on devices with more RAM (e.g. the Xiaomi Pad 6 with 8GB of RAM).",
+      "revId": "0555a90eaca412f1065572062b060a44a3bab963",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
